@@ -1,0 +1,19 @@
+name+version*,license*,Copyrights*,end-of-support,dependencies,language,repository,email,url
+castor-core-1.3.3.jar,Apache-2.0,-,-,-,Java,-,-,-
+castor-xml-1.3.3.jar,Apache-2.0,-,-,-,Java,-,-,-
+commons-lang-2.6.jar,Apache-2.0,-,-,-,Java,-,-,-
+commons-logging-1.1.3.jar,Apache-2.0,-,-,-,Java,-,-,-
+gwt-servlet-2.7.0.jar,Apache-2.0,Google,-,-,Java,-,-,http://www.gwtproject.org/
+jcomedilib-1.1.0.jar,LGPL-2.1,CSI-Piemonte,-,-,Java,-,-,-
+jcommon-1.0.15.jar,LGPL-3.0,JFree.org,-,-,Java,-,-,http://www.jfree.org/jcommon/
+jetty-6.1.26.jar,Apache-2.0; EPL-1.0,mortbay.org,-,-,Java,-,-,org.mortbay.jetty
+jetty-util-6.1.26.jar,Apache-2.0; EPL-1.0,mortbay.org,-,-,Java,-,-,org.mortbay.jetty
+jfreechart-1.0.12.jar,LGPL-3.0,JFree.org,-,-,Java,-,-,http://www.jfree.org/jcommon/
+jSerialComm-2.7.0.jar,"Apache-2.0;LGPL-3.0","Will Hedgecock",-,-,Java,-,-,http://fazecast.github.io/jSerialComm/
+log4j-1.2.16.jar,Apache-2.0,-,-,-,Java,-,-,-
+servlet-api-2.5.jar,CDDL-1.0; GPL-2.0,-,-,-,Java,-,-,-
+slf4j-api-1.5.11.jar,MIT,slf4j.org,-,-,Java,-,-,http://www.slf4j.org
+slf4j-log4j12-1.5.11.jar,MIT,slf4j.org,-,-,Java,-,-,http://www.slf4j.org
+xercesImpl-2.9.0.jar,Apache-2.0,-,-,-,Java,-,-,-
+gson-2.8.6.jar,Apache-2.0,Google,-,-,Java,-,-,https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.6/
+commons-codec-1.7.jar,Apache-2.0,-,-,-,Java,-,-,-

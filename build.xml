@@ -1,0 +1,640 @@
+<!-- Title:  Build and release procedures for Periferico project -->
+<!-- Author: pierfrancesco.vallosio@consulenti.csi.it -->
+<!-- Date:   09-January-2008 -->
+<!-- $Id: build.xml,v 1.62 2015/11/19 16:37:18 pfvallosio Exp $ -->
+
+<project name="periferico" basedir="." default="default">
+
+	<property file="buildfiles/build.properties" />
+	<property environment="env" />
+
+	<!-- ############################################################# -->
+	<!-- # public target: default                                    # -->
+	<!-- ############################################################# -->
+	<target name="default" description="Verifica se eseguire il build per un solo environment specificato a linea di commando con -Dtarget=${target} o per tutti gli environment ">
+		<condition property="first-call" value="distribution">
+			<not>
+				<equals arg1="${target}" arg2="$${target}" />
+			</not>
+		</condition>
+		<condition property="first-call" value="all-target">
+			<equals arg1="${target}" arg2="$${target}" />
+		</condition>
+		<echo message="target: ${target}" />
+		<echo message="first-call: ${first-call}" />
+		<antcall target="${first-call}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: all-target                                 # -->
+	<!-- ############################################################# -->
+	<target name="all-target" description="Lancia il build per le varie distribuzioni in sequenza">
+		<antcall target="distribution">
+			<param name="target" value="dev" />
+		</antcall>
+		<antcall target="distribution">
+			<param name="target" value="tst" />
+		</antcall>
+		<antcall target="distribution">
+			<param name="target" value="coll" />
+		</antcall>
+		<antcall target="distribution">
+			<param name="target" value="prod" />
+		</antcall>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: init                                       # -->
+	<!-- ############################################################# -->
+	<target name="init" description="Inizializza lo script Ant">
+		<tstamp>
+			<format property="ANNO-COPYRIGHT" pattern="yyyy" />
+			<format property="current.date" pattern="dd/MM/yyyy HH:mm:ss" locale="it" />
+		</tstamp>
+		<echo message="current.date: ${current.date}" />
+		<condition property="target" value="dev">
+			<equals arg1="${target}" arg2="$${target}" />
+		</condition>
+		<echo message="target: ${target}" />
+		<loadproperties srcFile="${buildfiles}/${target}.properties" />
+		<property name="temp-target" value="${temp}/${target}" />
+		<property name="classes-target" value="${classes}/${target}" />
+		<property name="archives-target" value="${archives}/${target}" />
+		<property name="dist-target" value="${dist}/${target}" />
+		<mkdir dir="${temp-target}" />
+		<mkdir dir="${classes-target}" />
+		<mkdir dir="${archives-target}" />
+		<mkdir dir="${dist-target}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: compile-all                                # -->
+	<!-- ############################################################# -->
+	<target name="compile-all" depends="compile-drv-conn, compile-drv-itf, compile-drv-impl, compile-common, compile-core, compile-ui-frontend, compile-ui-backend" description="Compila tutti i sorgenti">
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: create-jar-manifest                      # -->
+	<!-- ############################################################# -->
+	<target name="create-jar-manifest" description="Crea il manifest per un jar">
+		<manifest file="${temp-target}/${module-name}.MF">
+			<attribute name="Built-By" value="${user.name}" />
+			<attribute name="Implementation-Vendor" value="${company-name}" />
+			<attribute name="Implementation-Title" value="${product-name}.${component-name}.${module-name}" />
+			<attribute name="Implementation-Version" value="${module-version}" />
+			<section name="${company-name}">
+				<attribute name="Nome-Prodotto" value="${product-name}" />
+				<attribute name="Nome-Componente" value="${component-name}" />
+				<attribute name="Versione" value="${product-version}" />
+				<attribute name="Modulo" value="${module-name}" />
+				<attribute name="Versione-Modulo" value="${module-version}" />
+				<attribute name="Ambiente" value="${nome.ambiente}" />
+			</section>
+		</manifest>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: package-war                                # -->
+	<!-- ############################################################# -->
+	<target name="package-war" depends="war-ui" description="Costruisce il war della web app">
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: package-all                                # -->
+	<!-- ############################################################# -->
+	<target name="package-all" depends="jar-drv-conn, jar-drv-itf, jar-drv-impl, jar-common, jar-core, package-war" description="Esegue il packaging di ogni componente del prodotto">
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: distribution                               # -->
+	<!-- ############################################################# -->
+	<target name="distribution" depends="release" description="Costruisce il tar per la distribuzione">
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-dist                                 # -->
+	<!-- ############################################################# -->
+	<target name="clean-dist" description="Rimuove la cartella delle distribuzioni">
+		<delete dir="${dist}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-classes                              # -->
+	<!-- ############################################################# -->
+	<target name="clean-classes" description="Rimuove la cartella dei sorgenti compilati">
+		<delete dir="${classes}" />
+		<delete dir="${build}/www" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-archives                             # -->
+	<!-- ############################################################# -->
+	<target name="clean-archives" description="Rimuove la cartella degli archivi (war, ear, ...)">
+		<delete dir="${archives}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-temp                                 # -->
+	<!-- ############################################################# -->
+	<target name="clean-temp" description="Rimuove la cartella dei files temporanei di build">
+		<delete dir="${temp}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: clean                                    # -->
+	<!-- ############################################################# -->
+	<target name="clean" depends="clean-dist, clean-classes, clean-archives, clean-temp" description="Rimuove tutte le cartelle create da Ant tranne quelle delle librerie">
+		<delete dir="${gwt-lib}" />
+		<delete dir="./target" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # public target: clean-all                                  # -->
+	<!-- ############################################################# -->
+	<target name="clean-all" depends="clean" description="Rimuove tutte le cartelle create da Ant" />
+
+	<!-- ############################################################# -->
+	<!-- # public target: show-vars                                  # -->
+	<!-- ############################################################# -->
+	<target name="show-vars" depends="init" description="Visualizza tutte le variabili impostate nei file di properties e/o da linea di comando">
+		<echo message="*****************************************" />
+		<echo message="********  ${product-name} environment  *******" />
+		<echo message="*****************************************" />
+		<echo message="Runtime:" />
+		<echo message="JAVA_HOME = ${env.JAVA_HOME}" />
+		<echo message="ANT_HOME = ${env.ANT_HOME}" />
+		<echo message="JAVA_VERSION = ${java.version}" />
+		<echo message="ANT_VERSION = ${ant.version}" />
+		<echo message="" />
+		<echo message="Target:" />
+		<echo message="TARGET = ${target}" />
+		<echo message="" />
+		<echo message="Application:" />
+		<echo message="VERSION = ${product-version}" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: compile-drv-conn                         # -->
+	<!-- ############################################################# -->
+	<target name="compile-drv-conn" depends="init" description="Compila la libreria con le funzioni di connessione agli analizzatori">
+		<mkdir dir="${classes-target}/acqdrivers/conn" />
+		<javac srcdir="${src-java}" destdir="${classes-target}/acqdrivers/conn" source="1.6" target="1.6" sourcepath="" includeantruntime="false" debug="${flag-debug}">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<include name="it/csi/periferico/acqdrivers/conn/**" />
+		</javac>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: compile-drv-itf                          # -->
+	<!-- ############################################################# -->
+	<target name="compile-drv-itf" depends="init" description="Compila l'interfaccia per i driver">
+		<mkdir dir="${classes-target}/acqdrivers/itf" />
+		<javac srcdir="${src-java}" destdir="${classes-target}/acqdrivers/itf" source="1.6" target="1.6" sourcepath="" includeantruntime="false" debug="${flag-debug}">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<include name="it/csi/periferico/acqdrivers/itf/**" />
+		</javac>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: compile-drv-impl                         # -->
+	<!-- ############################################################# -->
+	<target name="compile-drv-impl" depends="init, jar-drv-itf" description="Compila la libreria con l'implementazione di riferimento per i driver">
+		<mkdir dir="${classes-target}/acqdrivers/impl" />
+		<javac srcdir="${src-java}" destdir="${classes-target}/acqdrivers/impl" source="1.6" target="1.6" sourcepath="" includeantruntime="false" debug="${flag-debug}">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset file="${archives-target}/periferico-drv-itf-${drv-itf-ver}.jar" />
+			</classpath>
+			<include name="it/csi/periferico/acqdrivers/impl/**" />
+		</javac>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: compile-common                           # -->
+	<!-- ############################################################# -->
+	<target name="compile-common" depends="init" description="Compila le classi della configurazione comune">
+		<mkdir dir="${classes-target}/config/common" />
+		<javac srcdir="${src-java}" destdir="${classes-target}/config/common" source="1.6" target="1.6" sourcepath="" includeantruntime="false" debug="${flag-debug}">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<include name="it/csi/periferico/config/common/**" />
+		</javac>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: compile-core                             # -->
+	<!-- ############################################################# -->
+	<target name="compile-core" depends="init, jar-common, jar-drv-conn, jar-drv-itf, jar-drv-impl" description="Compila il backend dell'applicazione">
+		<mkdir dir="${classes-target}/core" />
+		<javac srcdir="${src-java}" destdir="${classes-target}/core" source="1.6" target="1.6" sourcepath="" includeantruntime="false" debug="${flag-debug}">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset file="${archives-target}/periferico-common-${cfg-common-ver}.jar" />
+				<fileset file="${archives-target}/periferico-drv-conn-${drv-conn-ver}.jar" />
+				<fileset file="${archives-target}/periferico-drv-itf-${drv-itf-ver}.jar" />
+				<fileset file="${archives-target}/periferico-drv-impl-${drv-impl-ver}.jar" />
+			</classpath>
+			<exclude name="it/csi/periferico/config/common/**" />
+			<exclude name="it/csi/periferico/acqdrivers/conn/**" />
+			<exclude name="it/csi/periferico/acqdrivers/itf/**" />
+			<exclude name="it/csi/periferico/acqdrivers/impl/**" />
+			<exclude name="it/csi/periferico/ui/**" />
+		</javac>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: jar-drv-conn                             # -->
+	<!-- ############################################################# -->
+	<target name="jar-drv-conn" depends="compile-drv-conn" description="Genera l'archivio della libreria con le funzioni di connessione agli analizzatori">
+		<antcall target="create-jar-manifest">
+			<param name="module-name" value="DRV-CONN" />
+			<param name="module-version" value="${drv-conn-ver}" />
+		</antcall>
+		<jar destfile="${archives-target}/periferico-drv-conn-${drv-conn-ver}.jar" manifest="${temp-target}/DRV-CONN.MF">
+			<fileset dir="${classes-target}/acqdrivers/conn" />
+		</jar>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: jar-drv-itf                              # -->
+	<!-- ############################################################# -->
+	<target name="jar-drv-itf" depends="compile-drv-itf" description="Genera l'archivio dell'interfaccia per i driver">
+		<antcall target="create-jar-manifest">
+			<param name="module-name" value="DRV-ITF" />
+			<param name="module-version" value="${drv-itf-ver}" />
+		</antcall>
+		<jar destfile="${archives-target}/periferico-drv-itf-${drv-itf-ver}.jar" manifest="${temp-target}/DRV-ITF.MF">
+			<fileset dir="${classes-target}/acqdrivers/itf" />
+		</jar>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: jar-drv-impl                             # -->
+	<!-- ############################################################# -->
+	<target name="jar-drv-impl" depends="compile-drv-impl" description="Genera l'archivio della libreria con l'implementazione di riferimento per i driver">
+		<antcall target="create-jar-manifest">
+			<param name="module-name" value="DRV-IMPL" />
+			<param name="module-version" value="${drv-impl-ver}" />
+		</antcall>
+		<jar destfile="${archives-target}/periferico-drv-impl-${drv-impl-ver}.jar" manifest="${temp-target}/DRV-IMPL.MF">
+			<fileset dir="${classes-target}/acqdrivers/impl" />
+			<fileset file="${src}/xml/driver_mapping.xml" />
+		</jar>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: jar-common                               # -->
+	<!-- ############################################################# -->
+	<target name="jar-common" depends="compile-common" description="Genera l'archivio delle classi della configurazione comune">
+		<antcall target="create-jar-manifest">
+			<param name="module-name" value="CFG-COMMON" />
+			<param name="module-version" value="${cfg-common-ver}" />
+		</antcall>
+		<jar destfile="${archives-target}/periferico-common-${cfg-common-ver}.jar" manifest="${temp-target}/CFG-COMMON.MF">
+			<fileset dir="${classes-target}/config/common" />
+			<fileset file="${src}/xml/common_mapping.xml" />
+		</jar>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: jar-core                                 # -->
+	<!-- ############################################################# -->
+	<target name="jar-core" depends="compile-core" description="Genera l'archivio del backend dell'applicazione">
+		<antcall target="create-jar-manifest">
+			<param name="module-name" value="CORE" />
+			<param name="module-version" value="${product-version}" />
+		</antcall>
+		<jar destfile="${archives-target}/periferico.jar" manifest="${temp-target}/CORE.MF">
+			<fileset dir="${classes-target}/core" />
+			<fileset file="${cfg}/log4j.properties" />
+			<fileset file="${cfg}/castor.properties" />
+			<fileset file="${src}/xml/boards_mapping.xml" />
+			<fileset file="${src}/xml/login_mapping.xml" />
+			<fileset file="${src}/xml/station_mapping.xml" />
+			<fileset dir="${src-java}">
+				<include name="**/MessageBundleCore*.properties" />
+			</fileset>
+
+		</jar>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: compile-ui-backend                       # -->
+	<!-- ############################################################# -->
+	<target name="compile-ui-backend" depends="init, jar-core" description="Compila il backend dell'interfaccia utente">
+		<mkdir dir="${classes-target}/ui/server" />
+		<javac srcdir="${src-java}" destdir="${classes-target}/ui/server" source="1.6" target="1.6" sourcepath="" includeantruntime="false" debug="${flag-debug}">
+			<classpath>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset file="${archives-target}/periferico-common-${cfg-common-ver}.jar" />
+				<fileset file="${archives-target}/periferico-drv-itf-${drv-itf-ver}.jar" />
+				<fileset file="${archives-target}/periferico.jar" />
+			</classpath>
+			<include name="it/csi/periferico/ui/server/**" />
+			<include name="it/csi/periferico/ui/client/ConfigResults.java" />
+			<include name="it/csi/periferico/ui/client/PerifericoUIService.java" />
+			<include name="it/csi/periferico/ui/client/*Exception.java" />
+			<include name="it/csi/periferico/ui/client/data/**" />
+		</javac>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: check-compile-ui-frontend                # -->
+	<!-- ############################################################# -->
+	<target name="check-compile-ui-frontend" description="Verifica se il lato client dell'interfaccia utente deve essere compilato">
+		<uptodate property="compile-ui-frontend.notRequired" targetfile="${build}/www/${target}/ui/uiFrontendBuild.done">
+			<srcfiles dir="${src-java}/it/csi/periferico/ui/client" includes="**/*" />
+			<srcfiles dir="${src-web}" includes="**/*" />
+		</uptodate>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: compile-ui-frontend                      # -->
+	<!-- ############################################################# -->
+	<target name="compile-ui-frontend" depends="init, compile-ui-backend, check-compile-ui-frontend" unless="compile-ui-frontend.notRequired" description="Compila il lato client dell'interfaccia utente">
+		<mkdir dir="${gwt-lib}" />
+		<copy todir="${gwt-lib}">
+					<fileset dir="${lib}" includes="gwt-user-2.7.0.jar,gwt-dev-2.7.0.jar,validation-api-1.0.0.GA-sources.jar, validation-api-1.0.0.GA.jar" />
+				</copy>
+		<mkdir dir="${build}/www/${target}/ui/client" />
+		<java classname="com.google.gwt.dev.Compiler" fork="true" failonerror="true">
+			<classpath>
+				<pathelement path="${src-web}:${src-java}:${classes-target}/ui/server" />
+				<fileset dir="${gwt-lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<jvmarg value="-Xmx256m" />
+			<!-- <arg value="-style" />
+			<arg value="DETAILED" /> -->
+			<arg value="-war" />
+			<arg value="${build}/www/${target}/ui/client" />
+			<arg value="-localWorkers" />
+			<arg value="4" />
+			<arg value="it.csi.periferico.ui.PerifericoUI" />
+		</java>
+		<delete dir="${build}/www/${target}/ui/client/html_gz" />
+		<mkdir dir="${build}/www/${target}/ui/client/html_gz" />
+		<copy todir="${build}/www/${target}/ui/client/html_gz">
+			<fileset dir="${build}/www/${target}/ui/client/it.csi.periferico.ui.PerifericoUI" includes="*.cache.html,*.cache.js" />
+		</copy>
+		<exec dir="${build}/www/${target}/ui/client/html_gz" executable="sh" os="Linux">
+			<arg line="-c 'gzip -9 *.cache.*'" />
+		</exec>
+		<touch file="${build}/www/${target}/ui/uiFrontendBuild.done" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: war-ui                                   # -->
+	<!-- ############################################################# -->
+	<target name="war-ui" depends="compile-ui-backend, compile-ui-frontend" description="Genera l'archivio dell'interfaccia utente">
+		<antcall target="create-jar-manifest">
+			<param name="module-name" value="UI" />
+			<param name="module-version" value="${product-version}" />
+		</antcall>
+		<war destfile="${archives-target}/perifericoUI.war" webxml="${src-web}/web.xml" manifest="${temp-target}/UI.MF">
+			<classes dir="${classes-target}/ui/server" />
+			<classes dir="${src-java}">
+				<include name="it/csi/periferico/ui/server/MessageBundleService*.properties" />
+			</classes>
+			<fileset dir="${build}/www/${target}/ui/client/it.csi.periferico.ui.PerifericoUI/">
+				<include name="**/*" />
+			</fileset>
+			<fileset dir="${build}/www/${target}/ui/client/html_gz">
+				<include name="**/*" />
+			</fileset>
+		</war>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: run-gwt                                  # -->
+	<!-- ############################################################# -->
+	<target name="run-gwt" description="Esegue l'applicazione nella shell GWT sulla porta 8888">
+		<antcall target="run-gwt-impl">
+			<param name="port" value="8888" />
+		</antcall>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: run-gwt2                                 # -->
+	<!-- ############################################################# -->
+	<target name="run-gwt2" description="Esegue l'applicazione nella shell GWT sulla porta 8889">
+		<antcall target="run-gwt-impl">
+			<param name="port" value="8889" />
+		</antcall>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: run-gwt-impl                             # -->
+	<!-- ############################################################# -->
+	<target name="run-gwt-impl" depends="compile-ui-backend" description="Esegue l'applicazione nella shell GWT">
+		<mkdir dir="${gwt-lib}" />
+		<copy todir="${gwt-lib}">
+			<fileset dir="${lib}" includes="gwt-user-2.7.0.jar,gwt-dev-2.7.0.jar,validation-api-1.0.0.GA-sources.jar, validation-api-1.0.0.GA.jar" />
+		</copy>
+		<mkdir dir="${temp-target}/rungwt/config" />
+		<copy todir="${temp-target}/rungwt/config">
+			<fileset dir="${cfg}">
+				<exclude name="linux" />
+			</fileset>
+		</copy>
+		<mkdir dir="${temp-target}/rungwt/war" />
+		<java classname="com.google.gwt.dev.DevMode" fork="true" dir="${temp-target}/rungwt" failonerror="true">
+			<classpath>
+				<pathelement path="${src-web}:${src-java}:${classes-target}/ui/server" />
+				<fileset dir="${archives-target}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${gwt-lib}">
+					<include name="**/*.jar" />
+				</fileset>
+				<fileset dir="${lib}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+			<jvmarg value="-Djava.library.path=${lib}/" />
+			<jvmarg value="-Xmx512M" />
+			<arg value="-port" />
+			<arg value="${port}" />
+			<arg value="-war" />
+			<arg value="${temp-target}/rungwt/war" />
+			<arg value="-startupUrl" />
+			<arg value="/it.csi.periferico.ui.PerifericoUI/PerifericoUI.html" />
+			<arg value="it.csi.periferico.ui.PerifericoUI" />
+		</java>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: copy-bin                                 # -->
+	<!-- ############################################################# -->
+	<target name="copy-bin" description="Copia la distribuzione eseguibile in una data cartella">
+		<mkdir dir="${bin-dir}/bin" />
+		<mkdir dir="${bin-dir}/bin/lib64" />
+		<copy todir="${bin-dir}/bin">
+			<fileset dir="${archives-target}" />
+			<fileset dir="${scripts}" excludes="run.sh run.bat" />
+			<fileset dir="${lib}" excludes="*-x86-64.so *-armv7l.so" />
+		</copy>
+		<copy todir="${bin-dir}/bin/lib64">
+			<fileset dir="${lib}" includes="*-x86-64.so" />
+			<regexpmapper from="(.*)-x86-64\.so" to="\1.so" />
+		</copy>
+		<copy todir="${bin-dir}/bin/libarmv7l">
+			<fileset dir="${lib}" includes="*-armv7l.so" />
+			<regexpmapper from="(.*)-armv7l\.so" to="\1.so" />
+		</copy>
+		<copy todir="${bin-dir}/bin/win64">
+			<fileset dir="${lib}" includes="*-win64.dll" />
+			<regexpmapper from="(.*)-win64\.dll" to="\1.dll" />
+		</copy>
+		<copy file="${scripts}/run.sh" todir="${bin-dir}" />
+		<chmod file="${bin-dir}/run.sh" perm="+x" />
+		<copy file="${scripts}/run.bat" todir="${bin-dir}" />
+		<chmod file="${bin-dir}/run.bat" perm="+x" />
+		<chmod perm="+x">
+			<fileset dir="${bin-dir}/bin">
+				<include name="*.sh" />
+				<include name="comedi_config" />
+				<include name="modprobe" />
+				<include name="periferico" />
+				<include name="periferico.service" />
+			</fileset>
+		</chmod>
+		<mkdir dir="${bin-dir}/config" />
+		<copy todir="${bin-dir}/config">
+			<fileset dir="${cfg}">
+				<exclude name="castor.properties" />
+				<exclude name="log4j.properties" />
+				<exclude name="linux/**" />
+			</fileset>
+		</copy>
+		<mkdir dir="${bin-dir}/doc" />
+		<copy todir="${bin-dir}/doc">
+			<fileset dir="${basedir}">
+				<include name="changelog.md" />
+				<include name="Copyrights.txt" />
+				<include name="CodeOfConduct.md" />
+				<include name="License.txt" />
+				<include name="AUTHORS.txt" />
+				<include name="BOM.csv" />
+				<include name="Maintainers.txt" />
+				<include name="CONTRIBUTORS.txt" />
+				<include name="README.md" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: run                                      # -->
+	<!-- ############################################################# -->
+	<target name="run" depends="jar-core, war-ui" description="Esegue l'applicazione">
+		<antcall target="copy-bin">
+			<param name="bin-dir" value="${temp-target}/run" />
+		</antcall>
+		<exec dir="${temp-target}/run" executable="./run.sh" />
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: dist                                     # -->
+	<!-- ############################################################# -->
+	<target name="dist" depends="jar-core, war-ui" description="Prepara il contenuto degli archivi per la release">
+		<antcall target="copy-bin">
+			<param name="bin-dir" value="${dist-target}/bin/periferico" />
+		</antcall>
+		<copy todir="${dist-target}/common/periferico">
+			<fileset dir="${archives-target}" includes="periferico-common-${cfg-common-ver}.jar" />
+		</copy>
+		<copy todir="${dist-target}/drv-libs/periferico">
+			<fileset dir="${archives-target}" includes="periferico-drv-conn-${drv-conn-ver}.jar" />
+			<fileset dir="${archives-target}" includes="periferico-drv-itf-${drv-itf-ver}.jar" />
+			<fileset dir="${archives-target}" includes="periferico-drv-impl-${drv-impl-ver}.jar" />
+		</copy>
+		<copy todir="${dist-target}/src/periferico">
+			<fileset dir="${basedir}">
+				<include name="src/**" />
+				<include name="lib/**" />
+				<include name="docs/**" />
+				<include name="conf/**" />
+				<include name="buildfiles/**" />
+				<include name="build.xml" />
+				<include name="changelog.md" />
+				<include name="Copyrights.txt" />
+				<include name="CodeOfConduct.md" />
+				<include name="License.txt" />
+				<include name="AUTHORS.txt" />
+				<include name="BOM.csv" />
+				<include name="Maintainers.txt" />
+				<include name="CONTRIBUTORS.txt" />
+				<include name="README.md" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- ############################################################# -->
+	<!-- # internal target: release                                  # -->
+	<!-- ############################################################# -->
+	<target name="release" depends="dist" description="Genera gli archivi per la release">
+		<tar destfile="${dist-target}/periferico_bin_V${product-version}_${DSTAMP}.tgz" compression="gzip">
+			<tarfileset dir="${dist-target}/bin">
+				<include name="**" />
+				<exclude name="periferico/log/" />
+				<exclude name="periferico/run*" />
+				<exclude name="periferico/bin/*.sh" />
+				<exclude name="periferico/bin/comedi_config" />
+				<exclude name="periferico/bin/modprobe" />
+				<exclude name="periferico/bin/periferico" />
+				<exclude name="periferico/config/**" />
+			</tarfileset>
+			<tarfileset dir="${dist-target}/bin" mode="755">
+				<include name="periferico/run*" />
+				<include name="periferico/bin/*.sh" />
+				<include name="periferico/bin/comedi_config" />
+				<include name="periferico/bin/modprobe" />
+				<include name="periferico/bin/periferico" />
+			</tarfileset>
+		</tar>
+		<tar destfile="${dist-target}/periferico_cfg_V${product-version}_${DSTAMP}.tgz" compression="gzip">
+			<tarfileset dir="${dist-target}/bin">
+				<include name="periferico/config/**" />
+				<exclude name="periferico/config/station.xml" />
+			</tarfileset>
+		</tar>
+		<tar destfile="${dist-target}/periferico_common_V${product-version}_${DSTAMP}.tgz" compression="gzip">
+			<tarfileset dir="${dist-target}/common">
+				<include name="**" />
+			</tarfileset>
+		</tar>
+		<tar destfile="${dist-target}/periferico_drv-libs_V${product-version}_${DSTAMP}.tgz" compression="gzip">
+			<tarfileset dir="${dist-target}/drv-libs">
+				<include name="**" />
+			</tarfileset>
+		</tar>
+		<tar destfile="${dist-target}/periferico_src_V${product-version}_${DSTAMP}.tgz" compression="gzip">
+			<tarfileset dir="${dist-target}/src">
+				<include name="**" />
+				<exclude name="periferico/src/scripts/*" />
+			</tarfileset>
+			<tarfileset dir="${dist-target}/src" mode="755">
+				<include name="periferico/src/scripts/*" />
+			</tarfileset>
+		</tar>
+	</target>
+
+</project>
