@@ -1,0 +1,19 @@
+# Startup configuration for Periferico application for systemd
+# Please, copy this file to: /etc/systemd/system/
+# The file should not be writeable for group and others
+
+[Unit]
+Description=Periferico
+After=syslog.target
+
+[Service]
+WorkingDirectory=/home/periferico/periferico
+SyslogIdentifier=Periferico
+ExecStart=/bin/bash -c "./run.sh"
+User=periferico
+Type=simple
+SuccessExitStatus=143
+
+[Install]
+WantedBy=multi-user.target
+

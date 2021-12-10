@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+                         "http://castor.org/mapping.dtd">
+
+<!-- 
+==================================================
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+==================================================
+ Original Author of file: Pierfrancesco Vallosio
+ Purpose of file: XML mapping file for the
+    configuration of the data acquisition drivers
+    for the air quality analyzers 
+ Change log:
+==================================================
+-->
+
+<mapping>
+
+	<class name="it.csi.periferico.acqdrivers.itf.DriverCfg">
+
+		<map-to xml="driver" />
+
+		<field name="version" type="string" direct="false">
+			<bind-xml name="version" node="element" />
+		</field>
+
+		<field name="faultCodeForOK" type="integer" direct="false">
+			<bind-xml name="faultCodeForOK" node="element" />
+		</field>
+
+		<field name="faultIgnoreMask" type="integer" direct="false">
+			<bind-xml name="faultIgnoreMask" node="element" />
+		</field>
+
+		<field name="alternateFaultCodeForOK" type="integer" collection="arraylist"
+			direct="false">
+			<bind-xml name="alternateFaultCodeForOK" node="element" />
+		</field>
+
+		<field name="ignoreCommFailureInterval_s" type="integer" direct="false">
+			<bind-xml name="ignoreCommFailureInterval_s" node="element" />
+		</field>
+
+		<field name="networkInterfaceOnly" type="boolean" direct="false">
+			<bind-xml name="networkInterfaceOnly" node="element" />
+		</field>
+
+		<field name="defaultIpPort" type="integer" direct="false">
+			<bind-xml name="defaultIpPort" node="element" />
+		</field>
+
+		<field name="defaultTtyBaudRate" type="integer" direct="false">
+			<bind-xml name="defaultTtyBaudRate" node="element" />
+		</field>
+
+		<field name="supportedTtyBaudRates" type="integer" collection="arraylist"
+			direct="false">
+			<bind-xml name="supportedTtyBaudRate" node="element" />
+		</field>
+
+		<field name="defaultTtyParams" type="string" direct="false">
+			<bind-xml name="defaultTtyParams" node="element" />
+		</field>
+
+		<field name="defaultDriverParams" type="string" direct="false">
+			<bind-xml name="defaultDriverParams" node="element" />
+		</field>
+
+		<field name="analyzerNameList" type="it.csi.periferico.acqdrivers.itf.AnalyzerName"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.acqdrivers.itf.AnalyzerName">
+
+		<map-to xml="analyzerName" />
+
+		<field name="brand" type="string" direct="false">
+			<bind-xml name="brand" node="element" />
+		</field>
+
+		<field name="model" type="string" direct="false">
+			<bind-xml name="model" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.acqdrivers.itf.ElementCfg">
+
+		<map-to xml="element" />
+
+		<field name="parameterId" type="string" direct="false">
+			<bind-xml name="parameter" node="element" />
+		</field>
+
+		<field name="aggregationPeriod_m" type="integer" direct="false">
+			<bind-xml name="aggregationPeriod_m" node="element" />
+		</field>
+
+	</class>
+
+</mapping>

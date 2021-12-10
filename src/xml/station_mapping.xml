@@ -1,0 +1,897 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+                         "http://castor.org/mapping.dtd">
+
+<!-- 
+==================================================
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+==================================================
+ Original Author of file: Pierfrancesco Vallosio
+ Purpose of file: XML mapping file for the
+    main configuration file of the application;
+    it contains all the specific configuration of
+    each monitoring station, including analyzer
+    configurations, station alarms and so on. 
+ Change log:
+==================================================
+-->
+
+<mapping>
+
+	<class name="it.csi.periferico.config.Config">
+
+		<map-to xml="config" />
+
+		<field name="idAsString" type="string" direct="false">
+			<bind-xml name="id" node="element" />
+		</field>
+
+		<field name="station" type="it.csi.periferico.core.Station"
+			direct="false">
+			<bind-xml name="station" node="element" />
+		</field>
+
+		<field name="boardList" type="it.csi.periferico.boards.BoardList"
+			direct="false">
+			<bind-xml name="boardList" node="element" />
+		</field>
+
+		<field name="date" type="java.util.Date" direct="false">
+			<bind-xml name="date" node="element" />
+		</field>
+
+		<field name="author" type="string" direct="false">
+			<bind-xml name="author" node="element" />
+		</field>
+
+		<field name="comment" type="string" direct="false">
+			<bind-xml name="comment" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.Station">
+
+		<map-to xml="station" />
+
+		<field name="idAsString" type="string" direct="false">
+			<bind-xml name="id" node="element" />
+		</field>
+
+		<field name="shortName" type="string" direct="false">
+			<bind-xml name="shortName" node="element" />
+		</field>
+
+		<field name="name" type="string" direct="false">
+			<bind-xml name="name" node="element" />
+		</field>
+
+		<field name="location" type="string" direct="false">
+			<bind-xml name="location" node="element" />
+		</field>
+
+		<field name="address" type="string" direct="false">
+			<bind-xml name="address" node="element" />
+		</field>
+
+		<field name="city" type="string" direct="false">
+			<bind-xml name="city" node="element" />
+		</field>
+
+		<field name="province" type="string" direct="false">
+			<bind-xml name="province" node="element" />
+		</field>
+
+		<field name="gpsInstalled" type="boolean" direct="false">
+			<bind-xml name="gpsInstalled" node="element" />
+		</field>
+
+		<field name="userNotes" type="string" direct="false">
+			<bind-xml name="userNotes" node="element" />
+		</field>
+
+		<field name="connectionParams" type="it.csi.periferico.comm.ConnectionParams"
+			direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+		<field name="container" type="it.csi.periferico.core.Container"
+			direct="false">
+			<bind-xml name="container" node="element" />
+		</field>
+
+		<field name="listAnalyzer" type="it.csi.periferico.core.Analyzer"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.comm.ConnectionParams">
+
+		<field name="copIP" type="string" direct="false">
+			<bind-xml name="copIP" node="element" />
+		</field>
+
+		<field name="outgoingCallEnabled" type="boolean" direct="false">
+			<bind-xml name="outgoingCallEnabled" node="element" />
+		</field>
+
+		<field name="maxConnectionAttempts" type="integer" direct="false">
+			<bind-xml name="maxConnectionAttempts" node="element" />
+		</field>
+
+		<field name="connectTimeout" type="integer" direct="false">
+			<bind-xml name="connectTimeout" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.comm.LanConnectionParams" extends="it.csi.periferico.comm.ConnectionParams">
+
+		<map-to xml="lanConnectionParams" />
+
+	</class>
+
+	<class name="it.csi.periferico.comm.RouterConnectionParams"
+		extends="it.csi.periferico.comm.LanConnectionParams">
+
+		<map-to xml="routerConnectionParams" />
+
+	</class>
+
+	<class name="it.csi.periferico.comm.ModemConnectionParams"
+		extends="it.csi.periferico.comm.ConnectionParams">
+
+		<map-to xml="modemConnectionParams" />
+
+		<field name="copDialupConfig" type="string" direct="false">
+			<bind-xml name="copDialupConfig" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.Container">
+
+		<field name="listAlarm" type="it.csi.periferico.core.ContainerAlarm"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.ContainerAlarm">
+
+		<map-to xml="containerAlarm" />
+
+		<field name="idAsString" type="string" direct="false">
+			<bind-xml name="id" node="element" />
+		</field>
+
+		<field name="description" type="string" direct="false">
+			<bind-xml name="description" node="element" />
+		</field>
+
+	</class>
+
+
+	<class name="it.csi.periferico.core.DigitalContainerAlarm"
+		extends="it.csi.periferico.core.ContainerAlarm">
+
+		<map-to xml="digitalContainerAlarm" />
+
+		<field name="digitalAlarm" type="it.csi.periferico.core.DigitalAlarm"
+			direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.TriggerContainerAlarm"
+		extends="it.csi.periferico.core.ContainerAlarm">
+
+		<map-to xml="triggerContainerAlarm" />
+
+		<field name="triggerAlarm" type="it.csi.periferico.core.TriggerAlarm"
+			direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.Alarm">
+
+		<field name="alarmNameId" type="string" direct="false">
+			<bind-xml name="alarmNameId" node="element" />
+		</field>
+
+		<field name="enabled" type="boolean" direct="false">
+			<bind-xml name="enabled" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.DigitalAlarm" extends="it.csi.periferico.core.Alarm">
+
+		<map-to xml="digitalAlarm" />
+
+		<field name="activeHigh" type="boolean" direct="false">
+			<bind-xml name="activeHigh" node="element" />
+		</field>
+
+		<field name="boardBindInfo" type="it.csi.periferico.boards.BoardBindInfo"
+			direct="false">
+			<bind-xml name="boardBindInfo" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.DataValidAlarm" extends="it.csi.periferico.core.DigitalAlarm">
+
+		<map-to xml="dataValidAlarm" />
+
+		<field name="discardData" type="boolean" direct="false">
+			<bind-xml name="discardData" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.TriggerAlarm" extends="it.csi.periferico.core.Alarm">
+
+		<map-to xml="triggerAlarm" />
+
+		<field name="observedAnalyzerIdAsString" type="string" direct="false">
+			<bind-xml name="observedAnalyzerId" node="element" />
+		</field>
+
+		<field name="observedParameterId" type="string" direct="false">
+			<bind-xml name="observedParameterId" node="element" />
+		</field>
+
+		<field name="alarmThresholdHigh" type="double" direct="false">
+			<bind-xml name="alarmThresholdHigh" node="element" />
+		</field>
+
+		<field name="alarmThresholdLow" type="double" direct="false">
+			<bind-xml name="alarmThresholdLow" node="element" />
+		</field>
+
+		<field name="warningThresholdHigh" type="double" direct="false">
+			<bind-xml name="warningThresholdHigh" node="element" />
+		</field>
+
+		<field name="warningThresholdLow" type="double" direct="false">
+			<bind-xml name="warningThresholdLow" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.DataPortAlarm" extends="it.csi.periferico.core.Alarm">
+
+		<map-to xml="dataPortAlarm" />
+
+		<field name="acqPeriod" type="integer" direct="false">
+			<bind-xml name="acqPeriod" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.Analyzer">
+
+		<field name="idAsString" type="string" direct="false">
+			<bind-xml name="id" node="element" />
+		</field>
+
+		<field name="name" type="string" direct="false">
+			<bind-xml name="name" node="element" />
+		</field>
+
+		<field name="brand" type="string" direct="false">
+			<bind-xml name="brand" node="element" />
+		</field>
+
+		<field name="model" type="string" direct="false">
+			<bind-xml name="model" node="element" />
+		</field>
+
+		<field name="description" type="string" direct="false">
+			<bind-xml name="description" node="element" />
+		</field>
+
+		<field name="serialNumber" type="string" direct="false">
+			<bind-xml name="serialNumber" node="element" />
+		</field>
+
+		<field name="userNotes" type="string" direct="false">
+			<bind-xml name="userNotes" node="element" />
+		</field>
+
+		<field name="statusAsString" type="string" direct="false">
+			<bind-xml name="status" node="element" />
+		</field>
+
+		<field name="deletionDate" type="java.util.Date" direct="false">
+			<bind-xml name="deletionDate" node="element" />
+		</field>
+
+		<field name="uiURL" type="string" direct="false">
+			<bind-xml name="uiURL" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.IOItfAnalyzer" extends="it.csi.periferico.core.Analyzer">
+
+		<field name="fault" type="it.csi.periferico.core.DigitalAlarm"
+			direct="false">
+			<bind-xml name="fault" node="element" />
+		</field>
+
+		<field name="dataValid" type="it.csi.periferico.core.DataValidAlarm"
+			direct="false">
+			<bind-xml name="dataValid" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.AnalogItfAnalyzer" extends="it.csi.periferico.core.IOItfAnalyzer">
+
+		<field name="minVoltage" type="double" direct="false">
+			<bind-xml name="minVoltage" node="element" />
+		</field>
+
+		<field name="maxVoltage" type="double" direct="false">
+			<bind-xml name="maxVoltage" node="element" />
+		</field>
+
+		<field name="minRangeExtension" type="boolean" direct="false">
+			<bind-xml name="minRangeExtension" node="element" />
+		</field>
+
+		<field name="maxRangeExtension" type="boolean" direct="false">
+			<bind-xml name="maxRangeExtension" node="element" />
+		</field>
+
+		<field name="differentialModeNeeded" type="boolean" direct="false">
+			<bind-xml name="differentialModeNeeded" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.DataPortAnalyzer" extends="it.csi.periferico.core.Analyzer">
+
+		<map-to xml="dataPortAnalyzer" />
+
+		<field name="portTypeAsString" type="string" direct="false">
+			<bind-xml name="portType" node="element" />
+		</field>
+
+		<field name="hostName" type="string" direct="false">
+			<bind-xml name="hostName" node="element" />
+		</field>
+
+		<field name="ipPort" type="integer" direct="false">
+			<bind-xml name="ipPort" node="element" />
+		</field>
+
+		<field name="ttyDevice" type="string" direct="false">
+			<bind-xml name="ttyDevice" node="element" />
+		</field>
+
+		<field name="ttyBaudRate" type="integer" direct="false">
+			<bind-xml name="ttyBaudRate" node="element" />
+		</field>
+
+		<field name="ttyParams" type="string" direct="false">
+			<bind-xml name="ttyParams" node="element" />
+		</field>
+
+		<field name="driverParams" type="string" direct="false">
+			<bind-xml name="driverParams" node="element" />
+		</field>
+
+		<field name="listElements" type="it.csi.periferico.core.DataPortElement"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+		<field name="fault" type="it.csi.periferico.core.DataPortAlarm"
+			direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+		<field name="calibrationCheck" type="it.csi.periferico.core.CalibAutoCheck"
+			direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.AvgAnalyzer" extends="it.csi.periferico.core.AnalogItfAnalyzer">
+
+		<map-to xml="avgAnalyzer" />
+
+		<field name="listElements" type="it.csi.periferico.core.AvgElement"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.RainAnalyzer" extends="it.csi.periferico.core.IOItfAnalyzer">
+
+		<map-to xml="rainAnalyzer" />
+
+		<field name="rainElement" type="it.csi.periferico.core.CounterElement"
+			direct="false">
+			<bind-xml name="rainElement" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.SampleAnalyzer" extends="it.csi.periferico.core.AnalogItfAnalyzer">
+
+		<map-to xml="sampleAnalyzer" />
+
+		<field name="listElements" type="it.csi.periferico.core.SampleElement"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+		<field name="calibrationCheck" type="it.csi.periferico.core.CalibAutoCheck"
+			direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.WindAnalyzer" extends="it.csi.periferico.core.AnalogItfAnalyzer">
+
+		<map-to xml="windAnalyzer" />
+
+		<field name="wind" type="it.csi.periferico.core.WindElement"
+			direct="false">
+			<bind-xml name="wind" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.Element">
+
+		<field name="enabled" type="boolean" direct="false">
+			<bind-xml name="enabled" node="element" />
+		</field>
+
+		<field name="parameterId" type="string" direct="false">
+			<bind-xml name="parameterId" node="element" />
+		</field>
+
+		<field name="avgPeriods" type="integer" collection="arraylist"
+			direct="false">
+			<bind-xml name="avgPeriod" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.ScalarElement" extends="it.csi.periferico.core.Element">
+
+		<field name="minValue" type="double" direct="false">
+			<bind-xml name="minValue" node="element" />
+		</field>
+
+		<field name="maxValue" type="double" direct="false">
+			<bind-xml name="maxValue" node="element" />
+		</field>
+
+		<field name="measureUnitName" type="string" direct="false">
+			<bind-xml name="measureUnitName" node="element" />
+		</field>
+
+		<field name="numDec" type="integer" direct="false">
+			<bind-xml name="numDecimals" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.GenericSampleElement"
+		extends="it.csi.periferico.core.ScalarElement">
+
+		<field name="analyzerMeasureUnitName" type="string" direct="false">
+			<bind-xml name="analyzerMeasureUnitName" node="element" />
+		</field>
+
+		<field name="acqPeriod" type="integer" direct="false">
+			<bind-xml name="acqPeriod" node="element" />
+		</field>
+
+		<field name="correctionCoefficient" type="double" direct="false">
+			<bind-xml name="correctionCoefficient" node="element" />
+		</field>
+
+		<field name="correctionOffset" type="double" direct="false">
+			<bind-xml name="correctionOffset" node="element" />
+		</field>
+
+		<field name="linearizationCoefficient" type="double" direct="false">
+			<bind-xml name="linearizationCoefficient" node="element" />
+		</field>
+
+		<field name="linearizationOffset" type="double" direct="false">
+			<bind-xml name="linearizationOffset" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.DataPortElement" extends="it.csi.periferico.core.GenericSampleElement">
+
+		<map-to xml="dataPortElement" />
+
+		<field name="rangeLow" type="double" direct="false">
+			<bind-xml name="rangeLow" node="element" />
+		</field>
+
+		<field name="rangeHigh" type="double" direct="false">
+			<bind-xml name="rangeHigh" node="element" />
+		</field>
+
+		<field name="discardDataNotValidForAnalyzer" type="boolean"
+			direct="false">
+			<bind-xml name="discardDataNotValidForAnalyzer" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.DataPortAvgElement" extends="it.csi.periferico.core.DataPortElement">
+
+		<map-to xml="dataPortAvgElement" />
+
+		<field name="avgPeriod" type="integer" direct="false">
+			<bind-xml name="acqPeriodForAvg" node="element" />
+		</field>
+
+		<field name="acqDelay" type="integer" direct="false">
+			<bind-xml name="acqDelay" node="element" />
+		</field>
+
+		<field name="acqDuration" type="integer" direct="false">
+			<bind-xml name="acqDuration" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.SampleElement" extends="it.csi.periferico.core.GenericSampleElement">
+
+		<map-to xml="sampleElement" />
+
+		<field name="rangeLow" type="double" direct="false">
+			<bind-xml name="rangeLow" node="element" />
+		</field>
+
+		<field name="rangeHigh" type="double" direct="false">
+			<bind-xml name="rangeHigh" node="element" />
+		</field>
+
+		<field name="boardBindInfo" type="it.csi.periferico.boards.BoardBindInfo"
+			direct="false">
+			<bind-xml name="boardBindInfo" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.AvgElement" extends="it.csi.periferico.core.SampleElement">
+
+		<map-to xml="avgElement" />
+
+		<field name="avgPeriod" type="integer" direct="false">
+			<bind-xml name="acqPeriodForAvg" node="element" />
+		</field>
+
+		<field name="acqDelay" type="integer" direct="false">
+			<bind-xml name="acqDelay" node="element" />
+		</field>
+
+		<field name="acqDuration" type="integer" direct="false">
+			<bind-xml name="acqDuration" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.CounterElement" extends="it.csi.periferico.core.ScalarElement">
+
+		<map-to xml="counterElement" />
+
+		<field name="valueForEvent" type="double" direct="false">
+			<bind-xml name="valueForEvent" node="element" />
+		</field>
+
+		<field name="acqOnRisingEdge" type="boolean" direct="false">
+			<bind-xml name="acqOnRisingEdge" node="element" />
+		</field>
+
+		<field name="boardBindInfo" type="it.csi.periferico.boards.BoardBindInfo"
+			direct="false">
+			<bind-xml name="boardBindInfo" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.WindElement" extends="it.csi.periferico.core.Element">
+
+		<map-to xml="windElement" />
+
+		<field name="speedMeasureUnitName" type="string" direct="false">
+			<bind-xml name="speedMeasureUnitName" node="element" />
+		</field>
+
+		<field name="speedMaxValue" type="double" direct="false">
+			<bind-xml name="speedMaxValue" node="element" />
+		</field>
+
+		<field name="speedCorrectionCoefficient" type="double" direct="false">
+			<bind-xml name="speedCorrectionCoefficient" node="element" />
+		</field>
+
+		<field name="speedCorrectionOffset" type="double" direct="false">
+			<bind-xml name="speedCorrectionOffset" node="element" />
+		</field>
+
+		<field name="directionCorrectionCoefficient" type="double"
+			direct="false">
+			<bind-xml name="directionCorrectionCoefficient" node="element" />
+		</field>
+
+		<field name="directionCorrectionOffset" type="double" direct="false">
+			<bind-xml name="directionCorrectionOffset" node="element" />
+		</field>
+
+		<field name="speedNumDec" type="integer" direct="false">
+			<bind-xml name="speedNumDec" node="element" />
+		</field>
+
+		<field name="speedPrecision" type="double" direct="false">
+			<bind-xml name="speedPrecision" node="element" />
+		</field>
+
+		<field name="speedRangeHigh" type="double" direct="false">
+			<bind-xml name="speedRangeHigh" node="element" />
+		</field>
+
+		<field name="directionNumDec" type="integer" direct="false">
+			<bind-xml name="directionNumDec" node="element" />
+		</field>
+
+		<field name="directionPrecision" type="double" direct="false">
+			<bind-xml name="directionPrecision" node="element" />
+		</field>
+
+		<field name="acqPeriod" type="integer" direct="false">
+			<bind-xml name="acqPeriod" node="element" />
+		</field>
+
+		<field name="speedBoardBindInfo" type="it.csi.periferico.boards.BoardBindInfo"
+			direct="false">
+			<bind-xml name="speedBoardBindInfo" node="element" />
+		</field>
+
+		<field name="directionBoardBindInfo" type="it.csi.periferico.boards.BoardBindInfo"
+			direct="false">
+			<bind-xml name="directionBoardBindInfo" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.CalibAutoCheck">
+
+		<map-to xml="calibAutoCheck" />
+
+		<field name="enabled" type="boolean" direct="false">
+			<bind-xml name="enabled" node="element" />
+		</field>
+
+		<field name="checkPeriodAsString" type="string" direct="false">
+			<bind-xml name="checkPeriod" node="element" />
+		</field>
+
+		<field name="dayOfCheck" type="integer" direct="false">
+			<bind-xml name="dayOfCheck" node="element" />
+		</field>
+
+		<field name="startTime" type="integer" direct="false">
+			<bind-xml name="startTime" node="element" />
+		</field>
+
+		<field name="listPoints" type="it.csi.periferico.core.CheckPoint"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.CheckPoint">
+
+		<map-to xml="checkPoint" />
+
+		<field name="description" type="string" direct="false">
+			<bind-xml name="description" node="element" />
+		</field>
+
+		<field name="cylinderOpeningTime" type="integer" direct="false">
+			<bind-xml name="cylinderOpeningTime" node="element" />
+		</field>
+
+		<field name="valueReadTime" type="integer" direct="false">
+			<bind-xml name="valueReadTime" node="element" />
+		</field>
+
+		<field name="cylinderClosingTime" type="integer" direct="false">
+			<bind-xml name="cylinderClosingTime" node="element" />
+		</field>
+
+		<field name="commandLogicActiveHigh" type="boolean" direct="false">
+			<bind-xml name="commandLogicActiveHigh" node="element" />
+		</field>
+
+		<field name="listElementPoints" type="it.csi.periferico.core.ElementPoint"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.core.ElementPoint">
+
+		<map-to xml="elementPoint" />
+
+		<field name="enabled" type="boolean" direct="false">
+			<bind-xml name="enabled" node="element" />
+		</field>
+
+		<field name="parameterId" type="string" direct="false">
+			<bind-xml name="parameterId" node="element" />
+		</field>
+
+		<field name="cylinderValue" type="double" direct="false">
+			<bind-xml name="cylinderValue" node="element" />
+		</field>
+
+		<field name="alarmThreshold" type="integer" direct="false">
+			<bind-xml name="alarmThreshold" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.BoardList">
+
+		<map-to xml="boardList" />
+
+		<field name="boards" type="it.csi.periferico.boards.Board"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.Board">
+
+		<field name="idAsString" type="string" direct="false">
+			<bind-xml name="id" node="element" />
+		</field>
+
+		<field name="brand" type="string" direct="false">
+			<bind-xml name="brand" node="element" />
+		</field>
+
+		<field name="model" type="string" direct="false">
+			<bind-xml name="model" node="element" />
+		</field>
+
+		<field name="driverParams" type="it.csi.periferico.boards.DriverParam"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.PCIBoard" extends="it.csi.periferico.boards.Board">
+
+		<map-to xml="pciBoard" />
+
+		<field name="version" type="string" direct="false">
+			<bind-xml name="version" node="element" />
+		</field>
+
+		<field name="pciDevice" type="it.csi.periferico.boards.PCIDevice"
+			direct="false">
+			<bind-xml name="pciDevice" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.ISABoard" extends="it.csi.periferico.boards.Board">
+
+		<map-to xml="isaBoard" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.SerialBoardBus" extends="it.csi.periferico.boards.Board">
+
+		<map-to xml="serialBoardBus" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.LanBoardBus" extends="it.csi.periferico.boards.Board">
+
+		<map-to xml="lanBoardBus" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.LanBoard" extends="it.csi.periferico.boards.Board">
+
+		<map-to xml="lanBoard" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.PCILocation">
+
+		<field name="domainAsHexString" type="string" direct="false">
+			<bind-xml name="domain" node="element" />
+		</field>
+
+		<field name="busAsHexString" type="string" direct="false">
+			<bind-xml name="bus" node="element" />
+		</field>
+
+		<field name="slotAsHexString" type="string" direct="false">
+			<bind-xml name="slot" node="element" />
+		</field>
+
+		<field name="functionAsHexString" type="string" direct="false">
+			<bind-xml name="function" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.PCIDevice" extends="it.csi.periferico.boards.PCILocation">
+
+		<field name="vendorIdAsHexString" type="string" direct="false">
+			<bind-xml name="vendorId" node="element" />
+		</field>
+
+		<field name="deviceIdAsHexString" type="string" direct="false">
+			<bind-xml name="deviceId" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.DriverParam">
+
+		<map-to xml="driverParam" />
+
+		<field name="name" type="string" direct="false">
+			<bind-xml name="name" node="element" />
+		</field>
+
+		<field name="value" type="string" direct="false">
+			<bind-xml name="value" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.BoardBindInfo">
+
+		<field name="boardIdAsString" type="string" direct="false">
+			<bind-xml name="boardId" node="element" />
+		</field>
+
+		<field name="subDevice" type="integer" direct="false">
+			<bind-xml name="subDevice" node="element" />
+		</field>
+
+		<field name="channel" type="integer" direct="false">
+			<bind-xml name="channel" node="element" />
+		</field>
+
+	</class>
+
+</mapping>

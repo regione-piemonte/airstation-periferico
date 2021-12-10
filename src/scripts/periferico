@@ -1,0 +1,188 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:             periferico
+# Required-Start:       $network
+# Required-Stop:
+# Default-Start:        2 3 4 5
+# Default-Stop:         0 1 6
+# Short-Description:    Periferico application
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+# /etc/init.d/periferico: start and stop the Periferico application
+
+# Environment variables
+# PERIFERICO_COMMAND: this is the command that starts Periferico application
+PERIFERICO_COMMAND=/var/csi/periferico/run.sh
+# PERIFERICO_STARTLOG: Periferico application startup log file
+PERIFERICO_STARTLOG=/var/csi/periferico/log/startup.log
+# PERIFERICO_STARTED_MSG: message in the startup log file that states that Periferico is started
+PERIFERICO_STARTED_MSG="Periferico startup completed"
+# PERIFERICO_USER: this is the user that executes Periferico application
+PERIFERICO_USER=periferico
+# PERIFERICO_PIDFILE: this is the PID file for Periferico application
+PERIFERICO_PIDFILE=/var/run/periferico.pid
+
+# Messages
+MSG_CMD_ERROR="Usage: /etc/init.d/periferico {start|stop|restart|status}"
+MSG_NO_COMMAND="Startup script not found: $PERIFERICO_COMMAND"
+MSG_PERM_ERROR="Only root can start/stop periferico application"
+MSG_STARTING="Starting periferico application"
+MSG_STOPPING="Stopping periferico application"
+MSG_STATUS_ON="Periferico application is running"
+MSG_STATUS_OFF="Periferico application is not running"
+
+# Functions
+
+start()
+{
+  if [ `id -u` -ne 0 ]; then
+    log_failure_msg $MSG_PERM_ERROR
+    exit 1
+  fi
+  check_running
+  running=$?
+  if [ $running -eq 0 ]; then
+    log_failure_msg $MSG_STATUS_ON [PID=`cat $PERIFERICO_PIDFILE`]
+    exit 1
+  fi
+  log_daemon_msg $MSG_STARTING
+  rm -f $PERIFERICO_STARTLOG
+  log_progress_msg "periferico"
+  if start-stop-daemon --start --quiet --make-pidfile --pidfile $PERIFERICO_PIDFILE --name java --background --startas $PERIFERICO_COMMAND --chuid $PERIFERICO_USER -- $PERIFERICO_OPTIONS; then
+    sleep 2
+    tail --pid=$$ --retry -f $PERIFERICO_STARTLOG 2>/dev/null &
+    wait_for_startup
+    check_running
+    running=$?
+    if [ $running -eq 0 ]; then
+      log_end_msg 0
+    else
+      log_end_msg 1
+      exit 1
+    fi
+  else
+    log_end_msg 1
+    exit 1
+  fi
+
+}
+
+stop()
+{
+  if [ `id -u` -ne 0 ]; then
+    log_failure_msg $MSG_PERM_ERROR
+    exit 1
+  fi
+  check_running
+  running=$?
+  if [ $running -ne 0 ]; then
+    log_failure_msg $MSG_STATUS_OFF
+    return 1
+  fi
+  log_daemon_msg $MSG_STOPPING
+  # If there is a stale PID file remove it
+  if [ -f $PERIFERICO_PIDFILE ] && ! ps h `cat $PERIFERICO_PIDFILE` > /dev/null; then
+      rm -f $PERIFERICO_PIDFILE
+  fi
+  if start-stop-daemon --stop --quiet --pidfile $PERIFERICO_PIDFILE; then
+    tail --pid=`cat $PERIFERICO_PIDFILE` -n 0 -f $PERIFERICO_STARTLOG 2>/dev/null &
+    wait_for_shutdown
+    log_end_msg 0
+  else
+    log_end_msg 1
+  fi
+}
+
+status()
+{
+  check_running
+  status=$?
+  if [ $status -eq 0 ]; then
+    log_success_msg $MSG_STATUS_ON [PID=`cat $PERIFERICO_PIDFILE`]
+  else
+    log_failure_msg $MSG_STATUS_OFF
+  fi
+  exit $status
+}
+
+check_running()
+{
+  pidofproc -p $PERIFERICO_PIDFILE $PERIFERICO_COMMAND > /dev/null
+}
+
+wait_for_startup()
+{
+  check_running
+  running=$?
+  count=75
+  startup_done=1
+  while [ $running -eq 0 -a $count -gt 0 -a $startup_done -ne 0 ]
+  do
+    sleep 1
+    check_running
+    running=$?
+    count=$(( $count - 1 ))
+    grep "$PERIFERICO_STARTED_MSG" $PERIFERICO_STARTLOG > /dev/null 2>&1
+    startup_done=$?
+  done
+  # this sleep is needed to ensure that tail reads last log lines before this
+  # script terminates
+  sleep 1
+}
+
+wait_for_shutdown()
+{
+  check_running
+  running=$?
+  count=75
+  while [ $running -eq 0 -a $count -gt 0 ]
+  do
+    sleep 1
+    check_running
+    running=$?
+    count=$(( $count - 1 ))
+  done
+  # this sleep is needed to ensure that tail reads last log lines before this
+  # script terminates
+  sleep 1
+}
+
+# Check the number of parameters
+if [ $# -lt 1 ]; then 
+    log_failure_msg $MSG_CMD_ERROR
+    exit 1
+fi
+
+# Check if periferico command exists
+if [ ! -x $PERIFERICO_COMMAND ]; then
+    log_failure_msg $MSG_NO_COMMAND
+    exit 1
+fi
+
+CONTROL_COMMAND=$1
+shift
+PERIFERICO_OPTIONS="$@"
+case "$CONTROL_COMMAND" in
+  start)
+    start
+  ;;
+  stop)
+    stop
+  ;;
+  restart)
+    stop
+    start
+  ;;
+  status)
+    status
+  ;;
+  *)
+    echo $MSG_CMD_ERROR
+    exit 1
+  ;;
+esac
+
+exit 0

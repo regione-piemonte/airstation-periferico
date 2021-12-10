@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN"
+    "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+
+<!-- 
+==================================================
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+==================================================
+ Original Author of file: Pierfrancesco Vallosio
+ Purpose of file: defines the mappings between URL
+   paths and the servlets
+ Change log:
+==================================================
+-->
+
+<web-app>
+
+  <servlet>
+    <servlet-name>default</servlet-name>
+    <servlet-class>org.mortbay.jetty.servlet.DefaultServlet</servlet-class>
+    <init-param>
+      <param-name>gzip</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>perifericoUI</servlet-name>
+    <servlet-class>it.csi.periferico.ui.server.PerifericoUIServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>perifericoUI</servlet-name>
+    <url-pattern>/uiservice</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>displayChart</servlet-name>
+    <servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>displayChart</servlet-name>
+    <url-pattern>/displayChart</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>copService</servlet-name>
+    <servlet-class>it.csi.periferico.comm.CopService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>copService</servlet-name>
+    <url-pattern>/copservice</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>exportcsvService</servlet-name>
+    <servlet-class>it.csi.periferico.comm.ExportcsvService</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>exportcsvService</servlet-name>
+    <url-pattern>/exportcsvService</url-pattern>
+  </servlet-mapping>
+
+  <session-config>
+  	<session-timeout>30</session-timeout>
+  </session-config>
+
+</web-app>

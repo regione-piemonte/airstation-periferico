@@ -1,0 +1,1283 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!--
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+_______________________________________________
+ Original Author of file: Pierfrancesco Vallosio
+ Purpose of file: Periferico application user manual and contextual help
+ Change log:
+   2021-11-10: single page version of the original frame based manual
+-->
+
+<html lang="it">
+
+<head>
+	<title>
+		Manuale del software Periferico 3.5
+	</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<meta http-equiv="Content-Language" content="it-it">
+	<link rel="stylesheet" type="text/css" href="../stylesheets/help.css">
+</head>
+
+<body>
+	<div class="column left_col">
+	<div class="left_content">
+		<h2>Indice generale</h2>
+		<a href="#introduction">Introduzione</a><br>
+		<a href="#login">Pagina iniziale</a><br>
+		<a href="#ui">Interfaccia utente</a><br>
+		<h3>Configurazione</h3>
+		<a href="#conf_main">Principi di funzionamento e comandi generali</a><br>
+		<a href="#conf_stationWidget">Informazioni anagrafiche e connessione</a><br>
+		<a href="#conf_alarmWidget">Allarmi di cabina</a><br>
+		<a href="#conf_listAnalyzerWidget">Analizzatori</a><br>
+		&nbsp;&nbsp;<a href="#conf_analyzerWidget">configurazione analizzatore</a><br>
+		&nbsp;&nbsp;configurazione elementi per:<br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="#conf_sampleElementWidget">analizzatore sample</a><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="#conf_dataPortElementWidget">analizzatore con interfaccia dati</a><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="#conf_avgElementWidget">analizzatore che calcola medie </a><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="#conf_windElementWidget">anemometro </a><br>
+		&nbsp;&nbsp;&nbsp;&nbsp;<a href="#conf_rainElementWidget">pluviometro </a><br>
+		&nbsp;&nbsp;<a href="#conf_manualCalib">ausilio alla calibrazione manuale</a><br>
+		<a href="#conf_listBoardWidget">Schede di acquisizione</a><br>
+		&nbsp;&nbsp;<a href="#conf_boardWidget">configurazione scheda</a><br>
+		&nbsp;&nbsp;<a href="#conf_subdeviceWidget">configurazione canali</a><br>
+		<a href="#conf_loadConfWidget">Caricamento configurazioni</a><br>
+		<h3>Visualizzazione</h3>
+		<a href="#view_informaticStatusWidget">Stato informatico</a><br>
+		<a href="#view_stationStatusWidget">Stato stazione</a><br>
+		&nbsp;&nbsp;<a href="#view_historyStationStatusWidget">storico degli allarmi di cabina</a><br>
+		<a href="#view_analyzerStatusWidget">Stato analizzatori</a><br>
+		&nbsp;&nbsp;<a href="#view_historyAnalyzersStatusWidget">storico degli stati</a><br>
+		<a href="#view_realTimeDataWidget">Consultazione dati</a><br>
+		&nbsp;&nbsp;<a href="#view_historyMeansDataWidget">tabella delle medie</a><br>
+		&nbsp;&nbsp;<a href="#view_historyRealTimeDataWidget">tabella dei dati istantanei</a><br>
+	</div>
+	</div>
+	
+	<div class="column right_col">
+	<div class="right_content">
+		<h1 id="introduction">Introduzione</h1>
+		<p>Il presente documento costituisce il manuale del software Periferico 3.5.
+		</p>
+		<p>La consultazione pu&ograve; essere effettuata utilizzando l'indice
+		generale, situato nella colonna di sinistra, oppure dall'interfaccia utente
+		del software, utilizzando il bottone di help, per accedere direttamente
+		alle informazioni del manuale relative alla pagina corrente. 
+		</p>
+		<hr>
+		
+		<h1 id="login">Pagina iniziale</h1>
+		<p>La pagina iniziale dell'interfaccia utente del software Periferico
+		richiede unicamente l'inserimento della password di accesso, seguita
+		da un click sul pulsante sottostante.
+		</p>
+		<p>Nell'applicazione &egrave; possibile configurare due password, una per
+		ottenere un accesso con funzionalit&agrave; complete, l'altra per ottenere
+		un accesso limitato alla sola consultazione.
+		</p>
+		<hr>
+
+		<h1 id="ui">Interfaccia utente</h1>
+		<p>L'interfaccia utente del software Periferico 3.0 &egrave; un'interfaccia
+		applicativa di tipo web, utilizzabile con un normale browser.
+		</p>
+		<p>Essa	presenta una barra superiore che consente di accedere direttamente
+		alle pagine principali dell'interfaccia; queste sono raggruppate in due
+		sezioni: configurazione e visualizzazione.
+		</p>
+		<p>Per passare da una sezione all'altra occorre premere il relativo
+		pulsante. Subito dopo il login vengono visualizzati i pulsanti di accesso
+		per tutte e due le sezioni. Dopo l'accesso ad una delle due sezioni, vengono
+		visualizzati i pulsanti	di accesso diretto alle pagine della sezione
+		corrente e, sul lato destro	della barra, il pulsante per accedere all'altra
+		sezione.
+		</p>
+		<p>Il pulsante della pagina correntemente selezionata assume il colore di
+		sfondo della pagina stessa, rendendo pi&ugrave; evidente quale sia la
+		pagina selezionata.
+		</p>
+		<hr>
+
+		<h1 id="conf_main">Principi di funzionamento e comandi generali</h1>
+		<p>La configurazione di stazione viene caricata all'avvio dell'applicazione
+		e viene utilizzata dall'applicazione per svolgere tutte le sue funzioni.<br>
+		L'interfaccia utente dell'applicazione &egrave; un'interfaccia di tipo web,
+		utilizzabile in un comune browser. Pertanto pi&ugrave; utenti possono
+		utilizzare in contemporanea l'interfaccia utente dell'applicazione.<br>
+		Questo implica che la configurazione dell'applicazione potrebbe essere
+		modificata contemporaneamente da utenti diversi.
+		</p>
+		<p> Per evitare che tali operazioni concorrenti non costituiscano un
+		problema per il funzionamento dell'applicazione, ogni utente che inizia a
+		modificare la configurazione opera su una sua copia della configurazione,
+		mentre l'applicazione continua a funzionare con la configurazione originale.
+		<br>Dopo aver effettuato le modifiche alla propria copia della
+		configurazione l'utente pu&ograve; salvare ed attivare la nuova
+		configurazione usando il pulsante
+		<img src="../images/save_orange.gif" alt="Salva"/>.
+		<br>In alternativa, se si vogliono scartare le modifiche eventualmente
+		effettuate, &egrave; possibile ricaricare la configurazione corrente	dalla
+		stazione con il pulsante
+		<img src="../images/reload_orange.gif" alt="Ricarica"/>.
+		</p>La sezione dell'interfaccia utente che consente di modificare la
+		configurazione &egrave; organizzata in pagine e, ciascuna pagina, in una o
+		pi&ugrave; schede.<br>Ogni volta che si opera sulla porzione di
+		configurazione relativa ad una scheda &egrave; possibile annullare le
+		modifiche apportate a tale porzione della configurazione, usando il pulsante
+		<img src="../images/send_verify_orange.gif" alt="Invia e verifica"/>,
+		oppure verificarle e memorizzarle nella propria copia della configurazione,
+		usando il pulsante
+		<img src="../images/undo_orange.gif" alt="Ripristina"/>.
+		<p>
+		</p>
+		<p>Nota: nel caso in cui due utenti effettuino delle modifiche in
+		contemporanea, all'ultimo che tenter&agrave; di salvare la propria copia
+		della configurazione verr&agrave; impedito il salvataggio poich&eacute;, se
+		gli	venisse consentito, annullerebbe le modifiche dell'altro utente senza
+		che	egli possa rendersene conto. Pertanto il secondo utente dovr&agrave;
+		ricaricare la configurazione corrente (ovvero quella salvata dal primo) e
+		partire da questa per effettuare le proprie modifiche.
+		</p>
+		<hr>
+
+		<h1 id="conf_stationWidget">Informazioni anagrafiche e connessione</h1>
+		<p>La pagina di configurazione della stazione contiene due schede: la
+		prima per la configurazione delle informazioni anagrafiche della stazione,
+		la seconda per l'eventuale configurazione della connessione in uscita dalla
+		stazione verso il server centrale di acquisizione.
+		</p>
+		<h3>Informazioni anagrafiche</h3>
+		<p>Le informazioni anagrafiche servono unicamente per identificare la
+		stazione. Tra queste, l'unico campo da compilare obbligatoriamente &egrave;
+		il "Nome breve": questo campo, con lunghezza massima di 16 caratteri,
+		identifica la stazione nell'interfaccia utente del software di stazione e
+		della centrale operativa. Il "Nome breve" pu&ograve; essere cambiato in
+		qualsiasi momento, senza causare problemi.
+		</p>
+		<p>Gli altri campi dell'anagrafica sono facoltativi e servono unicamente
+		per meglio identificare il posto dove la stazione &egrave; collocata.<br>
+		Il campo "Note utente" pu&ograve; essere considerato una sorta di lavagna
+		dove annotare ulteriori informazioni o note relative alla stazione.
+		</p>
+		<p>Unica eccezione &egrave; il campo "Dotata di GPS": questo serve per
+		specificare se alla stazione &egrave; stato collegato un dispositivo GPS,
+		in modo che il software di gestione del dispositivo venga attivato.
+		</p>
+		<h3>Configurazione della connessione</h3>
+		<p>La scheda di configurazione della connessione serve per l'eventuale
+		configurazione della connessione in uscita dalla stazione verso il centro
+		operativo.<br>Lo scopo di questa connessione &egrave; l'eventuale utilizzo
+		delle funzioni del server del centro operativo che consentono il caricamento
+		di una configurazione dai backup presenti sul server. Tale funzione
+		pu&ograve; risultare utile quando si effettua la reinstallazione di una
+		stazione a seguito di guasto o sostituzione del PC.
+		</p>
+		<p>La configurazione della connessione richiede che siano specificate le
+		seguenti informazioni:
+		</p>
+			<ul>
+				<li>l'indirizzo IP oppure l'hostname del server del centro operativo</li>
+				<li>il tipo di connessione: router, modem o lan</li>
+				<li>l'abilitazione ad effettuare il collegamento al server</li>
+				<li>il timeout di connessione (questo campo viene precompilato
+				automaticamente con	un valore predefinito adatto al tipo di
+				connessione)</li>
+				<li>il numero massimo di tentativi di connessione</li>
+			</ul>
+		<p>Nota: le connessioni dal server del centro operativo verso la stazione
+		di misura avvengono indipendentemente da questa configurazione, in quanto
+		sono gestite a livello del sistema operativo, in modo indipendente
+		dall'applicazione.
+		</p>
+		<hr>
+
+		<h1 id="conf_alarmWidget">Allarmi di cabina</h1>
+		<p>La pagina di configurazione degli allarmi di cabina &egrave; organizzata
+		in tre schede: una presenta la lista degli allarmi gi&agrave; configurati,
+		le altre due consentono, rispettivamente, di effettuare la configurazione di
+		un nuovo allarme e di modificare un allarme precedentemente configurato.
+		Queste ultime due schede vengono visualizzate in alternativa, in base alle
+		operazioni che si stanno effettuando. 
+		</p>
+		<p>Gli allarmi di cabina possono essere di due tipi: digitali oppure
+		trigger.<br>Gli allarmi digitali rilevano lo stato di un ingresso digitale
+		di una delle schede di acquisizione.<br>Gli allarmi trigger effettuano il
+		monitoraggio della grandezza acquisita da un elemento di un analizzatore
+		confrontandone il valore con 4 soglie configurabili; queste soglie sono:
+		</p>
+			<ul>
+				<li>soglia alta di allarme</li>
+				<li>soglia alta di attenzione</li>
+				<li>soglia bassa di attenzione</li>
+				<li>soglia bassa di allarme</li>
+			</ul>
+		&Egrave; richiesto che almeno una di queste soglie venga impostata.
+		<h3>Lista degli allarmi</h3>
+		<p>La lista degli allarmi visualizza l'elenco degli allarmi presenti in
+		configurazione, consentendone la modifica e la cancellazione. Per ciascun
+		allarme vengono visualizzati:
+		</p>
+			<ul>
+				<li>lo stato di abilitazione (verde: abilitato, grigio: disabilitato)</li>
+				<li>la sigla che identifica l'allarme</li>
+				<li>la descrizione dell'allarme</li>
+				<li>le eventuali note</li>
+				<li>il pulsante di modifica</li>
+				<li>il pulsante di cancellazione</li>
+			</ul>
+		<h3 id="modifica">>Modifica di un allarme</h3>
+		<p>Quando viene premuto il pulsante di modifica di un allarme compare la
+		scheda di modifica dell'allarme. Essa consente di effettuare le seguenti
+		operazioni:
+		</p>
+			<ul>
+				<li>abilitare / disabilitare l'allarme</li>
+				<li>visualizzare la descrizione dell'allarme</li>
+				<li>scrivere le note relative all'allarme</li>
+			</ul>
+		Consente inoltre, nel caso degli allarmi di tipo digitale, di:
+			<ul>
+				<li>impostare il livello logico del segnale digitale dell'allarme:
+				attivo alto oppure basso</li>
+				<li>visualizzare l'informazione di collegamento alla scheda di
+				acquisizione dell'ingresso digitale</li>
+			</ul>
+		Nel caso degli allarmi di tipo trigger, le informazioni specifiche da
+		configurare sono:
+			<ul>
+				<li>le soglie di allarme ed attenzione</li>
+				<li>il collegamento all'elemento da monitorare</li>
+			</ul>
+		<h3>Configurazione di un nuovo allarme</h3>
+		<p>La configurazione di un nuovo allarme richiede la selezione dell'allarme
+		da una lista, seguita dall'utilizzo del pulsante "Crea nuovo allarme".<br>
+		Gli allarmi presenti nella lista sono definiti nella configurazione generale
+		della rete di monitoraggio.
+		</p>
+		<p>Dopo aver creato il nuovo allarme, la sua configurazione avviene in
+		modo del tutto analogo alla <a href="#modifica">modifica di un allarme
+		esistente</a>.
+		</p> 
+		<hr>
+
+		<h1 id="conf_listAnalyzerWidget">Configurazione degli analizzatori</h1>
+		<p>La pagina di configurazione degli analizzatori &egrave; suddivisa in
+		due schede: una consente di inserire in configurazione un nuovo analizzatore,
+		l'altra visualizza la lista degli analizzatori attualmente presenti in
+		configurazione.
+		</p>
+		<h3>Nuovo analizzatore</h3>
+		<p>Per inserire in configurazione un nuovo analizzatore generico, da
+		collegare alle schede di acquisizione, selezionarne il tipo dalla lista dei
+		tipi di analizzatore e poi premere il pulsante "Crea nuovo analizzatore".
+		Le tipologie di analizzatore generico supportate dall'applicazione sono:
+		</p> 
+			<ul>
+				<li>analizzatore che calcola medie</li>
+				<li>analizzatore sample generico</li>
+				<li>anemometro generico</li>
+				<li>pluviometro a bascula</li>
+			</ul>
+		<p>Per inserire in configurazione un nuovo analizzatore con	interfaccia
+		dati, selezionare la marca e il modello dalle apposite liste, poi premere
+		il pulsante "Crea nuovo analizzatore con interfaccia dati".
+		</p> 
+		<h3>Lista analizzatori</h3>
+		<p>La lista degli analizzatori visualizza l'elenco degli analizzatori
+		presenti in	configurazione, consentendone la modifica e la cancellazione.
+		Per ciascun	analizzatore vengono visualizzati:
+		</p>	
+			<ul>
+				<li>lo stato di abilitazione (verde: abilitato, grigio: disabilitato)</li>
+				<li>il nome che identifica l'analizzatore</li>
+				<li>la marca</li>
+				<li>il modello</li>
+				<li>il pulsante di modifica</li>
+				<li>il pulsante di cancellazione</li>
+			</ul>
+		<hr>
+
+		<h1 id="conf_analyzerWidget">Configurazione analizzatore</h1>
+		<p>La configurazione di un analizzatore &egrave; suddivisa in tre schede:
+		</p>
+			<ul>
+			<li>Informazioni sull'analizzatore</li>
+			<li>Allarme</li>
+			<li>Operazioni</li>
+			</ul>
+		<p>La configurazione di un analizzatore richiede alcune informazioni comuni
+		a tutti i tipi di analizzatori e altre informazioni specifiche, dipendenti
+		dal tipo di analizzatore.<br>Anche la scheda di configurazione dell'allarme
+		presenta alcune differenze tra gli analizzatori con interfaccia analogica
+		e quelli con interfaccia dati.
+		</p>
+		<h3>Informazioni comuni</h3>
+		<p>Le informazioni comuni a tutti i tipi di analizzatore sono:
+		</p>
+			<ul>
+			<li>Nome: campo obbligatorio, serve per identificare l'analizzatore</li>
+			<li>Marca: campo facoltativo</li>
+			<li>Modello: campo facoltativo</li>
+			<li>Descrizione: campo facoltativo</li>
+			<li>Numero di serie: campo facoltativo</li>
+			<li>Stato: &egrave; lo stato dell'analizzatore, a scelta fra:
+				<ul>
+					<li>abilitato</li>
+					<li>disabilitato (l'analizzatore &egrave; in cabina,
+					ma si &egrave; deciso di non utilizzarlo)</li>
+					<li>guasto (l'analizzatore &egrave; guasto e non pu&ograve;
+					essere utilizzato, eventualmente &egrave; stato portato via
+					per essere riparato)</li>
+					<li>rimosso (l'analizzatore &egrave; stato tolto dalla
+					cabina, ma si intende riutilizzarlo in seguito nella stessa
+					cabina)</li>
+				</ul>
+			</li>
+			<li>Note: campo a disposizione per l'inserimento di note relative
+			all'analizzatore</li>
+			</ul>
+		<h3>Configurazioni specifiche</h3>
+		<p>Per gli analizzatori con interfaccia analogica (analizzatore sample
+		generico, anemometro, analizzatore che calcola medie) le informazioni
+		specifiche sono:
+		</p>
+			<ul>
+				<li>tensione minima: tensione a cui corrisponde lo zero di scala
+				degli elementi</li>
+				<li>tensione massima: tensione a cui corrisponde il fondo scala
+				degli elementi</li>
+				<li>modo differenziale: selezionare questa opzione se gli elementi
+				dell'analizzatore sono stati collegati alla scheda per l'utlizzo
+				del modo differenziale</li>
+				<li>range simmetrico: questa opzione &egrave; normalmente selezionata
+				e serve per programmare i canali della scheda in modo da avere
+				un range simmetrico anche quando lo zero di scala &egrave; non
+				negativo</li>
+			</ul>
+		<p>Per il pluviometro a bascula non vi sono informazioni specifiche.
+		</p>
+		<p>Per gli analizzatori con interfaccia dati le informazioni specifiche
+		sono:
+		</p>
+			<ul>
+				<li>tipo di interfaccia: rete o seriale</li>
+				<li>nome host: il nome host o l'indirizzo IP dell'analizzatore</li>
+				<li>porta seriale: il dispositivo della porta seriale (es:
+				/dev/ttyS0)</li>
+				<li>baud rate della porta seriale: la velocit&agrave; della porta
+				(es: 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200</li>
+				<li>parametri della porta seriale: si tratta di 4 caratteri,
+				scritti consecutivamente, che rappresentano la configurazione
+				della porta seriale:
+					<ol>
+						<li>numero di bit del dato: 5, 6, 7, 8 (default)</li>
+						<li>parit&agrave;: N=no parit&agrave; (default), O=dispari, E=pari</li>
+						<li>bit di stop: 1 (defualt), . (da usare per 1.5), 2</li>
+						<li>controllo di flusso: H=hardware, S=software,
+						N=disabilitato</li>
+					</ol>
+				</li>
+			</ul>
+		Nota: il campo nome host &egrave; visibile solo per gli analizzatori con
+		interfaccia di rete, i campi relativi alla porta seriale sono visibili
+		solo per gli analizzatori con porta seriale.
+		<h3>Configurazione dell'allarme</h3>
+		<p>Per gli analizzatori da collegare alle schede di acquisizione, la scheda
+		di configurazione dell'allarme consente di creare un nuovo allarme, di
+		configurarlo e di cancellarlo.<br>La configurazione dell'allarme contiene
+		i seguenti campi:
+		</p>
+			<ul>
+			<li>lo stato dell'allarme: abilitato o disabilitato</li>
+			<li>il livello del segnale di allarme: attivo alto o attivo basso</li>
+			<li>la visualizzazione dell'informazione del collegamento alla scheda</li>
+			</ul>
+		<p>Negli analizzatori con interfaccia dati l'allarme &egrave; sempre
+		presente. Pertanto non &egrave; possibile crearlo o cancellarlo.<br>Le
+		informazioni richieste per la configurazione dell'allarme sono:
+		</p>
+			<ul>
+			<li>lo stato dell'allarme: abilitato o disabilitato</li>
+			<li>il periodo di acquisizone, espresso in secondi</li>
+			</ul>
+		<h3>Operazioni</h3>
+		<p>La scheda delle operazioni ha tre funzioni:
+		</p>
+			<ul>
+			<li>apertura della lista degli elementi, tramite l'apposito pulsante</li>
+			<li>attivazione e disattivazione dello stato di calibrazione manuale,
+			tramite gli appositi pulsanti</li>
+			<li>attivazione e disattivazione dello stato di manutenzione, tramite
+			gli appositi pulsanti</li>
+			</ul>
+		<hr>
+
+		<h1 id="conf_sampleElementWidget">Configurazione elemento per analizzatore sample</h1>
+		<p>La pagina di configurazione di un elemento di un analizzatore sample
+		generico comprende due schede. La prima &egrave; la scheda di configurazione
+		vera e propria dell'elemento, la seconda &egrave;
+		<a href="#conf_manualCalib">la scheda di ausilio alla calibrazione manuale</a>;
+		essa serve per effettuare in modo automatico il	calcolo del coefficiente e
+		della costante di correzione durante le	operazioni di calibrazione manuale.
+		</p>
+		<h3>Configurazione</h3>
+		<p>La scheda di configurazione dell'elemento prevede i seguenti campi:
+		</p>
+			<ul>
+				<li><strong>abilitazione</strong>: quando l'elemento non &egrave; abilitato
+				non	viene effettuata l'acquisizione</li>
+				<li><strong>unit&agrave; di misura dell'analizzatore</strong>: &egrave;
+				l'unit&agrave; di misura con cui l'analizzatore misura i dati</li>
+				<li><strong>zero di scala</strong>: &egrave; espresso nell'unit&agrave; di
+				misura con cui l'analizzatore misura i dati</li>
+				<li><strong>fondo scala</strong>: &egrave; espresso nell'unit&agrave; di
+				misura con cui l'analizzatore misura i dati</li>
+				<li><strong>coefficiente di correzione</strong>: coefficiente che moltiplica
+				il valore letto dall'analizzatore, al fine di correggere la catena
+				analogica o	l'intera catena di acquisizione</li>
+				<li><strong>costante di correzione</strong>: costante che si somma al valore
+				letto dall'analizzatore, al fine di correggere la catena analogica o
+				l'intera catena di acquisizione</li>
+				<li><strong>periodo di acquisizione</strong>: &egrave; il periodo con cui si
+				leggono	i dati dall'analizzatore; &egrave; espresso in secondi</li>
+				<li><strong>collegato a scheda</strong>: indica la scheda e il relativo
+				ingresso a cui l'elemento &egrave; collegato</li>
+				<li><strong>unit&agrave; di misura per l'acquisizione</strong>: &egrave;
+				l'unit&agrave; di misura con cui si vogliono acquisire ovvero
+				memorizzare i dati (da non confondere con l'unit&agrave; di misura
+				dell'analizzatore: la conversione tra le due unit&agrave; di misura
+				avviene in modo automatico)</li>
+				<li><strong>coefficiente di conversione</strong>: &egrave; il coefficiente di 
+				conversione tra le unit&agrave; di misura, calcolato
+				dall'applicazione (vengono anche visualizzati il peso molecolare
+				nonch&eacute; la temperatura e la pressione di riferimento)</li>
+				<li><strong>numero di decimali</strong>: il numero di decimali da usare nella
+				visualizzazione e memorizzazione dei dati</li>
+				<li><strong>coefficiente di linearizzazione</strong>: da usare per compensare
+				eventuali non linearit&agrave; dell'analizzatore, misurate nel
+				laboratorio di calibrazione</li>
+				<li><strong>costante di linearizzazione</strong>: da usare per compensare
+				eventuali non linearit&agrave; dell'analizzatore, misurate nel
+				laboratorio di calibrazione</li>
+				<li><strong>prevalidazione, valore minimo</strong>: i valori inferiori a
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>prevalidazione, valore massimo</strong>: i valori che superano
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>nuovo periodo di mediazione</strong>: consente di aggiungere un
+				nuovo periodo di mediazione; &egrave; possibile avere pi&ugrave;
+				periodi	di mediazione per un dato elemento</li>
+				<li><strong>periodi di mediazione</strong>: visualizza i periodi di mediazione
+				che	sono stati configurati e consente di cancellarli</li>
+			</ul> 
+		<hr>
+
+		<h1 id="conf_dataPortElementWidget">Configurazione elemento per analizzatore con interfaccia dati</h1>
+		<p>La pagina di configurazione di un elemento di un analizzatore con
+		interfaccia dati comprende due schede. La prima &egrave; la scheda di
+		configurazione vera e propria dell'elemento, la seconda &egrave;
+		<a href="#conf_manualCalib">la scheda di ausilio alla calibrazione manuale</a>;
+		essa serve per effettuare in modo automatico il	calcolo del coefficiente e
+		della costante di correzione durante le	operazioni di calibrazione manuale.
+		</p>
+		<h3>Configurazione</h3>
+		<p>La scheda di configurazione dell'elemento prevede i seguenti campi:
+		</p>
+			<ul>
+				<li><strong>abilitazione</strong>: quando l'elemento non &egrave; abilitato
+				non	viene effettuata l'acquisizione</li>
+				<li><strong>unit&agrave; di misura dell'analizzatore</strong>: &egrave;
+				l'unit&agrave; di misura con cui l'analizzatore misura i dati</li>
+				<li><strong>zero di scala</strong>: &egrave; espresso nell'unit&agrave; di
+				misura con cui l'analizzatore misura i dati</li>
+				<li><strong>fondo scala</strong>: &egrave; espresso nell'unit&agrave; di
+				misura con cui l'analizzatore misura i dati</li>
+				<li><strong>coefficiente di correzione</strong>: coefficiente che moltiplica
+				il valore letto dall'analizzatore, al fine di correggere la catena
+				analogica o	l'intera catena di acquisizione</li>
+				<li><strong>costante di correzione</strong>: costante che si somma al valore
+				letto dall'analizzatore, al fine di correggere la catena analogica o
+				l'intera catena di acquisizione</li>
+				<li><strong>periodo di acquisizione</strong>: &egrave; il periodo con cui si
+				leggono	i dati dall'analizzatore; &egrave; espresso in secondi</li>
+				<li><strong>unit&agrave; di misura per l'acquisizione</strong>: &egrave;
+				l'unit&agrave; di misura con cui si vogliono acquisire ovvero
+				memorizzare i dati (da non confondere con l'unit&agrave; di misura
+				dell'analizzatore: la conversione tra le due unit&agrave; di misura
+				avviene in modo automatico)</li>
+				<li><strong>coefficiente di conversione</strong>: &egrave; il coefficiente di 
+				conversione tra le unit&agrave; di misura, calcolato
+				dall'applicazione (vengono anche visualizzati il peso molecolare
+				nonch&eacute; la temperatura e la pressione di riferimento)</li>
+				<li><strong>numero di decimali</strong>: il numero di decimali da usare nella
+				visualizzazione e memorizzazione dei dati</li>
+				<li><strong>coefficiente di linearizzazione</strong>: da usare per compensare
+				eventuali non linearit&agrave; dell'analizzatore, misurate nel
+				laboratorio di calibrazione</li>
+				<li><strong>costante di linearizzazione</strong>: da usare per compensare
+				eventuali non linearit&agrave; dell'analizzatore, misurate nel
+				laboratorio di calibrazione</li>
+				<li><strong>prevalidazione, valore minimo</strong>: i valori inferiori a
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>prevalidazione, valore massimo</strong>: i valori che superano
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>nuovo periodo di mediazione</strong>: consente di aggiungere un
+				nuovo periodo di mediazione; &egrave; possibile avere pi&ugrave;
+				periodi	di mediazione per un dato elemento</li>
+				<li><strong>periodi di mediazione</strong>: visualizza i periodi di mediazione
+				che	sono stati configurati e consente di cancellarli</li>
+			</ul> 
+		<hr>
+
+		<h1 id="conf_avgElementWidget">Configurazione elemento per analizzatore che calcola medie</h1>
+		<p>La pagina di configurazione di un elemento di un analizzatore che calcola
+		medie comprende due schede. La prima &egrave; la scheda di configurazione
+		vera e propria dell'elemento, la seconda &egrave;
+		<a href="#conf_manualCalib">la scheda di ausilio alla calibrazione manuale</a>;
+		essa serve per effettuare in modo automatico il	calcolo del coefficiente e
+		della costante di correzione durante le	operazioni di calibrazione manuale.
+		</p>
+		<h3>Configurazione</h3>
+		<p>La scheda di configurazione dell'elemento prevede i seguenti campi:
+		</p>
+			<ul>
+				<li><strong>abilitazione</strong>: quando l'elemento non &egrave; abilitato
+				non	viene effettuata l'acquisizione</li>
+				<li><strong>unit&agrave; di misura dell'analizzatore</strong>: &egrave;
+				l'unit&agrave; di misura con cui l'analizzatore misura i dati</li>
+				<li><strong>zero di scala</strong>: &egrave; espresso nell'unit&agrave; di
+				misura con cui l'analizzatore misura i dati</li>
+				<li><strong>fondo scala</strong>: &egrave; espresso nell'unit&agrave; di
+				misura con cui l'analizzatore misura i dati</li>
+				<li><strong>coefficiente di correzione</strong>: coefficiente che moltiplica
+				il valore letto dall'analizzatore, al fine di correggere la catena
+				analogica o	l'intera catena di acquisizione</li>
+				<li><strong>costante di correzione</strong>: costante che si somma al valore
+				letto dall'analizzatore, al fine di correggere la catena analogica o
+				l'intera catena di acquisizione</li>
+				<li><strong>periodo di acquisizione</strong>: &egrave; il periodo con cui si
+				campiona il valore della media calcolata dall'analizzatore; &egrave;
+				espresso in secondi</li>
+				<li><strong>durata acquisizione</strong>: &egrave; la durata del campionamento
+				del valore della media calcolata dall'analizzatore; &egrave; espresso
+				in minuti</li>
+				<li><strong>ritardo acquisizione</strong>: &egrave; l'attesa, dopo l'istante
+				cui la media si riferisce, prima di cominciare il campionamento
+				della media; &egrave; espresso in minuti</li>
+				<li><strong>collegato a scheda</strong>: indica la scheda e il relativo
+				ingresso a cui l'elemento &egrave; collegato</li>
+				<li><strong>unit&agrave; di misura per l'acquisizione</strong>: &egrave;
+				l'unit&agrave; di misura con cui si vogliono acquisire ovvero
+				memorizzare i dati (da non confondere con l'unit&agrave; di misura
+				dell'analizzatore: la conversione tra le due unit&agrave; di misura
+				avviene in modo automatico)</li>
+				<li><strong>coefficiente di conversione</strong>: &egrave; il coefficiente di 
+				conversione tra le unit&agrave; di misura, calcolato
+				dall'applicazione (vengono anche visualizzati il peso molecolare
+				nonch&eacute; la temperatura e la pressione di riferimento)</li>
+				<li><strong>numero di decimali</strong>: il numero di decimali da usare nella
+				visualizzazione e memorizzazione dei dati</li>
+				<li><strong>coefficiente di linearizzazione</strong>: da usare per compensare
+				eventuali non linearit&agrave; dell'analizzatore, misurate nel
+				laboratorio di calibrazione</li>
+				<li><strong>costante di linearizzazione</strong>: da usare per compensare
+				eventuali non linearit&agrave; dell'analizzatore, misurate nel
+				laboratorio di calibrazione</li>
+				<li><strong>prevalidazione, valore minimo</strong>: i valori inferiori a
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>prevalidazione, valore massimo</strong>: i valori che superano
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>periodo di mediazione</strong>: consente di impostare il periodo
+				di mediazione usato dall'analizzatore per il calcolo delle medie
+				</li>
+			</ul> 
+		<hr>
+
+		<h1 id="conf_windElementWidget">Configurazione elemento per anemometro</h1>
+		<p>La pagina di configurazione dell'elemento dell'anemometro comprende
+		un'unica scheda.
+		</p>
+		<h3>Configurazione</h3>
+		<p>La scheda di configurazione dell'elemento prevede i seguenti campi:
+		</p>
+			<ul>
+				<li><strong>abilitazione</strong>: quando l'elemento non &egrave; abilitato
+				non	viene effettuata l'acquisizione</li>
+				<li><strong>fondo scala della velocit&agrave;</strong>: &egrave; il fondo
+				scala della velocit&agrave; lo zero di scala &egrave;
+				automaticamente impostato a 0</li>
+				<li><strong>coefficiente di correzione della velocit&agrave;</strong>:
+				coefficiente che moltiplica	il valore letto dall'analizzatore,
+				al fine di correggere la catena	analogica o	l'intera catena di
+				acquisizione</li>
+				<li><strong>costante di correzione della velocit&agrave;</strong>: costante
+				che si somma al valore letto dall'analizzatore, al fine di
+				correggere la catena analogica o l'intera catena di acquisizione</li>
+				<li><strong>coefficiente di correzione della direzione;</strong>:
+				coefficiente che moltiplica	il valore letto dall'analizzatore,
+				al fine di correggere la catena	analogica o	l'intera catena di
+				acquisizione</li>
+				<li><strong>costante di correzione della direzione;</strong>: costante
+				che si somma al valore letto dall'analizzatore, al fine di
+				correggere la catena analogica o l'intera catena di acquisizione</li>
+				<li><strong>periodo di acquisizione</strong>: &egrave; il periodo con cui si
+				leggono	i dati di velocit&agrave; e direzione dall'analizzatore;
+				&egrave; espresso in secondi</li>
+				<li><strong>velocit&agrave; collegata a scheda</strong>: indica la scheda e il
+				relativo ingresso a cui la velocit&agrave; &egrave; collegata</li>
+				<li><strong>direzione collegata a scheda</strong>: indica la scheda e il
+				relativo ingresso a cui la direzione &egrave; collegata</li>
+				<li><strong>unit&agrave; di misura della velocit&agrave;</strong>: &egrave;
+				l'unit&agrave; di misura con cui si vogliono acquisire i dati
+				della velocit&agrave;</li>
+				<li><strong>unit&agrave; di misura della direzione;</strong>: visualizza
+				l'unit&agrave; di misura da usare per l'acquisizione della
+				direzione (sono supportati soli i gradi)</li>
+				<li><strong>numero di decimali della velocit&agrave;</strong>: il numero di
+				decimali da usare nella	visualizzazione e memorizzazione dei dati
+				della velocit&agrave;</li>
+				<li><strong>numero di decimali della direzione</strong>: il numero di decimali
+				da usare nella visualizzazione e memorizzazione dei dati della
+				direzione</li>
+				<li><strong>precisione della velocit&agrave;</strong>: l'incertezza nella
+				misura della velocit&agrave; dovuta alla somma delle incertezze
+				dello strumento e della catena analogica; i dati inferiori allo
+				zero di un valore non eccedente l'incertezza vengono considerati
+				validi</li>
+				<li><strong>precisione della direzione</strong>: l'incertezza nella misura
+				della direzione dovuta alla somma delle incertezze dello strumento
+				e della catena analogica; i dati inferiori allo	zero o superiori
+				a 360 gradi di un valore non eccedente l'incertezza vengono
+				considerati	validi</li>
+				<li><strong>massimo valore della velocit&agrave;</strong>: i valori che
+				superano questo limite vengono contrassegnati come non validi</li>
+				<li><strong>nuovo periodo di mediazione</strong>: consente di aggiungere un
+				nuovo periodo di mediazione; &egrave; possibile avere pi&ugrave;
+				periodi	di mediazione per il vento</li>
+				<li><strong>periodi di mediazione</strong>: visualizza i periodi di mediazione
+				che	sono stati configurati e consente di cancellarli</li>
+			</ul> 
+		<hr>
+
+		<h1 id="conf_rainElementWidget">Configurazione elemento per pluviometro</h1>
+		<p>La pagina di configurazione dell'elemento di un pluviometro comprende una
+		sola scheda: la scheda di configurazione.
+		</p>
+		<h3>Configurazione</h3>
+		<p>La scheda di configurazione dell'elemento prevede i seguenti campi:
+		</p>
+			<ul>
+				<li><strong>abilitazione</strong>: quando l'elemento non &egrave; abilitato
+				non	viene effettuata l'acquisizione</li>
+				<li><strong>valore da sommare per ogni evento</strong>: &egrave; il valore
+				associato ad ogni evento generato dalla bascula ovvero ad ogni sua
+				oscillazione</li>
+				<li><strong>acquisizione sul fronte di salita</strong>: specifica se l'evento
+				&egrave; da considerarsi generato sul fronte di salita o di discesa
+				del segnale elettrico</li>
+				<li><strong>collegato a scheda</strong>: indica la scheda e il relativo
+				ingresso a cui l'elemento &egrave; collegato</li>
+				<li><strong>unit&agrave; di misura</strong>: &egrave;
+				l'unit&agrave; di misura con cui si vogliono acquisire ovvero
+				memorizzare i dati</li>
+				<li><strong>numero di decimali</strong>: il numero di decimali da usare nella
+				visualizzazione e memorizzazione dei dati</li>
+				<li><strong>prevalidazione, valore minimo</strong>: i valori inferiori a
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>prevalidazione, valore massimo</strong>: i valori che superano
+				questo limite vengono contrassegnati come non validi</li>
+				<li><strong>nuovo periodo di mediazione</strong>: consente di aggiungere un
+				nuovo periodo di aggregazione; &egrave; possibile avere pi&ugrave;
+				periodi	di aggregazione per la pioggia</li>
+				<li><strong>periodi di mediazione</strong>: visualizza i periodi di
+				aggregazione che sono stati configurati e consente di cancellarli
+				</li>
+			</ul> 
+		<hr>
+
+		<h1 id="conf_manualCalib">Ausilio alla calibrazione manuale</h1>
+		<p>La scheda di ausilio alla calibrazione manuale, collocata nella pagina di
+		configurazione degli elementi che supportano tale operazione, consente di
+		effettuare il calcolo del coefficiente e della costante di correzione
+		durante	un'operazione di calibrazione manuale ad uno o due punti.
+		</p>
+		<p>La prima riga della scheda visualizza, ad ogni pressione del	pulsante
+		<img src="../images/reload_value.gif" alt="Ricarica"/>, i valori correnti per:
+		</p>
+			<ul>
+				<li>la tensione rilevata dalla scheda di acquisizione</li>
+				<li>il valore acquisito, espresso nell'unit&agrave; di misura
+				dell'analizzatore</li>
+				<li>il valore corretto, usando i parametri di correzione attualmente
+				in configurazione, espresso nell'unit&agrave; di misura
+				dell'analizzatore</li>
+			</ul>
+		Nota: le informazioni sopra descritte possono essere acquisite e visualizzate
+		per ogni elemento abilitato, premendo l'apposito pulsante, anche quando non
+		si sta effettuando un'operazione di calibrazione.
+		<p>Per poter utilizzare i controlli situati nel riquadro inferiore della
+		scheda, occorre che sia attivata la condizione di calibrazione manuale
+		nella scheda delle operazioni dell'analizzatore, a cui appartiene l'elemento
+		in oggetto.<br>Tali controlli consentono di catturare i valori letti in
+		corrispondenza dei valori attesi e di effettuare il calcolo del nuovo
+		coefficiente e della nuova costante di correzione.
+		</p>
+		<p>Nel caso della calibrazione ad un punto procedere nel modo seguente:
+		</p>
+			<ul>
+				<li>specificare il valore atteso nella casella relativa al primo
+				punto</li>
+				<li>premere il pulsante
+				<img src="../images/reload_value.gif" alt="Ricarica"/> fino a quando
+				il valore letto non si stabilizza</li>
+				<li>premere il pulsante
+				<img src="../images/acquire.gif" alt="Acquisisci"/>  per memorizzare
+				il valore letto nella riga relativa al primo punto</li>
+				<li>premere il pulsante
+				<img src="../images/compute.gif" alt="Calcola"/> per effettuare
+				il calcolo</li>
+			</ul>
+		Nota: nel caso della calibrazione ad un punto viene calcolata solo la
+		costante di correzione; per quanto riguarda il coefficiente di correzione
+		si pu&ograve; scegliere tra mantenere quello corrente e usare il valore 1.
+		<p>Nel caso della calibrazione a due punti procedere nel modo seguente:
+		</p>
+			<ul>
+				<li>specificare i valori attesi nelle caselle relative al primo e
+				al secondo punto</li>
+				<li>premere il pulsante
+				<img src="../images/reload_value.gif" alt="Ricarica"/> fino a quando
+				il valore letto, relativo al primo punto, non si stabilizza</li>
+				<li>premere il pulsante
+				<img src="../images/acquire.gif" alt="Acquisisci"/>  per memorizzare
+				il valore letto nella riga relativa al primo punto</li>
+				<li>premere il pulsante
+				<img src="../images/reload_value.gif" alt="Ricarica"/> fino a quando
+				il valore letto, relativo al secondo punto, non si stabilizza</li>
+				<li>premere il pulsante
+				<img src="../images/acquire.gif" alt="Acquisisci"/>  per memorizzare
+				il valore letto nella riga relativa al secondo punto</li>
+				<li>premere il pulsante
+				<img src="../images/compute.gif" alt="Calcola"/> per effettuare
+				il calcolo</li>
+			</ul>
+		<p>Sia per la calibrazione ad un punto che per quella a due, dopo aver
+		effettuato il calcolo si pu&ograve; scegliere di inserire i valori dei
+		nuovi parametri di correzione nella configurazione: in tal caso, bisogna
+		comunque premere il pulsante "Verifica e memorizza le informazioni" sulla
+		scheda di configurazione dell'elemento, come si deve fare tutte le volte
+		che si modifica un qualsiasi parametro della configurazione.<br>Inoltre,
+		affinch&eacute; la stazione di misura cominci ad utilizzare i nuovi
+		parametri occorre salvare ed attivare la nuova configurazione, usando
+		l'apposito pulsante.
+		</p>
+		<hr>
+
+		<h1 id="conf_listBoardWidget">Schede di acquisizione</h1>
+		<p>La pagina di configurazione delle schede di acquisizione &egrave;
+		suddivisa in tre sezioni:
+		</p>
+			<ul>
+				<li><a href="#lista">Lista delle schede presenti nella configurazione</a></li>
+				<li><a href="#PCI">Schede PCI rilevate da configurare</a></li>
+				<li><a href="#ISA">Nuova scheda ISA</a></li>
+			</ul>
+		<h3 id="lista">Lista delle schede presenti nella configurazione</h3>
+		<p>Questa sezione della pagina visualizza la lista delle schede presenti in
+		configurazione e consente di operare su di esse.<br>Per ciascuna scheda
+		della lista vengono visualizzati:
+		</p>
+			<ul>
+				<li>l'indice della scheda nella lista</li>
+				<li>la marca</li>
+				<li>il modello</li>
+				<li>lo stato della scheda</li>
+				<li>il pulsante per la modifica della
+				<a href="#conf_boardWidget">configurazione della scheda</a></li>
+				<li>il pulsante per la cancellazione della scheda dalla configurazione</li>
+			</ul>
+		Lo stato di una scheda pu&ograve; assumere uno dei seguenti valori:
+			<ul>
+				<li>INIT_OK: la scheda &egrave; stata inizializzata correttamente</li>
+				<li>INIT_FAILED: l'inizializzazione della scheda &egrave; fallita</li>
+				<li>DETECTED: la scheda &egrave; stata rilevata, ma non ancora inizializzata</li>
+				<li>NOT_DETECTED: la scheda non &egrave; stata rilevata</li>
+			</ul>
+		Nota: le informazioni relative al rilevamento delle schede sono disponibili
+		solo per le schede PCI, in quanto supportate dal bus PCI.
+		<h3 id="PCI">Schede PCI rilevate da configurare</h3>
+		<p>Questa sezione della pagina visualizza l'elenco delle schede di
+		acquisizione PCI rilevate, ma non presenti in configurazione.<br>
+		Normalmente, questa	lista risulta vuota; quando non &egrave; vuota significa
+		che &egrave; stata aggiunta una nuova scheda di acquisizione PCI nel sistema
+		oppure che una scheda esistente &egrave; stata spostata da uno slot ad un
+		altro.
+		Per ciascuna scheda della lista si hanno i seguenti campi:
+		</p>
+			<ul>
+				<li>posizione nel bus PCI e PCIID (ovvero identificatore del produttore e del dispositivo)</li>
+				<li>marca</li>
+				<li>modello</li>
+				<li>pulsante "Nuova scheda", per inserire la scheda in
+				configurazione</li>
+				<li>lista delle schede uguali, presenti in configurazione ma non
+				rilevate, e pulsante per effettuare l'associazione della scheda
+				ad una di queste</li>
+			</ul>
+		Nota: il pulsante "Nuova scheda" va usato quando si vuole inserire in
+		configurazione una nuova scheda che &egrave; appena stata aggiunta nel PC,
+		mentre l'operazione di associazione ad una scheda presente in
+		configurazione, ma non rilevata va eseguita quando si effettua lo
+		spostamento di una scheda nel bus PCI (ad esempio per manutenzione o
+		sostituzione del PC)
+		<h3 id="ISA">Nuova scheda ISA</h3>
+		<p>	Questa sezione della pagina serve quando &egrave; stata inserita una
+		nuova scheda ISA.<br>Per iniziare la configurazione della nuova scheda
+		occorre	scegliere la marca e il modello dalle rispettive liste, poi premere
+		il pulsante "Nuova scheda ISA".
+		</p> 
+		<hr>
+
+		<h1 id="conf_boardWidget">Configurazione scheda</h1>
+		<p>La pagina di configurazione per una scheda di acquisizione &egrave;
+		suddivisa in due sezioni. La prima sezione riguarda la scheda stessa, la
+		seconda sezione riguarda i canali di ingresso e uscita della scheda. 
+		</p>
+		<p>La configurazione di scheda visualizza la marca, il modello e lo stato
+		della scheda. In questa sezione occorre effettuare la configurazione dei
+		parametri della scheda che sono in numero variabile e dipendono dal modello
+		della scheda; per alcune schede non vi sono parametri da configurare. Per
+		ciascun parametro da configurare, sostando con il puntatore del mouse sul
+		nome del parametro, vengono visualizzate le informazioni necessarie per
+		configurare	il parametro stesso.
+		</p>
+		<p>Per alcuni modelli di schede PCI &egrave; indispensabile configurare la
+		versione della scheda. In tal caso appare una lista per la selezione della
+		versione. Occorre selezionare la versione corrispondente a quella della
+		propria scheda; in caso contrario l'acquisizione sar&agrave; affetta da
+		errori. Se non si sa con sicurezza quale sia la versione della propria
+		scheda, leggere la versione sul circuito stampato della scheda stessa. 
+		</p>
+		<p>Nelle schede ISA &egrave; sempre presente il campo per la configurazione
+		della IO Base, indispensabile al funzionamento della scheda. Consultare
+		la documentazione della scheda per determinarne il valore. Il valore deve
+		essere inserito in esadecimale, non preceduto da 0x.
+		</p>
+		<p>La seconda sezione della pagina visualizza le informazioni relative ai
+		canali della scheda che, in generale, sono raggruppati per tipologia.<br>
+		Le informazioni in questione sono: il tipodi canali del gruppo,
+		l'identificatore del gruppo	di canali all'interno della scheda, il numero
+		di canali del gruppo, il pulsante per la <a href="#conf_subdeviceWidget">
+		configurazione dei canali</a>.
+		</p>
+		<hr>
+
+		<h1 id="conf_subdeviceWidget">Configurazione dei canali</h1>
+		<p>La configurazione dei canali di una scheda consiste semplicemente
+		nell'associare i canali agli ingressi od uscite dei dispositivi ad essi
+		fisicamente collegati.<br>Per effettuare l'associazione occorre premere
+		il pulsante: <img src="../images/list_io_user.gif" alt="Visualizza elementi associabili"/>.<br>
+		Tale pulsante apre la lista dei possibili utilizzatori compatibili con il
+		canale e non ancora associati ad altri canali. Qualora sia necessario
+		configurare le propriet&agrave; del canale, ad esempio la scala di un
+		ingresso analogico, tale operazione verr&agrave; svolta automaticamente dal
+		software.<br>Per rimuovere l'associazione tra un canale e il suo
+		utilizzatore, premere il pulsante
+		<img src="../images/editdelete.gif" alt="Rimuovi"/>.
+		</p>
+		<hr>
+
+		<h1 id="conf_loadConfWidget">Caricamento delle configurazioni</h1>
+		<p>La pagina di caricamento delle configurazioni consente di caricare
+		le configurazioni storiche al fine di esaminarle o, quando necessario,
+		renderle nuovamente attive.<br>Nota: quando si carica una configurazione
+		storica questa viene caricata solo nell'interfaccia utente e non
+		nell'applicazione; la configurazione viene effettivamente attivata ed
+		utilizzata dall'applicazione solo se si preme il pulsante "Salva ed attiva
+		la nuova configurazione".
+		</p>
+		<p>Ogni volta che una nuova configurazione viene salvata ed attivata,
+		quella precedente viene storicizzata sulla stazione di misura. Inoltre,
+		ogni volta che il server del centro operativo interroga la stazione di
+		misura, se rileva che la configurazione &egrave; cambiata, richiede la
+		nuova configurazione alla stazione e la salva.<br>Pertanto sulla stazione
+		di misura sono disponibili tutte le configurazioni storiche, mentre sul
+		server del centro operativo sono disponibili tutte le configurazioni che
+		sono rimaste attive per un tempo sufficiente ad essere recuperate dal
+		centro operativo (solitamente 1 ora).
+		</p>
+		<p>La pagina di caricamento delle configurazioni contiene due schede: una
+		relativa alle configurazioni storiche archiviate nella stazione di misura
+		(configurazioni locali), l'altra relativa alle configurazioni archiviate
+		sul server del centro operativo (configurazioni dal COP).<br>
+		Quando si desidera consultare una configurazione storica &egrave;
+		preferibile utilizzare la scheda delle configurazioni locali, quando, a
+		seguito della sostituzione del disco fisso o del PC di stazione, occorre
+		consultare una configurazione che non &egrave; pi&ugrave; sulla stazione
+		occorre utilizzare la scheda delle configurazioni dal COP.<br>
+		Nota: in caso di reinstallazione del software di stazione a seguito di
+		guasto si pu&ograve; scaricare dal centro operativo l'ultima configurazione
+		dispoibile e poi salvarla rendendola attiva.
+		</p>
+		<h3>Scheda configurazioni locali</h3>
+		<p>La scheda delle configurazioni locali visualizza le date di attivazione
+		delle ultime 10	configurazioni storiche presenti sulla stazione. &Egrave;
+		anche possibile effettuare una ricerca specificando le date di inzio e
+		fine ricerca e il mumero massimo di risultati da restituire.<br>Per
+		caricare una configurazione basta selezionarla dalla lista e premere il
+		pulsante di caricamento.
+		</p>
+		<h3>Scheda configurazioni dal COP</h3>
+		<p>Questa scheda consente di effettuare il collegamento al centro operativo,
+		utilizzando i parametri di configurazione della connessione specificati
+		nella <a href="#conf_stationWidget">configurazione delle connessioni</a>.
+		&Egrave; anche possibile specificare direttamente in questa scheda dei
+		parametri di connessione alternativi, compilando o sovrascrivendo i campi
+		"IP del COP" e "Tipo di connessione".<br>Per effettuare la connessione
+		occorre premere il pulsante "Connetti al COP".
+		</p>
+		<p>Una volta avvenuta la connessione con il centro operativo viene
+		visualizzata la lista delle stazioni note al centro operativo: a questo
+		punto occorre selezionare il nome della stazione e premere il pulsante
+		sul lato destro della lista per ottenere l'elenco delle configurazioni
+		della stazione selezionata.<br>Infine, per scaricare una configurazione,
+		occorre selezionarla dalla lista e premere il pulsante di download.
+		</p>
+		<hr>
+
+		<h1 id="view_informaticStatusWidget">Stato informatico</h1>
+		<p>Questa pagina visualizza le informazioni relative allo stato informatico
+		dell'applicazione, ovvero al corretto funzionamento della stessa.<br> Tali
+		informazioni sono raggruppate in tre sezioni:
+		</p>
+			<ul>
+				<li><a href="#stato_app">stato dell'applicazione</a></li>
+				<li><a href="#dischi">stato dei dischi</a></li>
+				<li><a href="#gps">stato del gps</a></li>
+			</ul>
+		<h3 id="stato_app">Stato dell'applicazione</h3>
+		<p>Lo stato dell'applicazione viene riassunto tramite un indicatore che
+		rappresenta lo stato globale dell'applicazione: se il funzionamento &egrave;
+		regolare l'indicatore &egrave; di colore verde, altrimenti &egrave; di colore
+		rosso; in tal caso occorre rivolgersi all'assistenza per la soluzione del
+		problema.<br>Le informazioni di dettaglio sullo stato dell'applicazione sono
+		cos&igrave; raggruppate:
+		</p>
+			<ul>
+				<li>stato delle schede di acquisizione</li>
+				<li>stato delle configurazioni</li>
+				<li>stato dei servizi applicativi</li>
+			</ul>
+		<p>In generale, a ciascuna informazione &egrave; associato un indicatore di
+		stato che assume il colore verde in condizioni regolari e il colore rosso
+		in caso di anomalie.
+		</p>
+		<h4>Stato delle schede di acquisizione</h4>
+		<p>Le informazioni visualizzate sono:
+		</p>
+			<ul>
+				<li>lo stato di inizializzazione della libreria che gestisce le
+				schede di acquisizione</li>
+				<li>il numero di schede presenti in configurazione e il numero
+				di schede correttamente inizializzate</li>
+				<li>il numero di associazioni fallite tra i canali delle schede
+				e i loro utilizzatori</li>
+			</ul>
+		<h4>Stato delle configurazioni</h4>
+		<p>Le informazioni visualizzate sono:
+		</p>
+			<ul>
+				<li>lo stato di caricamento della configurazione, che pu&ograve;
+				essere: mancante, corrotta, errata oppure corretta</li>
+				<li>la riuscita del salvataggio di una nuova configurazione;
+				se non &egrave; ancora stata salvata una configurazione dopo
+				l'avvio dell'applicazione l'indicatore di stato &egrave; di colore
+				grigio</li>
+				<li>lo stato di attivazione della configurazione attuale che
+				pu&ograve; essere: attiva (verde), non attiva (rosso), non
+				disponibile (grigio, caso in cui la	configurazione non &egrave;
+				stata caricata)</li>
+			</ul>
+		<h4>Stato dei servizi applicativi</h4>
+		<p>Questa scheda visualizza lo stato di funzionamento dei servizi che
+		costituiscono parte integrante dell'applicazione stessa:
+		</p>
+			<ul>
+				<li>driver degli analizzatori con interfaccia dati: numero di driver
+				utilizzati, numero di driver inizializzati correttamente, numero di
+				driver bloccati da un errore fatale; il funzionamento &egrave;
+				regolare quando il numero di driver inizializzati correttamente
+				&egrave; uguale a quello di driver utilizzati e non vi sono
+				driver bloccati</li>
+				<li>numero di errori avvenuti durante la scrittura dei dati su
+				disco</li>
+				<li>numero di errori dei servizi applicativi: totali, dall'avvio
+				dell'applicazione, indicatore giallo se > 0, attuali, ovvero il cui
+				effetto condiziona ancora l'applicazione, indicatore rosso se > 0;
+				l'indicatore &egrave; verde se non vi sono errori.</li>
+			</ul>
+		<h3 id="dischi">Stato dei dischi</h3>
+		<p>Questa sezione visualizza la percentuale di spazio disco occupato nei
+		filesystem che ospitano rispettivamente le cartelle contenenti:
+		</p>
+			<ul>
+				<li>il sistema operativo (disco root)</li>
+				<li>i dati dell'applicazione (disco data)</li>
+				<li>le informazioni temporanee (disco tmp)</li>
+			</ul>
+		<p>In condizioni normali la percentuale di spazio disco occupato &egrave;
+		associata ad un'icona di colore verde. Quando la parcentuale supera la
+		soglia di attenzione l'icona assume il colore giallo, quando supera la
+		soglia di allarme assume il colore rosso.<br>L'applicazione usa come soglie
+		di attenzione e di allarme predefinite rispettivamente 80% e 90%. Tali
+		soglie possono essere cambiate agendo sulla configurazione globale della
+		rete di rilevamento. 
+		</p>
+		<p>Nota: una o pi&ugrave; percentuali possono essere permanentemente uguali
+		tra	loro, questo significa che le cartelle a cui esse si riferiscono si
+		trovano	nello stesso filesystem; tale situazione si pu&ograve; verificare in
+		alcune tipologie di installazione.
+		</p>
+		<h3 id="gps">Stato del gps</h3>
+		<p>Questa sezione visualizza lo stato del sistema GPS.<br>Nel caso in cui
+		la configurazione di stazione non preveda l'uso del GPS, viene visualizzato
+		unicamente un indicatore di colore grigio con la scritta
+		"GPS non installato".<br>Nel caso in cui la configurazione di stazione
+		preveda l'utlizzo del GPS, viene visualizzato un indicatore di colore verde
+		con la scritta "GPS installato", unitamente alle informazioni sullo stato
+		del dispositivo e della localizzazione.
+		</p>
+		<p>Le informazioni relative allo stato del dispositivo prevedono un
+		indicatore verde, nel caso in cui risulta possibile acquisire la posizione,
+		e un indicatore rosso, in caso contrario.<br>L'indicatore di colore verde
+		&egrave; associato all'informazione del tipo di localizzazione ottenuta che
+		pu&ograve; essere bidimensionale o tridimensionale.<br>Unitamente
+		all'indicatore di colore rosso viene visualizzata la descrizione del
+		problema che impedisce la localizzazione; i	possibili problemi sono:
+		</p>
+			<ul>
+				<li>il driver del GPS non risponde</li>
+				<li>il dispositivo GPS non &egrave; stato rilevato</li>
+				<li>il GPS non riceve il segnale</li>
+			</ul>
+		<p>Quando la localizzazione &egrave; possibile, vengono visualizzate le
+		informazioni ad essa relative: data, latitudine, longitudine e altitudine
+		(quest'ultima solo nel caso di localizzazione tridimensionale).
+		</p>
+		<hr>
+
+		<h1 id="view_stationStatusWidget">Stato stazione</h1>
+		<p>Questa pagina visualizza lo stato della stazione, sotto forma di una
+		tabella contenente l'elenco degli allarmi di cabina.<br>Per ciascun allarme
+		di cabina vengono visualizzati il nome, la descrizione, lo stato e la data
+		dell'ultima variazione dello stato.<br>La prima colonna della tabella
+		contiene, per ciascun allarme, un pulsante che consente di consultarne lo
+		storico degli stati.
+		</p>
+		<p>Per gli allarmi di tipo binario viene visualizzato un indicatore di
+		colore rosso quando l'allarme &egrave; attivo, di colore verde quando
+		l'allarme non &egrave; attivo. 
+		</p>
+		<p>Per gli allarmi di tipo analogico, in base allo stato di superamento
+		delle soglie, possono essere visualizzate le seguenti icone:
+		</p>
+			<ul>
+				<li><img src="../images/alarm_high.gif" alt="Soglia di allarme superiore"/>: superamento della soglia superiore di allarme</li>
+				<li><img src="../images/warning_high.gif" alt="Soglia di attenzione superiore"/>: superamento della soglia superiore di attenzione</li>
+				<li><img src="../images/ledgreen.gif" alt="Valori nella norma"/>: situazione regolare</li>
+				<li><img src="../images/warning_low.gif" alt="Soglia di attenzione inferiore"/>: valore al di sotto della soglia inferiore di attenzione</li>
+				<li><img src="../images/alarm_low.gif" alt="Soglia di allarme inferiore"/>: valore al di sotto della soglia inferiore di allarme</li>
+			</ul> 
+		<p>Per la consultazione dello storico degli stati degli allarmi si deve
+		utilizzare il pulsante presente nella prima colonna della tabella, relativo
+		all'allarme di cabina per cui si vuole effettuare la consultazione.<br>Per
+		effettuare la consultazione vengono richieste le seguenti informazioni:
+		</p>
+			<ul>
+				<li>data inizio (default: giorno corrente)</li>
+				<li>ora inizio (default: 00:00)</li>
+				<li>data fine (default: giorno corrente)</li>
+				<li>ora fine (default: ora attuale)</li>
+			</ul>
+		Dopo aver inserito le informazioni richieste, premendo il pulsante di
+		conferma, si accede alla pagina che
+		<a href="#view_historyStationStatusWidget">visualizza lo storico degli
+		stati</a>.
+		<hr>
+
+		<h1 id="view_historyStationStatusWidget">Storico degli allarmi di cabina</h1>
+		<p>Questa pagina visualizza una tabella contenente l'elenco degli stati
+		storici degli allarmi di cabina, in base alla richiesta effettuata nella
+		pagina di <a href="#view_stationStatusWidget">stato stazione</a>.
+		</p>
+		<p>Le informazioni contenute nella tabella sono, per ciascuna variazione
+		dello stato: data e ora in cui &egrave; avvenuta la variazione dello stato,
+		valore dello stato.
+		</p>
+		<p>Le informazioni visualizzate nella tabella possono essere visualizzate
+		anche sotto forma di grafico oppure esportate in formato csv, utilizzando
+		gli appositi bottoni situati sul fondo della pagina stessa.
+		<hr>
+
+		<h1 id="view_analyzerStatusWidget">Stato analizzatori</h1>
+		<p>Questa pagina visualizza una tabella contenente l'elenco degli
+		analizzatori presenti nella stazione di	misura.<br>Per ciascun analizzatore
+		vengono visualizzati il nome, la marca e il modello	nonch&eacute; le
+		informazioni di stato correnti.<br>La prima colonna della tabella contiene,
+		per ciascun analizzatore, un pulsante che consente di consultare lo storico
+		degli stati degli analizzatori.
+		</p>
+		<p>Le informazioni di stato visualizzate sono:
+		</p>
+			<ul>
+				<li>stato del segnale di allarme dell'analizzatore:
+					<ul>
+						<li>verde: funzionamento regolare</li>
+						<li>rosso: allarme attivo</li>
+						<li>grigio: informazione non disponibile</li>
+					</ul>
+				</li>
+				<li>stato di manutenzione in corso:
+					<ul>
+						<li>giallo: attivo</li>
+						<li>grigio: non attivo</li>
+					</ul>
+				</li>
+				<li>stato di calibrazione manuale in corso:
+					<ul>
+						<li>giallo: attivo</li>
+						<li>grigio: non attivo</li>
+					</ul>
+				</li>
+				<li>stato di calibrazione automatica in corso: predisposizione per
+				implementazioni future
+				</li>
+				<li>stato di calibrazione automatica fallita: predisposizione per
+				implementazioni future
+				</li>
+			</ul>
+		<p>
+		Per la consultazione dello storico degli stati degli analizzatori si deve
+		utilizzare il pulsante presente nella prima colonna della tabella, relativo
+		all'analizzatore per cui si vuole effettuare la consultazione.<br>Per
+		effettuare la consultazione vengono richieste le seguenti informazioni:
+		</p>
+			<ul>
+				<li>data inizio (default: giorno corrente)</li>
+				<li>ora inizio (default: 00:00)</li>
+				<li>data fine (default: giorno corrente)</li>
+				<li>ora fine (default: ora attuale)</li>
+				<li>stato da consultare:
+					<ul>
+						<li>fault: allarme dell'analizzatore</li>
+						<li>maintenance: manutenzione</li>
+						<li>man_calib: calibrazione manuale</li>
+						<li>achk_run: calibrazione automatica</li>
+						<li>achk_fail: calibrazione automatica fallita</li>
+					</ul>
+				</li>
+			</ul>
+		Dopo aver inserito le informazioni richieste, premendo il pulsante di
+		conferma, si accede alla pagina che
+		<a href="#view_historyAnalyzersStatusWidget">visualizza lo storico degli
+		stati</a>.
+		<hr>
+
+		<h1 id="view_historyAnalyzersStatusWidget">Storico degli stati</h1>
+		<p>Questa pagina visualizza una tabella contenente l'elenco degli stati
+		storici, in base alla richiesta effettuata nella pagina di 
+		<a href="#view_analyzerStatusWidget">stato degli	analizzatori</a>.
+		</p>
+		<p>Le informazioni contenute nella tabella sono, per ciascuna variazione
+		dello stato: data e ora in cui &egrave; avvenuta la variazione dello stato,
+		valore dello stato.
+		</p>
+		<p>Le informazioni visualizzate nella tabella possono essere visualizzate
+		anche sotto forma di grafico oppure esportate in formato csv, utilizzando
+		gli appositi bottoni situati sul fondo della pagina stessa.
+		<hr>
+
+		<h1 id="view_realTimeDataWidget">Consultazione dati</h1>
+		<p>Questa pagina visualizza una tabella contenente l'elenco di tutti gli
+		elementi misurati, al fine di poter effettuare la consultazione dei dati
+		acquisiti.
+		</p>
+		<p>Per ciascun elemento viene visualizzato l'ultimo dato istantaneo
+		acquisito (dato in tempo reale) comprensivo di unit&agrave; di misura,
+		data e ora di acquisizione, i flag e il periodo di acquisizione. Tale dato
+		viene aggiornato quando si entra nella pagina e ogni qualvolta viene premuto
+		il pulsante di refresh <img src="../images/reload_blue.gif" alt="Ricarica"/>.  
+		</p>
+		<p>La consultazione dei dati istantanei e delle medie pu&ograve; essere
+		effettuata utilizzando gli appositi pulsanti situati nelle prime due colonne
+		della tabella. Sia per i dati istantanei che per le medie &egrave; possibile
+		effettuare la visualizzazione in forma tabellare oppure grafica; &egrave;
+		inoltre possibile lo scarico dei dati in formato csv.
+		</p>
+		<p>Per effettuare la consultazione dei dati per gli analizzatori cancellati
+		occorre premere il pulsante
+		<img src="../images/view_deleted_analyzers.gif" alt="Visualizza analizzatori cancellati"/>,
+		per visualizzare l'elenco di tali analizzatori, poi procedere come descritto
+		in precedenza. Per tornare all'elenco degli analizzatori attivi premere il
+		pulsante di refresh <img src="../images/reload_blue.gif" alt="Ricarica"/>.
+		Dopo aver consultato i dati per un elemento di un analizzatore cancellato,
+		si torna automaticamente alla lista degli analizzatori attivi.
+		</p>
+		<p>Nota: la visualizzazione e l'esportazione dei dati istantanei pu&ograve;
+		essere limitata, in base al tempo di campionamento, ad una sola giornata
+		oppure a 12 ore al fine di evitare il trasferimento di grosse moli di dati.
+		</p>
+		<hr>
+
+		<h1 id="view_historyMeansDataWidget">Tabella delle medie</h1>
+		<p>La tabella delle medie visualizza, per l'elemento ed il periodo
+		selezionati, le seguenti informazioni:
+		</p>
+			<ul>
+				<li>valore</li>
+				<li>unit&agrave; di misura</li>
+				<li>data</li>
+				<li>flag di validit&agrave;</li>
+				<li>flag multiplo (rappresenta le condizioni in cui i dati sono
+				stati acquisiti)</li>
+				<li>periodo di acquisizione</li>
+			</ul>
+		&Egrave; possibile visualizzare il grafico dei dati presenti in tabella o
+		esportarli in formato csv, utilizzando gli appositi pulsanti al fondo della
+		tabella.
+		<hr>
+
+		<h1 id="view_historyRealTimeDataWidget">Tabella dei dati istantanei</h1>
+		<p>La tabella dei dati istantanei, appena viene visualizzata, non presenta
+		alcun dato poich&eacute; i dati istantanei potrebbero essere troppi per la
+		visualizzazione in una tabella nel browser.<br>In funzione del numero di
+		dati, vengono visualizzate una o due colonne di bottoni sul lato sinistro
+		della tabella: la prima rappresenta le ore del giorno, la seconda, quando
+		presente, rappresenta le decine di minuti.<br>Per visualizzare i dati
+		occorre premere il bottone che rappresenta l'ora desiderata e poi, solo
+		quando sono presenti anche i bottoni delle decine di minuti, premere il
+		bottone della decina di minuti desiderata. 
+		</p>
+		<p>La tabella dei dati istantanei visualizza, per l'elemento ed il periodo
+		selezionati, le seguenti informazioni:
+		</p>
+			<ul>
+				<li>valore</li>
+				<li>unit&agrave; di misura</li>
+				<li>data</li>
+				<li>flag di validit&agrave;</li>
+				<li>flag multiplo (rappresenta le condizioni in cui i dati sono
+				stati acquisiti)</li>
+				<li>periodo di acquisizione</li>
+			</ul>
+		&Egrave; possibile visualizzare il grafico dei dati presenti in tabella o
+		esportarli in formato csv, utilizzando gli appositi pulsanti al fondo della
+		tabella.
+		<hr>
+	</div> 
+	</div> 
+</body>
+
+</html>

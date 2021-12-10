@@ -1,0 +1,51 @@
+ BUILD TARGETS
+
+ *******************************************************************
+ CLEAN
+ *******************************************************************
+ clean-all:      Rimuove tutte le cartelle create da Ant
+ clean-archives: Rimuove la cartella degli archivi (war, ear, ...)
+ clean-cache:    Rimuove la cartella della cache delle librerie
+                 creata da Ivy
+ clean-classes:  Rimuove la cartella dei sorgenti compilati
+ clean-dist:     Rimuove la cartella delle distribuzioni
+ clean-temp:     Rimuove la cartella dei files temporanei di build
+
+ *******************************************************************
+ UTILITY
+ *******************************************************************
+ about:        Visualizza l'elenco dei target pubblici dello script
+ about-custom: Visualizza l'elenco dei target privati dello script
+ show-vars:    Visualizza tutte le variabili impostate nei file di
+               properties e/o da linea di comando
+ init:         Inizializza lo script Ant
+
+ *******************************************************************
+ IVY CONFIGURATION
+ *******************************************************************
+ resolve-dependencies: Legge la configurazione di ivy
+ load-dependencies:    Carica le dipendenze tramite ivy
+
+ *******************************************************************
+ COMPILE
+ *******************************************************************
+ compile-all: Compila tutti i sorgenti
+
+ *******************************************************************
+ PACKAGING
+ *******************************************************************
+ package-all: Esegue il packaging di ogni componente del prodotto
+ package-war: Costruisce il war della web app
+
+ *******************************************************************
+ DISTRIBUTION
+ *******************************************************************
+ --> La chiamata ad Ant senza parametri provocherà la creazione di
+     un pacchetto per ogni ambiente di esecuzione (in particolare:
+     dev/tst/coll/prod)
+ default:      Verifica se eseguire il build per un solo environment
+               specificato a linea di commando con
+               -Dtarget=${target} o per tutti gli environment 
+ all-target:   Lancia il build per le varie distribuzioni in
+               sequenza
+ distribution: Costruisce il tar per la distribuzione

@@ -1,0 +1,721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<common>
+    <defaultAvgPeriod>60</defaultAvgPeriod>
+    <avgPeriod>1</avgPeriod>
+    <avgPeriod>10</avgPeriod>
+    <avgPeriod>30</avgPeriod>
+    <avgPeriod>1440</avgPeriod>
+    <dataWriteToDiskPeriod>1</dataWriteToDiskPeriod>
+    <manualOperationsAutoResetPeriod>120</manualOperationsAutoResetPeriod>
+    <copServicePort>55000</copServicePort>
+    <mapsSiteURLFormatter>http://maps.google.com/maps?q=%f,%f&amp;hl=%s</mapsSiteURLFormatter>
+    <storageManager>
+        <maxDaysOfData>731</maxDaysOfData>
+        <maxDaysOfAggregateData>731</maxDaysOfAggregateData>
+        <diskFullWarningThresholdPercent>80</diskFullWarningThresholdPercent>
+        <diskFullAlarmThresholdPercent>90</diskFullAlarmThresholdPercent>
+    </storageManager>
+    <standards>
+        <referenceTemperature_K>293.0</referenceTemperature_K>
+        <referencePressure_kPa>101.3</referencePressure_kPa>
+    </standards>
+    <alarmName>
+        <id>AFTP</id>
+        <name>Allarme flusso testa di prelievo</name>
+        <type>digital</type>
+        <dataQualityRelevant>true</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>AFV</id>
+        <name>Antifurto volumetrico</name>
+        <type>digital</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>APA</id>
+        <name>Allarme porta aperta</name>
+        <type>digital</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>ATA</id>
+        <name>Allarme temperatura analogico</name>
+        <type>trigger</type>
+        <dataQualityRelevant>true</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>ATD</id>
+        <name>Allarme temperatura digitale</name>
+        <type>digital</type>
+        <dataQualityRelevant>true</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>ATTP</id>
+        <name>Allarme temperatura testa di prelievo</name>
+        <type>digital</type>
+        <dataQualityRelevant>true</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>AUA</id>
+        <name>Allarme umidita' analogico</name>
+        <type>trigger</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>PWR_FAIL</id>
+        <name>Allarme tensione alimentazione</name>
+        <type>digital</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>SWNV</id>
+        <name>Dato Swam non valido</name>
+        <type>digital</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>UPS_V_FAIL</id>
+        <name>Allarme alimentazione UPS</name>
+        <type>digital</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>FaultHCLHF</id>
+        <name>Allarme strumento LGR HCL-HF</name>
+        <type>trigger</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <alarmName>
+        <id>ATLR</id>
+        <name>Allarme temperatura linea riscaldata</name>
+        <type>digital</type>
+        <dataQualityRelevant>false</dataQualityRelevant>
+    </alarmName>
+    <parameter>
+        <id>BB%</id>
+        <name>BC Biomass Burning %</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC1</id>
+        <name>Black Carbon 370nm</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC2</id>
+        <name>Black Carbon 470nm</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC3</id>
+        <name>Black Carbon 520nm</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC4</id>
+        <name>Black Carbon 590nm</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC5</id>
+        <name>Black Carbon 660nm</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC6</id>
+        <name>Black Carbon (880nm)</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC7</id>
+        <name>Black Carbon 950nm</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC_K1</id>
+        <name>BC compensation 370nm</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC_K2</id>
+        <name>BC compensation 470nm</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC_K3</id>
+        <name>BC compensation 520nm</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC_K4</id>
+        <name>BC compensation 590nm</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC_K5</id>
+        <name>BC compensation 660nm</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC_K6</id>
+        <name>BC compensation 880nm</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BC_K7</id>
+        <name>BC compensation 950nm</name>
+        <type>chemical</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>BENZENE</id>
+        <name>Benzene</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>78.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>CH4</id>
+        <name>Metano</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>16.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>CO</id>
+        <name>Monossido di carbonio</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>28.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>CO2</id>
+        <name>Anidride carbonica</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>44.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>EB</id>
+        <name>Etilbenzene</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>106.17</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>H2O</id>
+        <name>Acqua</name>
+        <type>other</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>18.01528</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>H2S</id>
+        <name>Acido solfidrico</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>HCl</id>
+        <name>Cloruro di idrogeno</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>36.4609</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>HF</id>
+        <name>Fluoruro di idrogeno</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>20.006343</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>IDRNOMET</id>
+        <name>Idrocarburi non metanici</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>12.0107</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>IGRO_CAB</id>
+        <name>Umidità cabina</name>
+        <type>other</type>
+        <physicalDimension>humidity</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>IPA</id>
+        <name>Idrocarburi Policiclici Aromatici</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>MERC_GAS</id>
+        <name>Mercurio gassoso</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>MPO-XILE</id>
+        <name>Meta-para-orto xilene</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>106.17</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>MP-XILE</id>
+        <name>Meta-para xilene</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>106.17</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>NAT_RAD</id>
+        <name>Radiazione Naturale</name>
+        <type>other</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>NH3</id>
+        <name>Ammoniaca</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>17.031</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>NO</id>
+        <name>Monossido di azoto</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>30.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>NO2</id>
+        <name>Biossido di azoto</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>46.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>NOX</id>
+        <name>Ossidi di azoto</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>46.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>O3</id>
+        <name>Ozono</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>48.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>O-XILE</id>
+        <name>Orto xilene</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>106.17</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>PBL</id>
+        <name>Planetary Boundary Layer</name>
+        <type>other</type>
+        <physicalDimension>number</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PGG</id>
+        <name>Livello pioggia</name>
+        <type>rain</type>
+        <physicalDimension>length</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PGG_T</id>
+        <name>Temperatura della pioggia</name>
+        <type>meteo</type>
+        <physicalDimension>temperature</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM10</id>
+        <name>Polveri PM10 - Generiche</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM10_B</id>
+        <name>Polveri PM10 - Beta</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM10_CP</id>
+        <name>Polveri PM10 - Contaparticelle</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM10_GBV</id>
+        <name>Polveri PM10 - Basso Volume</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM10_N</id>
+        <name>Polveri PM10 - Nefelometro</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM10_T</id>
+        <name>Polveri PM10 - Teom</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM1_CP</id>
+        <name>PM1- Contaparticelle</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM2.5</id>
+        <name>Polveri PM2.5 - Generiche</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM2.5_B</id>
+        <name>Polveri PM2.5 - Beta</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PM2.5_CP</id>
+        <name>PM2.5- Contaparticelle</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PRES</id>
+        <name>Pressione</name>
+        <type>meteo</type>
+        <physicalDimension>pressure</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PRESS_INT</id>
+        <name>Pressione interna</name>
+        <type>other</type>
+        <physicalDimension>pressure</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PTS</id>
+        <name>Particelle totali sospese</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>PTS_T</id>
+        <name>Polveri totali sospese Teom</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>RSG</id>
+        <name>Radiazione solare globale</name>
+        <type>meteo</type>
+        <physicalDimension>radiation</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>RSN</id>
+        <name>Radiazione solare netta</name>
+        <type>meteo</type>
+        <physicalDimension>radiation</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>RSR</id>
+        <name>Radiazione solare riflessa</name>
+        <type>meteo</type>
+        <physicalDimension>radiation</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>SO2</id>
+        <name>Biossido di zolfo</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>64.0</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>SOX</id>
+        <name>Ossidi di zolfo</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>TEMP</id>
+        <name>Temperatura generica</name>
+        <type>meteo</type>
+        <physicalDimension>temperature</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>TEMP_AR</id>
+        <name>Temperatura dell'aria</name>
+        <type>meteo</type>
+        <physicalDimension>temperature</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>TEMP_AR_Q</id>
+        <name>Temperatura dell'aria in quota</name>
+        <type>meteo</type>
+        <physicalDimension>temperature</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>TEMP_AR_S</id>
+        <name>Temperatura dell'aria al suolo</name>
+        <type>meteo</type>
+        <physicalDimension>temperature</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>TEMP_CAB</id>
+        <name>Temperatura cabina</name>
+        <type>other</type>
+        <physicalDimension>temperature</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>TNX</id>
+        <name>TNX</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>TOLUENE</id>
+        <name>Toluene</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>92.14</molecularWeight>
+    </parameter>
+    <parameter>
+        <id>UM_REL</id>
+        <name>Umidità relativa</name>
+        <type>meteo</type>
+        <physicalDimension>humidity</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>V_DIR</id>
+        <name>Direzione del vento</name>
+        <type>wind_dir</type>
+        <physicalDimension>direction</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>VENTO</id>
+        <name>Vento vettoriale</name>
+        <type>wind</type>
+        <physicalDimension>multi_dimensional</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>V_VEL</id>
+        <name>Velocità del vento</name>
+        <type>wind_vel</type>
+        <physicalDimension>speed</physicalDimension>
+    </parameter>
+    <parameter>
+        <id>XILENE</id>
+        <name>Xilene</name>
+        <type>chemical</type>
+        <physicalDimension>concentration</physicalDimension>
+        <molecularWeight>106.17</molecularWeight>
+    </parameter>
+    <measureUnit>
+        <name>mg/m3</name>
+        <description>milligrammi al metro cubo</description>
+        <physicalDimension>concentration</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1000.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>ng/m3</name>
+        <description>nanogrammi al metro cubo</description>
+        <physicalDimension>concentration</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>0.0010</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>ppb</name>
+        <description>parti per miliardo</description>
+        <physicalDimension>concentration</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula>vv2mpv</conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>ppm</name>
+        <description>parti per milione</description>
+        <physicalDimension>concentration</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1000.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula>vv2mpv</conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>ug/m3</name>
+        <description>microgrammi al metro cubo</description>
+        <physicalDimension>concentration</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>°</name>
+        <description>gradi</description>
+        <physicalDimension>direction</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>%</name>
+        <description>per cento</description>
+        <physicalDimension>humidity</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>mm</name>
+        <description>millimetri</description>
+        <physicalDimension>length</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>m.d.</name>
+        <description>multi dimensionale</description>
+        <physicalDimension>multi_dimensional</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>n.</name>
+        <description>numero</description>
+        <physicalDimension>number</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>kPa</name>
+        <description>kilopascal</description>
+        <physicalDimension>pressure</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>false</allowedForAcquisition>
+        <conversionMultiplyer>10.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>mbar</name>
+        <description>Millibar</description>
+        <physicalDimension>pressure</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>Torr</name>
+        <description>Torr</description>
+        <physicalDimension>pressure</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>false</allowedForAcquisition>
+        <conversionMultiplyer>1.33322</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>W/m2</name>
+        <description>Watt al metro quadro</description>
+        <physicalDimension>radiation</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>Km/h</name>
+        <description>chilometri all'ora</description>
+        <physicalDimension>speed</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>m/s</name>
+        <description>metri al secondo</description>
+        <physicalDimension>speed</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>°C</name>
+        <description>gradi centigradi</description>
+        <physicalDimension>temperature</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>true</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>0.0</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+    <measureUnit>
+        <name>°K</name>
+        <description>gradi kelvin</description>
+        <physicalDimension>temperature</physicalDimension>
+        <allowedForAnalyzer>true</allowedForAnalyzer>
+        <allowedForAcquisition>false</allowedForAcquisition>
+        <conversionMultiplyer>1.0</conversionMultiplyer>
+        <conversionAddendum>-273.1499938964844</conversionAddendum>
+        <conversionFormula></conversionFormula>
+    </measureUnit>
+</common>
+

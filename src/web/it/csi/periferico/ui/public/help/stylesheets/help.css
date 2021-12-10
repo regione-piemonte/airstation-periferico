@@ -1,0 +1,86 @@
+/*
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+_______________________________________________
+ Original Author of file: Pierfrancesco Vallosio
+ Purpose of file: Periferico application user manual and contextual help
+ Change log:
+   2021-11-10: single page version of the original frame based manual
+*/
+body {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #000000;
+	background: #FFFFFF url(../images/background.png) repeat-x;
+}
+
+h2 {
+	font-size: 200%;
+}
+
+h3 {
+	font-size: 130%;
+	color: #FFFFFF;
+	background: #FFFFFF url(../images/bg_header_gradient.gif) repeat-x;
+}
+
+h4 {
+	color: #FFFFFF;
+	background-color: #828DA6;
+}
+
+td {
+	color: #000000;
+	background-color: #EEEEEE;
+}
+
+table tr:first-child td {
+	color: #000000;
+	background-color: #CCCCCC;
+}
+
+table th {
+	color: #000000;
+	background-color: #CCCCCC;
+}
+
+pre {
+	background-color: #EFEFEF;
+}
+
+img {
+	vertical-align: top;
+}
+
+.column {
+	height: 100%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	overflow-x: hidden;
+}
+
+.left_col {
+	width: 20%;
+	left: 0;
+	border-right-style: double;
+	border-right-color: black;
+	border-right-width: 5px;
+}
+
+.left_content {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.right_col {
+	width: 80%;
+	right: 0;
+}
+
+.right_content {
+	text-align: left;
+	margin-left: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+}

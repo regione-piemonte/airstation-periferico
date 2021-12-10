@@ -1,0 +1,900 @@
+/*----------------------------------------------------------------------------
+ * SRQA - Periferico
+ * Copyright (C) 2008 by Regione Piemonte (http://www.regione.piemonte.it)
+ * LICENSE and CREDITS
+ * This program is free software and it's released under the terms of the
+ * GNU General Public License(GPL) - (http://www.gnu.org/licenses/gpl.html)
+ * Please READ carefully the doc/license.txt file for further details
+ * Please READ the doc/credits.txt file for complete credits list
+ * ----------------------------------------------------------------------------
+ * Original Author of file: Isabella Vespa
+ * Purpose of file: application's entry point
+ * Change log:
+ *   2008-01-10: initial version
+ * ----------------------------------------------------------------------------
+ * $Id:  $
+ * ----------------------------------------------------------------------------
+ */
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: #FFFFFF url(images/body_bg.jpg) repeat-x;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #555452;
+}
+
+p, ul, ol {
+	margin-bottom: 15px;
+	line-height: 1.6em;
+}
+
+a:link {
+	color: #0AAAFD;
+}
+
+a:hover, a:active {
+	text-decoration: none;
+	color: #FF6700;
+}
+
+a:visited {
+	color: #555452;
+}
+
+img {
+	border: none;
+}
+
+/* Menu */
+
+#menu {
+	background: #FFFFFF url(images/menu_bg.jpg) repeat-x;
+	width: auto;
+	height: 55px;
+	min-width: 1000px;
+	margin: 0 auto;
+}
+
+#menu a {
+	display: block;
+	width: 122px;
+	background: url(images/img02.jpg) no-repeat;
+	text-align: center;
+}
+
+#menu a:hover {
+	background-image: url(images/img03.jpg);
+}
+
+#menu .active {
+	padding-top: 0px;
+}
+
+#menu .active a {
+	background-image: url(images/img04_2.jpg);
+}
+
+#menu .active a:hover {
+	background-image: url(images/img04_2.jpg);
+}
+/* Grid */
+
+.gwt-Grid {
+	border: 1px solid #FF8D17;
+	text-align: center;
+}
+
+.gwt-Grid-blue {
+	border: 1px solid #0AAAFD;
+}
+
+.gwt-row-selected {
+	background-color: #ffcb85;
+}
+
+.gwt-Label-title {
+	height: 30px;
+	margin: 0;
+	padding: 0px 0 0 20px;
+	background: url(images/img08_1.jpg) no-repeat;
+	letter-spacing: -1px;
+	color: #FF3300;
+	font-size: 130%;
+}
+
+.gwt-title-orange {
+	height: 30px;
+	margin: 0;
+	padding: 10px 0 0 20px;
+	letter-spacing: -1px;
+	color: #FF8D17;
+	font-size: 130%;
+	white-space: nowrap;
+}
+
+.gwt-informatic-title {
+	height: 15px;
+	margin: 0;
+	padding: 0px 0 0 0px;
+	letter-spacing: -1px;
+	color: #327EBE;
+	font-size: 100%;
+}
+
+.gwt-analyzer-title-orange {
+	height: 15px;
+	margin: 0;
+	padding: 0px 0 0 0px;
+	letter-spacing: -1px;
+	color: #FF8D17;
+	font-size: 100%;
+}
+
+.gwt-Label-title-blue {
+	height: 30px;
+	margin: 0;
+	padding: 0px 0 0 20px;
+	background: url(images/img10_2.jpg) no-repeat;
+	letter-spacing: -1px;
+	color: #327EBE;
+	font-size: 130%;
+}
+
+.gwt-post-boxed-blue {
+	margin-bottom: 20px;
+	padding: 5px;
+	border: 1px solid #0AAAFD;
+	/*background: #FFF3EA;*/
+	background: url(images/pattern4.png) repeat;
+	width: 1000px;
+}
+
+.gwt-Label-help {
+	padding: 5px;
+	border: 1px solid #FF8D17;
+
+}
+
+.gwt-post-boxed {
+	margin-bottom: 20px;
+	padding: 5px;
+	border: 1px solid #FF8D17;
+	/*background: #FFF3EA;*/
+	background: url(images/pattern2.png) repeat;
+	width: 1000px;
+}
+
+.gwt-bg-text-blue {
+	background: #ebffff;
+	border-top: thin ridge #1977ff;
+	border-left: thin ridge #1977ff;	
+}
+
+.gwt-bg-text-blue-fixed-space{
+	background: #ebffff;
+	border-top: thin ridge #1977ff;
+	border-left: thin ridge #1977ff;
+	font-family: Courier, monospace;
+}
+
+.gwt-bg-text-blue-custom-font{
+	background: #ebffff;
+	border-top: thin ridge #1977ff;
+	border-left: thin ridge #1977ff;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #0861b5;
+	font-size: 100%;
+}
+
+.gwt-bg-text-orange {
+	background: #fff7ed;
+	border-top: thin ridge #f6790d;
+	border-left: thin ridge #f6790d;
+}
+
+.gwt-pointer {
+  	cursor: pointer;
+}
+
+.gwt-button-enabled {
+	height: 22px;
+	width: 22px;
+	text-align: center;
+	background: url(images/ledgreen.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-cursor {
+  	cursor: pointer;
+}
+
+.gwt-button-disabled {
+	height: 22px;
+	width: 22px;
+	text-align: center;
+	background: url(images/ledgray.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-panel{
+	width: 988px;
+}
+
+.gwt-button-new {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/new.jpg) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-new-orange {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/new_orange.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-new-small {
+	height: 24px;
+	width: 25px;
+	text-align: center;
+	background: url(images/new_small_orange.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-new-very-small {
+	height: 16px;
+	width: 16px;
+	text-align: center;
+	background: url(images/new_very_small.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-help {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/button_help_orange.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-help-blue {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/pulsante_help.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-back {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/button_back.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-reload-display {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/reload_display.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-start {
+	height: 28px;
+	width: 74px;
+	text-align: center;
+	background: url(images/button_start.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-stop {
+	height: 28px;
+	width: 74px;
+	text-align: center;
+	background: url(images/button_stop.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-back-blue {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/button_back_blue.jpg) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-prev-gray {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/button_gray.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-forward {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/forward_orange.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-forward-gray {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/forward_gray.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-up {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/up_orange.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-up-blue {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/up_blue.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-list-element{
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/list_element_button.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-new-riquadro {
+	height: 32px;
+	width: 32px;
+	text-align: center;
+	background: url(images/new_riquadro.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-associate {
+	height: 32px;
+	width: 32px;
+	text-align: center;
+	background: url(images/connect_creating.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-configure {
+	height: 32px;
+	width: 32px;
+	text-align: center;
+	background: url(images/configure.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-save {
+	height: 32px;
+	width: 100px;
+	background: url(images/save_orange.png) no-repeat;
+	margin-right:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-save-gray {
+	height: 32px;
+	width: 100px;
+	background: url(images/save_gray.png) no-repeat;
+	margin-right:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-load_local {
+	height: 32px;
+	width: 100px;
+	background: url(images/download.png) no-repeat;
+	margin-right:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-connect-cop {
+	height: 32px;
+	width: 100px;
+	background: url(images/connect_cop.png) no-repeat;
+	margin-right:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-open-folder {
+	height: 32px;
+	width: 100px;
+	text-align: center;
+	background: url(images/open_folder.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+
+.gwt-no-border-panel {
+	border: 0px;
+}
+
+.gwt-popup-panel {
+	background: url(images/pattern2.png) repeat;
+	border: 5px solid #FF8D17;
+}
+
+.gwt-popup-panel-blue {
+	background: url(images/pattern4.png) repeat;
+	border: 5px solid #0AAAFD;
+}
+
+.tt{
+	/* for very old versions of Firefox */
+	-moz-opacity: 0.7;
+    /* CSS3 standard */
+    opacity: 0.7;
+    /* for IE */
+    filter: alpha(opacity=70);
+}
+
+.gwt-button-reload {
+	height: 32px;
+	width: 100px;
+	background: url(images/reload_orange.png) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-reload-value {
+	height: 32px;
+	width: 100px;
+	background: url(images/reload_value.png) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-reload-blue {
+	height: 32px;
+	width: 100px;
+	background: url(images/reload_all.jpg) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-undo {
+	height: 32px;
+	width: 100px;
+	background: url(images/undo_arancio.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-undo-blue {
+	height: 32px;
+	width: 100px;
+	background: url(images/button_undo_blue.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-send-verify{
+	height: 32px;
+	width: 100px;
+	background: url(images/send_verify_arancio.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-send-verify-blue{
+	height: 32px;
+	width: 100px;
+	background: url(images/button_ok_blue.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-blue{
+	height: 32px;
+	width: 100px;
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	color: #0861b5;
+	font-size: 100%;
+	background: url(images/base.jpg) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-del{
+	height: 32px;
+	width: 100px;
+	background: url(images/button_delete.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-csv{
+	height: 32px;
+	width: 100px;
+	background: url(images/button_csv_blue.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-chart{
+	height: 32px;
+	width: 100px;
+	background: url(images/button_chart_blue.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-modify {
+	height: 32px;
+	width: 32px;
+	background: url(images/modify.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-delete {
+	height: 32px;
+	width: 32px;
+	background: url(images/editdelete.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-unbind {
+	height: 32px;
+	width: 32px;
+	background: url(images/unbind.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-delete-medium {
+	height: 24px;
+	width: 24px;
+	background: url(images/editdelete_medium.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-delete-small {
+	height: 16px;
+	width: 16px;
+	background: url(images/editdelete-small.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-login {
+	height: 32px;
+	width: 100px;
+	background: url(images/login.jpg) no-repeat;
+	text-align: center;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-list_iouser {
+	height: 32px;
+	width: 32px;
+	background: url(images/list_io_user.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-list_iouser-medium {
+	height: 24px;
+	width: 24px;
+	background: url(images/list_io_user_medium.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-history {
+	height: 25px;
+	width: 25px;
+	background: url(images/history.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-dgt {
+	height: 25px;
+	width: 25px;
+	background: url(images/hwinfo.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-csv-small {
+	height: 22px;
+	width: 22px;
+	background: url(images/csv_small.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-chart-small {
+	height: 22px;
+	width: 22px;
+	background: url(images/chart_small.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-table-small {
+	height: 22px;
+	width: 22px;
+	background: url(images/table.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-means {
+	height: 25px;
+	width: 25px;
+	background: url(images/saetta.png) no-repeat;
+	text-align: center;
+	border: 0;
+  	cursor: pointer;
+}
+
+.gwt-button-hour{
+	height: 18px;
+	width: 40px;
+	background: url(images/hour.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-hour-selected{
+	height: 18px;
+	width: 40px;
+	background: url(images/selected_hour.png) no-repeat;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-acquire {
+	height: 32px;
+	width: 100px;
+	background: url(images/acquire.png) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-acquire-gray {
+	height: 32px;
+	width: 100px;
+	background: url(images/acquire-gray.png) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-calculate {
+	height: 32px;
+	width: 100px;
+	background: url(images/calcola.png) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+.gwt-button-calculate-gray {
+	height: 32px;
+	width: 100px;
+	background: url(images/calcola-gray.png) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+
+.gwt-h1 {
+	margin-bottom: 10px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: bold;
+	color: #333333;
+	font-size: 150%;
+	text-align: center;
+}
+
+.gwt-title-widget {
+	margin-bottom: 10px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: bold;
+	color: #333333;
+	font-size: 140%;
+	text-align: left;
+	margin-left: 20px;
+}
+
+.gwt-label-login {
+	height: 30px;
+	margin: 0;
+	padding: 0px 0 0 0px;
+	background: url(images/img10_1.jpg) no-repeat;
+	letter-spacing: -1px;
+	color: #327EBE;
+	font-size: 130%;
+}
+
+.gwt-login-boxed {
+	padding: 30px;
+	border: 1px solid #0AAAFD;
+}
+
+.gwt-button-view-deleted-analyzers {
+	height: 32px;
+	width: 100px;
+	background: url(images/view_deleted_analyzers.jpg) no-repeat;
+	margin-left:5px;
+	border: 0px;
+  	cursor: pointer;
+}
+
+/* Page */
+
+.gwt-page {
+	width: 1000px;
+	margin: 0px auto;
+	padding: 0px 0 0px 0;
+	text-align: center;
+}
+
+.page {
+	width: 1000px;
+	margin: 0px auto;
+	padding: 0px 0 0px 0;
+	text-align: center;
+}
+
+.post {
+	margin-bottom: 20px;
+}
+
+.post .title {
+	padding: 0 20px;
+}
+
+.post .story {
+	padding: 0 20px;
+	background: url(images/pattern2.png) repeat;
+}
+
+.post .storyblue {
+	padding: 0 20px;
+	background: url(images/pattern4.png) repeat;
+}
+
+.post .meta {
+	padding: 5px 20px;
+	background: url(images/pattern4.png) repeat;
+}
+
+.post .meta p {
+	margin: 0;
+	font-size: 77%;
+}
+
+.boxed .title {
+	height: 30px;
+	margin: 0;
+	padding: 0px 0 0 20px;
+	background: url(images/img08_1.jpg) no-repeat;
+	letter-spacing: -1px;
+	color: #FF3300;
+	font-size: 130%;
+}
+
+.boxedblue .title {
+	height: 30px;
+	margin: 0;
+	padding: 0px 0 0 20px;
+	background: url(images/img10_2.jpg) no-repeat;
+	letter-spacing: -1px;
+	color: #327EBE;
+	font-size: 130%;
+}
+
+.boxed .story {
+	padding: 20px;
+	border: 1px solid #FF8D17;
+}
+
+.boxedblue .storyblue {
+	padding: 20px;
+	border: 1px solid #0AAAFD;
+}
+
+.boxed .meta {
+	padding: 5px 10px;
+	background: #FF8D17;
+	color: #FFFFFF;
+}
+
+.boxed .meta a {
+	color: #FFFFFF;
+}
+
+/* Sidebar */
+
+#login {
+	width: 1000px;
+	margin: 0px auto;
+	padding: 15px 0 0 0;
+}
+
+.gwt-table-header {
+  background: #09a3fd;
+  border-color: #ffffff;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.gwt-table-data {
+  border-color: #aaaaaa;
+  border-style: solid;
+  border-width: 1px 1px 1px 1px;
+}

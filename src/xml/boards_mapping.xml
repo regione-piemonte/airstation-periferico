@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+                         "http://castor.exolab.org/mapping.dtd">
+
+<!-- 
+==================================================
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+==================================================
+ Original Author of file: Pierfrancesco Vallosio
+ Purpose of file: XML mapping file for data
+    acquisition boards configuration
+ Change log:
+==================================================
+-->
+
+<mapping>
+
+	<class name="it.csi.periferico.config.BoardsCfg">
+
+		<map-to xml="boardsCfg" />
+
+		<field name="comediOptions" type="string" collection="arraylist"
+			direct="false">
+			<bind-xml name="comediOption" node="element" />
+		</field>
+
+		<field name="boardDescriptors" type="it.csi.periferico.boards.BoardDescriptors"
+			direct="false">
+			<bind-xml name="boardDescriptors" node="element" />
+		</field>
+
+		<field name="adamBoardsInfo" type="it.csi.periferico.boards.adam.AdamModuleInfo"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.BoardDescriptors">
+
+		<field name="comediEnabled" type="boolean" direct="false">
+			<bind-xml name="comediEnabled" node="element" />
+		</field>
+
+		<field name="adamEnabled" type="boolean" direct="false">
+			<bind-xml name="adamEnabled" node="element" />
+		</field>
+
+		<field name="list" type="it.csi.periferico.boards.BoardDescriptor"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.BoardDescriptor">
+
+		<field name="brand" type="string" direct="false">
+			<bind-xml name="brand" node="element" />
+		</field>
+
+		<field name="model" type="string" direct="false">
+			<bind-xml name="model" node="element" />
+		</field>
+
+		<field name="libName" type="string" direct="false">
+			<bind-xml name="libName" node="element" />
+		</field>
+
+		<field name="kernelModuleName" type="string" direct="false">
+			<bind-xml name="kernelModuleName" node="element" />
+		</field>
+
+		<field name="driverName" type="string" direct="false">
+			<bind-xml name="driverName" node="element" />
+		</field>
+
+		<field name="differentialModeSupported" type="boolean" direct="false">
+			<bind-xml name="differentialModeSupported" node="element" />
+		</field>
+
+		<field name="driverParamDescriptors" type="it.csi.periferico.boards.DriverParamDescriptor"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.PCIBoardDescriptor"
+		extends="it.csi.periferico.boards.BoardDescriptor">
+
+		<map-to xml="pciBoardDescriptor" />
+
+		<field name="vendorIdAsHexString" type="string" direct="false">
+			<bind-xml name="vendorId" node="element" />
+		</field>
+
+		<field name="deviceIdAsHexString" type="string" direct="false">
+			<bind-xml name="deviceId" node="element" />
+		</field>
+
+		<field name="pciBoardVersions" type="it.csi.periferico.boards.PCIBoardVersion"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+		<field name="versionWarning" type="string" direct="false">
+			<bind-xml name="versionWarning" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.ISABoardDescriptor"
+		extends="it.csi.periferico.boards.BoardDescriptor">
+
+		<map-to xml="isaBoardDescriptor" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.SerialBoardBusDescriptor"
+		extends="it.csi.periferico.boards.BoardDescriptor">
+
+		<map-to xml="serialBoardBusDescriptor" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.LanBoardBusDescriptor"
+		extends="it.csi.periferico.boards.BoardDescriptor">
+
+		<map-to xml="lanBoardBusDescriptor" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.LanBoardDescriptor"
+		extends="it.csi.periferico.boards.BoardDescriptor">
+
+		<map-to xml="lanBoardDescriptor" />
+
+	</class>
+
+	<class name="it.csi.periferico.boards.Range">
+
+		<map-to xml="range" />
+
+		<field name="min" type="double" direct="false">
+			<bind-xml name="min" node="element" />
+		</field>
+
+		<field name="max" type="double" direct="false">
+			<bind-xml name="max" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.DriverParamDescriptor">
+
+		<map-to xml="driverParamDescriptor" />
+
+		<field name="name" type="string" direct="false">
+			<bind-xml name="name" node="element" />
+		</field>
+
+		<field name="index" type="integer" direct="false">
+			<bind-xml name="index" node="element" />
+		</field>
+
+		<field name="typeAsString" type="string" direct="false">
+			<bind-xml name="type" node="element" />
+		</field>
+
+		<field name="optional" type="boolean" direct="false">
+			<bind-xml name="optional" node="element" />
+		</field>
+
+		<field name="help" type="string" direct="false">
+			<bind-xml name="help" node="element" />
+		</field>
+
+		<field name="allowedValues" type="string" collection="arraylist"
+			direct="false">
+			<bind-xml name="value" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.PCIBoardVersion">
+
+		<map-to xml="pciBoardVersion" />
+
+		<field name="version" type="string" direct="false">
+			<bind-xml name="version" node="element" />
+		</field>
+
+		<field name="driverName" type="string" direct="false">
+			<bind-xml name="driverName" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.adam.AdamModuleInfo">
+
+		<map-to xml="adamModuleInfo" />
+
+		<field name="modelName" type="string" direct="false">
+			<bind-xml name="modelName" node="element" />
+		</field>
+
+		<field name="numAI" type="integer" direct="false">
+			<bind-xml name="numAI" node="element" />
+		</field>
+
+		<field name="numAO" type="integer" direct="false">
+			<bind-xml name="numAO" node="element" />
+		</field>
+
+		<field name="numDI" type="integer" direct="false">
+			<bind-xml name="numDI" node="element" />
+		</field>
+
+		<field name="numDO" type="integer" direct="false">
+			<bind-xml name="numDO" node="element" />
+		</field>
+
+		<field name="numDIO" type="integer" direct="false">
+			<bind-xml name="numDIO" node="element" />
+		</field>
+
+		<field name="listRange" type="it.csi.periferico.boards.adam.AdamRange"
+			collection="arraylist" direct="false">
+			<bind-xml auto-naming="deriveByClass" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.boards.adam.AdamRange" extends="it.csi.periferico.boards.Range">
+
+		<map-to xml="adamRange" />
+
+		<field name="id" type="integer" direct="false">
+			<bind-xml name="id" node="element" />
+		</field>
+
+		<field name="unit" type="string" direct="false">
+			<bind-xml name="unit" node="element" />
+		</field>
+
+	</class>
+
+</mapping>

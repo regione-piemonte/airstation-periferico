@@ -1,0 +1,7 @@
+
+# Periferico management
+periferico  ALL=(root)     NOPASSWD: /sbin/modprobe
+periferico  ALL=(root)     NOPASSWD: /usr/local/sbin/comedi_config
+periferico  ALL=(root)     NOPASSWD: /etc/init.d/periferico
+periferico  ALL=(root)     NOPASSWD: /usr/sbin/ntpdate
+periferico  ALL=(root)     NOPASSWD: /sbin/hwclock

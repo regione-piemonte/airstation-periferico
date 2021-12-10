@@ -1,0 +1,33 @@
+==============================================================================
+|      INSTALLAZIONE PERFERICO SU RASPBERRY PI 4
+|      Autore: pierfrancesco.vallosio@mce.it
+|      Data:   5 novembre 2021
+==============================================================================
+
+Requisiti: Raspberry PI4 model B, >= 2GB RAM, >= 16GB uSD
+Ambiente software usato per l'installazione: Raspbian GNU/Linux 10 (buster).
+Pacchetti aggiuntivi necessari:
+ - openjdk-11-jre-headless
+ - ntpdate
+ 
+Istruzioni:
+ - creare utente periferico
+ - aggiungere l'utente periferico al gruppo 'dialout'
+ - nella home dell'utente periferico scompattare gli archivi:
+   - periferico_cfg_Vx.y.z_yyyymmdd.tgz (versione >= V3.5.0)
+   - periferico_bin_Vx.y.z_yyyymmdd.tgz (versione >= V3.5.0)
+ - copiare il file di avvio: periferico/bin/periferico.service
+   in /etc/systemd/system/
+ - creare il file: /etc/sudoers.d/090_periferico
+   i permessi del file devono essere 'mode 0440'
+   con il seguente contenuto:
+		# Periferico management
+		periferico  ALL=(root)     NOPASSWD: /bin/systemctl stop periferico
+		periferico  ALL=(root)     NOPASSWD: /bin/systemctl start periferico
+		periferico  ALL=(root)     NOPASSWD: /bin/systemctl restart periferico
+		periferico  ALL=(root)     NOPASSWD: /usr/sbin/ntpdate
+		periferico  ALL=(root)     NOPASSWD: /sbin/hwclock
+ - avviare il software con il comando:
+   sudo systemctl start periferico
+ - accedere all'interfaccia web del software da browser:
+   http://IP-RASPBERRY:55000/

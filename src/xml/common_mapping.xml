@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+                         "http://castor.exolab.org/mapping.dtd">
+
+<!-- 
+==================================================
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+==================================================
+ Original Author of file: Pierfrancesco Vallosio
+ Purpose of file: XML mapping file for the
+    part of the station configuration that is
+    common to all the monitoring stations.
+    The purpose is defining information that
+    should be the same in all the stations, like
+    measure units, pollutant names and so on. 
+ Change log:
+==================================================
+-->
+
+<mapping>
+
+	<class name="it.csi.periferico.config.common.CommonCfg">
+
+		<map-to xml="common"/>
+
+		<field name="defaultAvgPeriod" type="integer" direct="false">
+			<bind-xml name="defaultAvgPeriod" node="element"/>
+		</field>
+
+		<field name="avgPeriods" type="integer" collection="arraylist" direct="false">
+			<bind-xml name="avgPeriod" node="element"/>
+		</field>
+		
+		<field name="dataWriteToDiskPeriod" type="integer" direct="false">
+			<bind-xml name="dataWriteToDiskPeriod" node="element"/>
+		</field>
+		
+		<field name="manualOperationsAutoResetPeriod" type="integer" direct="false">
+			<bind-xml name="manualOperationsAutoResetPeriod" node="element"/>
+		</field>
+
+		<field name="copServicePort" type="integer" direct="false">
+			<bind-xml name="copServicePort" node="element"/>
+		</field>
+
+		<field name="mapsSiteURLFormatter" type="string" direct="false">
+			<bind-xml name="mapsSiteURLFormatter" node="element"/>
+		</field>
+
+		<field name="storageManagerCfg" type="it.csi.periferico.config.common.StorageManagerCfg" direct="false">
+			<bind-xml name="storageManager" node="element"/>
+		</field>
+		
+		<field name="standards" type="it.csi.periferico.config.common.Standards" direct="false">
+			<bind-xml name="standards" node="element"/>
+		</field>
+		
+		<field name="alarmNames" type="it.csi.periferico.config.common.AlarmName" collection="arraylist" direct="false">
+			<bind-xml name="alarmName" node="element"/>
+		</field>
+		
+		<field name="parameters" type="it.csi.periferico.config.common.Parameter" collection="arraylist" direct="false">
+			<bind-xml name="parameter" node="element"/>
+		</field>
+		
+		<field name="measureUnits" type="it.csi.periferico.config.common.MeasureUnit" collection="arraylist" direct="false">
+			<bind-xml name="measureUnit" node="element"/>
+		</field>
+		
+	</class>
+	
+	<class name="it.csi.periferico.config.common.StorageManagerCfg">
+	
+		<field name="maxDaysOfData" type="integer" direct="false">
+			<bind-xml name="maxDaysOfData" node="element"/>
+		</field>
+
+		<field name="maxDaysOfAggregateData" type="integer" direct="false">
+			<bind-xml name="maxDaysOfAggregateData" node="element"/>
+		</field>
+
+		<field name="diskFullWarningThresholdPercent" type="integer" direct="false">
+			<bind-xml name="diskFullWarningThresholdPercent" node="element"/>
+		</field>
+
+		<field name="diskFullAlarmThresholdPercent" type="integer" direct="false">
+			<bind-xml name="diskFullAlarmThresholdPercent" node="element"/>
+		</field>
+
+ 	</class>
+ 	
+ 	<class name="it.csi.periferico.config.common.Standards">
+ 	
+		<field name="referenceTemperature_K" type="double" direct="false">
+			<bind-xml name="referenceTemperature_K" node="element"/>
+		</field>
+
+		<field name="referencePressure_kPa" type="double" direct="false">
+			<bind-xml name="referencePressure_kPa" node="element"/>
+		</field>
+
+ 	</class>
+
+	<class name="it.csi.periferico.config.common.AlarmName">
+
+		<field name="id" type="string" direct="false">
+			<bind-xml name="id" node="element"/>
+		</field>
+
+		<field name="name" type="string" direct="false">
+			<bind-xml name="name" node="element"/>
+		</field>
+
+		<field name="typeAsString" type="string" direct="false">
+			<bind-xml name="type" node="element"/>
+		</field>
+
+		<field name="dataQualityRelevant" type="boolean" direct="false">
+			<bind-xml name="dataQualityRelevant" node="element"/>
+		</field>
+
+ 	</class>
+	
+	<class name="it.csi.periferico.config.common.Parameter">
+
+		<field name="id" type="string" direct="false">
+			<bind-xml name="id" node="element"/>
+		</field>
+
+		<field name="name" type="string" direct="false">
+			<bind-xml name="name" node="element"/>
+		</field>
+
+		<field name="typeAsString" type="string" direct="false">
+			<bind-xml name="type" node="element"/>
+		</field>
+
+		<field name="physicalDimension" type="string" direct="false">
+			<bind-xml name="physicalDimension" node="element"/>
+		</field>
+
+		<field name="molecularWeight" type="double" direct="false">
+			<bind-xml name="molecularWeight" node="element"/>
+		</field>
+
+ 	</class>
+	
+	<class name="it.csi.periferico.config.common.MeasureUnit">
+
+		<field name="name" type="string" direct="false">
+			<bind-xml name="name" node="element"/>
+		</field>
+
+		<field name="description" type="string" direct="false">
+			<bind-xml name="description" node="element"/>
+		</field>
+
+		<field name="physicalDimension" type="string" direct="false">
+			<bind-xml name="physicalDimension" node="element"/>
+		</field>
+
+		<field name="allowedForAnalyzer" type="boolean" direct="false">
+			<bind-xml name="allowedForAnalyzer" node="element"/>
+		</field>
+
+		<field name="allowedForAcquisition" type="boolean" direct="false">
+			<bind-xml name="allowedForAcquisition" node="element"/>
+		</field>
+
+		<field name="conversionMultiplyer" type="double" direct="false">
+			<bind-xml name="conversionMultiplyer" node="element"/>
+		</field>
+
+		<field name="conversionAddendum" type="double" direct="false">
+			<bind-xml name="conversionAddendum" node="element"/>
+		</field>
+
+		<field name="conversionFormula" type="string" direct="false">
+			<bind-xml name="conversionFormula" node="element"/>
+		</field>
+
+ 	</class>
+ 	
+</mapping>

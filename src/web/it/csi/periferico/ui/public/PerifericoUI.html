@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<!-- 
+==================================================
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+==================================================
+ Original Author of file: Isabella Vespa
+ Purpose of file: application's entry point
+ Change log:
+   2008-01-10: initial version
+==================================================
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<title>Periferico 3.5</title>
+	 	<meta name="AUTHOR" content="Isabella Vespa - CSI Piemonte (isabella.vespa@csi.it)">
+  		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+  		
+		<!--                                           -->
+		<!-- This script loads your compiled module.   -->
+		<!-- If you add any GWT meta tags, they must   -->
+		<!-- be added before this line.                -->
+		<!--                                           -->
+		<script language='javascript' src='it.csi.periferico.ui.PerifericoUI.nocache.js'></script>
+		
+		<!-- stylesheet -->
+		<link rel="stylesheet" href="gwt-style.css" type="text/css">
+		
+	</head>
+	
+	<!-- OPTIONAL: include this if you want history support -->
+	<iframe src="javascript:''" title="" id="__gwt_historyFrame" style="width:0;height:0;border:0"></iframe>
+	
+	<!--                                           -->
+	<!-- The body can have arbitrary html, or      -->
+	<!-- you can leave the body empty if you want  -->
+	<!-- to create a completely dynamic ui         -->
+	<!--                                           -->
+	<body>
+	
+		<div id="menu">
+		</div>
+		
+		<!-- end #menu -->
+		<div id="login">
+		</div>
+		
+		<div id="page">
+				<div id="config-box">
+				</div>
+				<div id="view-box">
+				</div>
+				<!-- end #post boxed -->
+			<div style="clear: both;">&nbsp;</div>
+		</div>
+		<!-- end #page -->
+		
+		<div id="popup" class="tt" style="display:none;vertical-align:middle;text-align:center;width:100%;height:100%;position:absolute;top:0px;left:0px;background-color:gray;">
+		</div>
+		
+		<div id="loading" class="tt" style="display:none;position:absolute;width:100%;height:100%;top:0px;left:0px;background-color:gray;">
+			<div style="position:absolute;top:50%;left:50%;margin-top:-30px;margin-left:-45px;text-align:center;">
+				<img src="images/loader.gif" alt="Loading...">
+				<div style="padding:5px;color:white;"><strong>Please wait...</strong></div>
+			</div> 
+		</div>
+		
+	</body>
+</html>

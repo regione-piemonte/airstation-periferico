@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boardsCfg>
+	<boardDescriptors>
+		<comediEnabled>false</comediEnabled>
+		<adamEnabled>true</adamEnabled>
+		<serialBoardBusDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM serial bus</model>
+			<libName>adam</libName>
+			<driverName>serial_bus</driverName>
+			<driverParamDescriptor>
+				<name>Serial port</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Serial port device name es. ttyS0</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Baud rate</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>Serial port speed</help>
+				<value>1200</value>
+				<value>2400</value>
+				<value>4800</value>
+				<value>9600</value>
+				<value>19200</value>
+				<value>38400</value>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Maximum scan address</name>
+				<index>2</index>
+				<type>decimal</type>
+				<optional>true</optional>
+				<help>Maximum scan address for board detection (1-255)</help>
+			</driverParamDescriptor>
+		</serialBoardBusDescriptor>
+		<lanBoardBusDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM serial bus over LAN</model>
+			<libName>adam</libName>
+			<driverName>lan_bus</driverName>
+			<driverParamDescriptor>
+				<name>Host or IP</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Host name or IP for serial bus over LAN</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Port</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>IP port for serial bus over LAN</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Maximum scan address</name>
+				<index>2</index>
+				<type>decimal</type>
+				<optional>true</optional>
+				<help>Maximum scan address for board detection (1-255)</help>
+			</driverParamDescriptor>
+		</lanBoardBusDescriptor>
+		<lanBoardDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM-6017</model>
+			<libName>adam</libName>
+			<driverName>lan_board</driverName>
+			<modelId>4017P</modelId>
+			<differentialModeSupported>false</differentialModeSupported>
+			<driverParamDescriptor>
+				<name>Host or IP</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Host name or IP</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Port</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>IP port</help>
+			</driverParamDescriptor>
+		</lanBoardDescriptor>
+		<lanBoardDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM-6051</model>
+			<libName>adam</libName>
+			<driverName>lan_board</driverName>
+			<modelId>6051</modelId>
+			<differentialModeSupported>false</differentialModeSupported>
+			<driverParamDescriptor>
+				<name>Host or IP</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Host name or IP</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Port</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>IP port</help>
+			</driverParamDescriptor>
+		</lanBoardDescriptor>
+	</boardDescriptors>
+	<adamModuleInfo>
+		<modelName>4017P</modelName>
+		<numAI>8</numAI>
+		<adamRange>
+			<id>7</id>
+			<unit>mA</unit>
+			<min>+0.004</min>
+			<max>+0.020</max>
+		</adamRange>
+		<adamRange>
+			<id>8</id>
+			<unit>V</unit>
+			<min>-10</min>
+			<max>+10</max>
+		</adamRange>
+		<adamRange>
+			<id>9</id>
+			<unit>V</unit>
+			<min>-5</min>
+			<max>+5</max>
+		</adamRange>
+		<adamRange>
+			<id>10</id>
+			<unit>V</unit>
+			<min>-1</min>
+			<max>+1</max>
+		</adamRange>
+		<adamRange>
+			<id>11</id>
+			<unit>mV</unit>
+			<min>-0.5</min>
+			<max>+0.5</max>
+		</adamRange>
+		<adamRange>
+			<id>12</id>
+			<unit>mV</unit>
+			<min>-0.15</min>
+			<max>+0.15</max>
+		</adamRange>
+		<adamRange>
+			<id>13</id>
+			<unit>mA</unit>
+			<min>-0.020</min>
+			<max>+0.020</max>
+		</adamRange>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>4051</modelName>
+		<numDI>16</numDI>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>4068</modelName>
+		<numDO>8</numDO>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>6017</modelName>
+		<numAI>8</numAI>
+		<adamRange>
+			<id>7</id>
+			<unit>mA</unit>
+			<min>+0.004</min>
+			<max>+0.020</max>
+		</adamRange>
+		<adamRange>
+			<id>8</id>
+			<unit>V</unit>
+			<min>-10</min>
+			<max>+10</max>
+		</adamRange>
+		<adamRange>
+			<id>9</id>
+			<unit>V</unit>
+			<min>-5</min>
+			<max>+5</max>
+		</adamRange>
+		<adamRange>
+			<id>10</id>
+			<unit>V</unit>
+			<min>-1</min>
+			<max>+1</max>
+		</adamRange>
+		<adamRange>
+			<id>11</id>
+			<unit>mV</unit>
+			<min>-0.5</min>
+			<max>+0.5</max>
+		</adamRange>
+		<adamRange>
+			<id>12</id>
+			<unit>mV</unit>
+			<min>-0.15</min>
+			<max>+0.15</max>
+		</adamRange>
+		<adamRange>
+			<id>13</id>
+			<unit>mA</unit>
+			<min>-0.020</min>
+			<max>+0.020</max>
+		</adamRange>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>6051</modelName>
+		<numDI>12</numDI>
+		<numDO>2</numDO>
+	</adamModuleInfo>
+</boardsCfg>

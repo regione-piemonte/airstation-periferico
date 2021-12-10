@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE mapping PUBLIC "-//EXOLAB/Castor Object Mapping DTD Version 1.0//EN"
+                         "http://castor.exolab.org/mapping.dtd">
+
+<!-- 
+==================================================
+ Copyright Regione Piemonte - 2021
+ SPDX-License-Identifier: EUPL-1.2-or-later
+==================================================
+ Original Author of file: Isabella Vespa
+ Purpose of file: XML mapping file for the
+   password based application login
+ Change log:
+==================================================
+-->
+
+<mapping>
+	<class name="it.csi.periferico.config.LoginCfg">
+
+		<map-to xml="login" />
+
+		<field name="passwordList" type="it.csi.periferico.config.Password" collection="arraylist" direct="false">
+			<bind-xml name="password" node="element" />
+		</field>
+
+	</class>
+
+	<class name="it.csi.periferico.config.Password">
+
+		<field name="type" type="java.lang.String" direct="false">
+			<bind-xml name="type" node="element" />
+		</field>
+
+		<field name="value" type="java.lang.String" direct="false">
+			<bind-xml name="value" node="element" />
+		</field>
+
+		<field name="mode" type="java.lang.String" direct="false">
+			<bind-xml name="mode" node="element" />
+		</field>
+
+	</class>
+
+</mapping>

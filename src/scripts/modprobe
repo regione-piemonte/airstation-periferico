@@ -1,0 +1,8 @@
+#!/bin/sh
+
+sudo /sbin/modprobe $*
+result=$?
+if [ $1 = "comedi" ]; then
+   sleep 1   # Wait for comedi device files to show up in /dev
+fi
+return $result

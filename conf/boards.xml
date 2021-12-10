@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<boardsCfg>
+	<comediOption>comedi_autoconfig=0</comediOption>
+	<boardDescriptors>
+		<comediEnabled>true</comediEnabled>
+		<adamEnabled>true</adamEnabled>
+		<pciBoardDescriptor>
+			<brand>Advantech</brand>
+			<model>PCI-1710</model>
+			<libName>comedi</libName>
+			<kernelModuleName>adv_pci1710</kernelModuleName>
+			<driverName></driverName>
+			<differentialModeSupported>true</differentialModeSupported>
+			<vendorId>13fe</vendorId>
+			<deviceId>1710</deviceId>
+			<pciBoardVersion>
+				<version>PCI-1710</version>
+				<driverName>pci1710</driverName>
+			</pciBoardVersion>
+			<pciBoardVersion>
+				<version>PCI-1710 HG</version>
+				<driverName>pci1710hg</driverName>
+			</pciBoardVersion>
+		</pciBoardDescriptor>
+		<pciBoardDescriptor>
+			<brand>Advantech</brand>
+			<model>PCI-1713</model>
+			<libName>comedi</libName>
+			<kernelModuleName>adv_pci1710</kernelModuleName>
+			<driverName></driverName>
+			<differentialModeSupported>true</differentialModeSupported>
+			<vendorId>13fe</vendorId>
+			<deviceId>1713</deviceId>
+			<pciBoardVersion>
+				<version>PCI-1713</version>
+				<driverName>pci1713</driverName>
+			</pciBoardVersion>
+		</pciBoardDescriptor>
+		<isaBoardDescriptor>
+			<brand>Advantech</brand>
+			<model>PCL-818L</model>
+			<libName>comedi</libName>
+			<kernelModuleName>pcl818</kernelModuleName>
+			<driverName>pcl818l</driverName>
+			<differentialModeSupported>true</differentialModeSupported>
+			<driverParamDescriptor>
+				<name>IO Base</name>
+				<index>0</index>
+				<type>iobase</type>
+				<optional>false</optional>
+				<help>From 0x000 to 0x3F0 Hex, default 0x300</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>IRQ</name>
+				<index>1</index>
+				<type>irq</type>
+				<optional>false</optional>
+				<help>(0=disable, 2, 3, 4, 5, 6, 7)</help>
+				<value>0</value>
+				<value>2</value>
+				<value>3</value>
+				<value>4</value>
+				<value>5</value>
+				<value>6</value>
+				<value>7</value>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>DMA</name>
+				<index>2</index>
+				<type>dma0</type>
+				<optional>false</optional>
+				<help>(0=disable, 1, 3)</help>
+				<value>0</value>
+				<value>1</value>
+				<value>3</value>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Clock for 8254</name>
+				<index>3</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>(0=disable, 1=1MHz, 10=10MHz)</help>
+				<value>0</value>
+				<value>1</value>
+				<value>10</value>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>A/D input range</name>
+				<index>4</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>(0=A/D input [-5V..+5V], 1=A/D input [-10V..+10V])</help>
+				<value>0</value>
+				<value>1</value>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>D/A output range</name>
+				<index>5</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>0=D/A output 0-5V (internal reference -5V), 1=D/A output 0-10V
+					(internal reference -10V), 2=D/A output unknow (external reference)
+				</help>
+				<value>0</value>
+				<value>1</value>
+				<value>2</value>
+			</driverParamDescriptor>
+		</isaBoardDescriptor>
+		<isaBoardDescriptor>
+			<brand>Comedi</brand>
+			<model>Test</model>
+			<libName>comedi</libName>
+			<kernelModuleName>comedi_test</kernelModuleName>
+			<driverName>comedi_test</driverName>
+			<differentialModeSupported>false</differentialModeSupported>
+			<driverParamDescriptor>
+				<name>Amplitude</name>
+				<index>0</index>
+				<type>decimal</type>
+				<optional>true</optional>
+				<help>Amplitude [uV] for fake waveforms (default: 1 V)</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Period</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>true</optional>
+				<help>Period [us] for fake waveforms (default: 0.1 s)</help>
+			</driverParamDescriptor>
+		</isaBoardDescriptor>
+		<isaBoardDescriptor>
+			<brand>Generic</brand>
+			<model>Parallel_port</model>
+			<libName>comedi</libName>
+			<kernelModuleName>comedi_parport</kernelModuleName>
+			<driverName>comedi_parport</driverName>
+			<differentialModeSupported>false</differentialModeSupported>
+			<driverParamDescriptor>
+				<name>IO Base</name>
+				<index>0</index>
+				<type>iobase</type>
+				<optional>false</optional>
+				<help>LPT1=0x378, LPT2=0x278, LPT3=0x3BC ...</help>
+				<value>0x378</value>
+				<value>0x278</value>
+				<value>0x3BC</value>
+				<value>0x27C</value>
+				<value>0x26C</value>
+				<value>0x268</value>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>IRQ</name>
+				<index>1</index>
+				<type>irq</type>
+				<optional>false</optional>
+				<help>(0=disable, 2, 3, 4, 5, 6, 7)</help>
+				<value>0</value>
+				<value>2</value>
+				<value>3</value>
+				<value>4</value>
+				<value>5</value>
+				<value>6</value>
+				<value>7</value>
+			</driverParamDescriptor>
+		</isaBoardDescriptor>
+		<serialBoardBusDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM serial bus</model>
+			<libName>adam</libName>
+			<driverName>serial_bus</driverName>
+			<driverParamDescriptor>
+				<name>Serial port</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Serial port device name es. ttyS0</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Baud rate</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>Serial port speed</help>
+				<value>1200</value>
+				<value>2400</value>
+				<value>4800</value>
+				<value>9600</value>
+				<value>19200</value>
+				<value>38400</value>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Maximum scan address</name>
+				<index>2</index>
+				<type>decimal</type>
+				<optional>true</optional>
+				<help>Maximum scan address for board detection (1-255)</help>
+			</driverParamDescriptor>
+		</serialBoardBusDescriptor>
+		<lanBoardBusDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM serial bus over LAN</model>
+			<libName>adam</libName>
+			<driverName>lan_bus</driverName>
+			<driverParamDescriptor>
+				<name>Host or IP</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Host name or IP for serial bus over LAN</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Port</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>IP port for serial bus over LAN</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Maximum scan address</name>
+				<index>2</index>
+				<type>decimal</type>
+				<optional>true</optional>
+				<help>Maximum scan address for board detection (1-255)</help>
+			</driverParamDescriptor>
+		</lanBoardBusDescriptor>
+		<lanBoardDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM-6017</model>
+			<libName>adam</libName>
+			<driverName>lan_board</driverName>
+			<modelId>4017P</modelId>
+			<differentialModeSupported>false</differentialModeSupported>
+			<driverParamDescriptor>
+				<name>Host or IP</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Host name or IP</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Port</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>IP port</help>
+			</driverParamDescriptor>
+		</lanBoardDescriptor>
+		<lanBoardDescriptor>
+			<brand>Advantech</brand>
+			<model>ADAM-6051</model>
+			<libName>adam</libName>
+			<driverName>lan_board</driverName>
+			<modelId>6051</modelId>
+			<differentialModeSupported>false</differentialModeSupported>
+			<driverParamDescriptor>
+				<name>Host or IP</name>
+				<index>0</index>
+				<type>string</type>
+				<optional>false</optional>
+				<help>Host name or IP</help>
+			</driverParamDescriptor>
+			<driverParamDescriptor>
+				<name>Port</name>
+				<index>1</index>
+				<type>decimal</type>
+				<optional>false</optional>
+				<help>IP port</help>
+			</driverParamDescriptor>
+		</lanBoardDescriptor>
+	</boardDescriptors>
+	<adamModuleInfo>
+		<modelName>4017P</modelName>
+		<numAI>8</numAI>
+		<adamRange>
+			<id>7</id>
+			<unit>mA</unit>
+			<min>+0.004</min>
+			<max>+0.020</max>
+		</adamRange>
+		<adamRange>
+			<id>8</id>
+			<unit>V</unit>
+			<min>-10</min>
+			<max>+10</max>
+		</adamRange>
+		<adamRange>
+			<id>9</id>
+			<unit>V</unit>
+			<min>-5</min>
+			<max>+5</max>
+		</adamRange>
+		<adamRange>
+			<id>10</id>
+			<unit>V</unit>
+			<min>-1</min>
+			<max>+1</max>
+		</adamRange>
+		<adamRange>
+			<id>11</id>
+			<unit>mV</unit>
+			<min>-0.5</min>
+			<max>+0.5</max>
+		</adamRange>
+		<adamRange>
+			<id>12</id>
+			<unit>mV</unit>
+			<min>-0.15</min>
+			<max>+0.15</max>
+		</adamRange>
+		<adamRange>
+			<id>13</id>
+			<unit>mA</unit>
+			<min>-0.020</min>
+			<max>+0.020</max>
+		</adamRange>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>4051</modelName>
+		<numDI>16</numDI>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>4068</modelName>
+		<numDO>8</numDO>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>6017</modelName>
+		<numAI>8</numAI>
+		<adamRange>
+			<id>7</id>
+			<unit>mA</unit>
+			<min>+0.004</min>
+			<max>+0.020</max>
+		</adamRange>
+		<adamRange>
+			<id>8</id>
+			<unit>V</unit>
+			<min>-10</min>
+			<max>+10</max>
+		</adamRange>
+		<adamRange>
+			<id>9</id>
+			<unit>V</unit>
+			<min>-5</min>
+			<max>+5</max>
+		</adamRange>
+		<adamRange>
+			<id>10</id>
+			<unit>V</unit>
+			<min>-1</min>
+			<max>+1</max>
+		</adamRange>
+		<adamRange>
+			<id>11</id>
+			<unit>mV</unit>
+			<min>-0.5</min>
+			<max>+0.5</max>
+		</adamRange>
+		<adamRange>
+			<id>12</id>
+			<unit>mV</unit>
+			<min>-0.15</min>
+			<max>+0.15</max>
+		</adamRange>
+		<adamRange>
+			<id>13</id>
+			<unit>mA</unit>
+			<min>-0.020</min>
+			<max>+0.020</max>
+		</adamRange>
+	</adamModuleInfo>
+	<adamModuleInfo>
+		<modelName>6051</modelName>
+		<numDI>12</numDI>
+		<numDO>2</numDO>
+	</adamModuleInfo>
+</boardsCfg>

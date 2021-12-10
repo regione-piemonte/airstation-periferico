@@ -1,0 +1,33 @@
+==============================================================================
+|      INSTALLAZIONE PERFERICO SU WINDOWS 10
+|      Autore: pierfrancesco.vallosio@mce.it
+|      Data:   5 novembre 2021
+==============================================================================
+
+Requisiti: Standard PC con CPU a 64 bit, >= 4GB RAM, >= 120GB HDD/SSD
+Ambiente software usato per l'installazione: Windows 10 - 64 bit.
+Pacchetti aggiuntivi necessari:
+ - openjdk 11, versione a 64 bit: https://docs.microsoft.com/it-it/java/openjdk/download
+ - winsw (1): https://github.com/winsw/winsw/releases/tag/v2.11.0
+ 
+Istruzioni:
+ - scegliere una cartella dove scompattare gli archivi del software Periferico
+ - scompattare gli archivi:
+   - periferico_cfg_Vx.y.z_yyyymmdd.tgz (versione >= V3.5.0)
+   - periferico_bin_Vx.y.z_yyyymmdd.tgz (versione >= V3.5.0)
+ - avviare il software con il comando run.bat dalla cartella periferico
+ - accedere all'interfaccia web del software da browser:
+   http://IP-WINDOWS-PC:55000/
+
+(1) WinSW è necessario solo per l'avvio del software Periferico come servizio
+    di Windows:
+ - copiare il file di configurazione di winsw: periferico/bin/winsw.xml
+   in periferico/ e rinominarlo in periferico.xml (1)
+ - copiare l'eseguibile di WinSW nella cartella periferico e rinominarlo
+   in periferico.exe (usare la versione di WinSW adatta al proprio sistema,
+   scegliendo la versione a 64 bit, eventualmente con .NET integrato se
+   .NET non è presente nel proprio sistema)
+   eseguire: periferico.exe install (una sola volta per configurare il servizio)
+   eseguire: periferico.exe start per avviare subito il servizio
+   successivamente il software Periferico si avvierà in automatico ad ogni avvio
+   di Windows.

@@ -1,0 +1,20 @@
+<service>
+  <id>periferico</id>
+  <name>Periferico</name>
+  <description>This service runs Periferico air quality data acquisition system.</description>
+  <env name="IP_PORT" value="55000"/>
+  <env name="LANG" value="it_IT.UTF-8"/>
+  <env name="PATH" value=".\bin;%PATH%"/>
+  <executable>java</executable>
+  <arguments>
+  -cp %BASE%\bin\jaxb-api-2.3.1.jar;%BASE%\bin\jaxb-core-2.3.0.1.jar;%BASE%\bin\jaxb-runtime-2.3.0.1.jar;%BASE%\bin\servlet-api-2.5.jar;%BASE%\bin\jetty-6.1.26.jar;%BASE%\bin\jetty-util-6.1.26.jar;%BASE%\bin\log4j-1.2.16.jar;%BASE%\bin\slf4j-api-1.5.11.jar;%BASE%\bin\slf4j-log4j12-1.5.11.jar;%BASE%\bin\castor-core-1.3.3.jar;%BASE%\bin\castor-xml-1.3.3.jar;%BASE%\bin\commons-logging-1.1.3.jar;%BASE%\bin\commons-lang-2.6.jar;%BASE%\bin\commons-codec-1.7.jar;%BASE%\bin\xercesImpl-2.9.0.jar;%BASE%\bin\jfreechart-1.0.12.jar;%BASE%\bin\jcommon-1.0.15.jar;%BASE%\bin\gwt-servlet-2.7.0.jar;%BASE%\bin\jSerialComm-2.7.0.jar;%BASE%\bin\gson-2.8.6.jar;%BASE%\bin\jcomedilib-1.1.0.jar;%BASE%\bin\periferico-common-1.0.0.jar;%BASE%\bin\periferico-drv-conn-1.1.0.jar;%BASE%\bin\periferico-drv-itf-1.1.0.jar;%BASE%\bin\periferico-drv-impl-1.1.0.jar;%BASE%\bin\periferico.jar;%BASE%\bin\drivers\*
+  -Dfile.encoding=UTF-8
+  -Djava.awt.headless=true
+  -Duser.timezone=GMT+1
+  -Dperiferico.port=%IP_PORT%
+  -Dperiferico.comedi=false
+  it.csi.periferico.Periferico
+  </arguments>
+  <logpath>%BASE%\log</logpath>
+  <log mode="reset"/>
+</service>

@@ -1,0 +1,57 @@
+ BUILD TARGETS
+
+ *******************************************************************
+ CLEAN
+ *******************************************************************
+ clean:     Rimuove tutte le cartelle create da Ant tranne quelle
+            delle librerie
+ clean-lib: Rimuove la cartella delle librerie creata da Ivy
+
+ *******************************************************************
+ UTILITY
+ *******************************************************************
+ check-compile-ui-frontend: Verifica se il lato client
+                dell'interfaccia utente deve essere compilato
+ copy-bin:      Copia la distribuzione eseguibile in una data
+                cartella
+ create-jar-manifest: Crea il manifest per un jar
+ install:       Installa l'applicazione su un PC remoto
+ install-light: Aggiorna l'applicazione su un PC remoto
+ run:           Esegue l'applicazione
+ run-gwt:       Esegue l'applicazione nella shell GWT sulla porta
+                8888
+ run-gwt2:      Esegue l'applicazione nella shell GWT sulla porta
+                8889
+ run-gwt-impl:  Esegue l'applicazione nella shell GWT
+
+ *******************************************************************
+ COMPILE
+ *******************************************************************
+ compile-common:      Compila le classi della configurazione comune
+ compile-core:        Compila il backend dell'applicazione
+ compile-drv-conn:    Compila la libreria con le funzioni di
+                      connessione agli analizzatori
+ compile-drv-impl:    Compila la libreria con l'implementazione di
+                      riferimento per i driver
+ compile-drv-itf:     Compila l'interfaccia per i driver
+ compile-ui-backend:  Compila il backend dell'interfaccia utente
+ compile-ui-frontend: Compila il lato client dell'interfaccia utente
+
+ *******************************************************************
+ PACKAGING
+ *******************************************************************
+ jar-common:   Genera l'archivio delle classi della configurazione
+               comune
+ jar-core:     Genera l'archivio del backend dell'applicazione
+ jar-drv-conn: Genera l'archivio della libreria con le funzioni di
+               connessione agli analizzatori
+ jar-drv-impl: Genera l'archivio della libreria con
+               l'implementazione di riferimento per i driver
+ jar-drv-itf:  Genera l'archivio dell'interfaccia per i driver
+ war-ui:       Genera l'archivio dell'interfaccia utente
+
+ *******************************************************************
+ DISTRIBUTION
+ *******************************************************************
+ dist:    Prepara il contenuto degli archivi per la release
+ release: Genera gli archivi per la release

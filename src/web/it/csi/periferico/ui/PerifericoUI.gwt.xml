@@ -1,0 +1,33 @@
+<module>
+
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name='com.google.gwt.user.User' />
+
+	<!-- Inherit ClientBundle -->
+	<inherits name="com.google.gwt.resources.Resources" />
+
+	<!-- Inherit the internationalization. -->
+	<inherits name="com.google.gwt.i18n.I18N" />
+
+	<!-- Declare path for resources lookup, needed from GWT 1.7.0 -->
+	<resource path="public" />
+
+	<!-- Supported locales. -->
+	<extend-property name="locale" values="it" />
+	<!-- <extend-property name="locale" values="it,fr,de"/> -->
+
+	<!-- Force compiling for only one browser to speedup development -->
+	<!-- supported values for GWT 2.7.0: gecko1_8, ie8, ie9, ie10, safari -->
+	<!-- <set-property name="user.agent" value="gecko1_8" /> -->
+	
+	<!-- Specify the app entry point class. -->
+	<entry-point class='it.csi.periferico.ui.client.PerifericoUI'></entry-point>
+
+	<servlet path='/displayChart' class='org.jfree.chart.servlet.DisplayChart' />
+
+	<servlet path='/exportcsvService' class='it.csi.periferico.comm.ExportcsvService' />
+
+	<servlet path='/uiservice'
+		class='it.csi.periferico.ui.server.PerifericoUIServiceImpl' />
+
+</module>

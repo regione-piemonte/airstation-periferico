@@ -1,0 +1,20 @@
+<!-- The attribute mode can be:                     -->
+<!-- remote : ask password only from remote access  -->
+<!-- always: ask password always                    -->
+<!-- null: never ask password                       -->
+
+<login>
+
+	<password >
+		<type>readonly</type>
+		<value>changeme</value>
+		<mode>remote</mode>
+	</password>
+	
+	<password>
+		<type>readwrite</type>
+		<value>changeme</value>
+		<mode>null</mode>
+	</password>
+	
+</login>
