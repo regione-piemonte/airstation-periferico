@@ -2,6 +2,8 @@
 Periferico 
 
 # Descrizione del prodotto
+Questo prodotto fa parte della suite **SRRQA - Rilevamento della Qualità dell'Aria**.
+
 Software sviluppato in Java che gestisce la stazione di misura. 
 
 Il software di stazione ha il compito di acquisire le misure e le informazioni di stato dagli analizzatori, le informazioni di stato della stazione stessa e del PC, di effettuare il calcolo delle aggregazioni (medie orarie, giornaliere, etc...) a partire dalle misure istantanee, di comunicare tali informazioni al centro operativo e di offrire un'interfaccia web per la consultazione di queste informazioni e per effettuare le operazioni di configurazione.
